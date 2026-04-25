@@ -1,0 +1,19 @@
+# 系統檔案
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# VS Code 設定
+.vscode/
+
+# 編輯器暫存
+*.swp
+*.swo
+*~
+
+# 壓縮檔
+*.zip
+
+# Excel 暫存檔
+~$*.xlsx
+~$*.docx

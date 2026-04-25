@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>酒單 | 沈淪域</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar__brand">
+      <span class="navbar__logo">AIZO</span>
+      <span class="navbar__subtitle">CHINRIN ・ 沈淪域</span>
+    </div>
+    <button class="navbar__toggle" id="navToggle" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="navbar__menu" id="navMenu">
+      <ul class="navbar__nav">
+        <li><a href="index.html" class="navbar__link">HOME</a></li>
+        <li><a href="members.html" class="navbar__link">MEMBERS</a></li>
+        <li><a href="menu.html" class="navbar__link">MENU</a></li>
+        <li><a href="reservation.html" class="navbar__link">RESERVATION</a></li>
+        <li><a href="contact.html" class="navbar__link">CONTACT</a></li>
+      </ul>
+      <a href="../index.html" class="navbar__back">← AIZO</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="page__title">
+      <h2>酒單</h2>
+      <p>MENU</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="menu-list">
+
+      <!-- ═══════════════ 威士忌 ═══════════════ -->
+      <section class="menu-category">
+        <h3 class="menu-category__title">WHISKY ・ ウイスキー</h3>
+
+        <div class="menu-item">
+          <div>
+            <div class="menu-item__name">山崎 12年</div>
+            <div class="menu-item__desc">日本・Suntory。果香與淡淡木桶氣息。</div>
+          </div>
+          <div class="menu-item__price">¥ 1,200</div>
+        </div>
+
+        <div class="menu-item">
+          <div>
+            <div class="menu-item__name">Laphroaig 10</div>
+            <div class="menu-item__desc">艾雷島。泥煤煙燻,海風鹹味。</div>
+          </div>
+          <div class="menu-item__price">¥ 900</div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ 經典雞尾酒 ═══════════════ -->
+      <section class="menu-category">
+        <h3 class="menu-category__title">CLASSIC COCKTAIL ・ カクテル</h3>
+
+        <div class="menu-item">
+          <div>
+            <div class="menu-item__name">Old Fashioned</div>
+            <div class="menu-item__desc">波本、方糖、苦精。時間的味道。</div>
+          </div>
+          <div class="menu-item__price">¥ 800</div>
+        </div>
+
+        <div class="menu-item">
+          <div>
+            <div class="menu-item__name">Negroni</div>
+            <div class="menu-item__desc">琴酒、金巴利、香艾酒。苦中帶甜。</div>
+          </div>
+          <div class="menu-item__price">¥ 750</div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ 店主特調 ═══════════════ -->
+      <section class="menu-category">
+        <h3 class="menu-category__title">SIGNATURE ・ シグネチャー</h3>
+
+        <div class="menu-item">
+          <div>
+            <div class="menu-item__name">沈淪 ・ Chinrin</div>
+            <div class="menu-item__desc">(待定)店主特調。</div>
+          </div>
+          <div class="menu-item__price">¥ 1,000</div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

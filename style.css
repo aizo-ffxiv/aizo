@@ -1,0 +1,183 @@
+@import url('https://fonts.cdnfonts.com/css/chomsky');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;500&family=Noto+Serif+TC:wght@200;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&display=swap');
+
+@font-face {
+  font-family: "Saint";
+  src: url("assets/saint.otf") format("truetype");
+  font-display: swap;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ===== 重置 & 基礎 ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0a;
+  --fg: #f5f5f0;
+  --muted: #8a8a85;
+  --accent: #c9a961;
+  --line: rgba(245, 245, 240, 0.15);
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Noto Serif JP", "Noto Serif TC", Georgia, serif;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== 主容器 ===== */
+.portal {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 3rem 4rem;
+}
+
+/* ===== 頁首 ===== */
+.portal__header {
+  text-align: center;
+  padding: 2rem 0 4rem;
+}
+
+.portal__logo {
+  font-family: "Saint", serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 400;
+  color: #c8102e;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 20px rgba(200, 16, 46, 0.3);
+}
+
+.portal__tagline {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.4em;
+}
+
+/* ===== 三個入口容器 ===== */
+.portal__gates {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  align-self: center;
+}
+
+/* ===== 單個入口 ===== */
+.gate {
+  background: var(--bg);
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--fg);
+  min-height: 50vh;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.6s ease;
+}
+
+/* 背景圖片層 */
+.gate::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  transition: opacity 0.6s ease, transform 0.8s ease;
+  z-index: 0;
+}
+
+/* 漸層暗化層，讓文字更突出 */
+.gate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 三個入口各自的背景圖 */
+.gate[data-gate="kikan"]::before {
+  background-image: url("assets/kikan.png");
+}
+.gate[data-gate="chinrin"]::before {
+  background-image: url("assets/chinrin.png");
+}
+.gate[data-gate="shinkiro"]::before {
+  background-image: url("assets/shinkiro.png");
+}
+
+/* Hover 時：圖片完全顯示 + 微放大 */
+.gate:hover::before {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* 文字層 */
+.gate > * {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.gate__name-jp {
+  font-family: "Shippori Mincho", "Noto Serif JP", serif;
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+}
+
+.gate__name-en {
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  color: var(--fg);      /* ← 改成白色 */
+  opacity: 0.85;         /* ← 加一點透明度讓它不那麼搶戲 */
+}
+
+.gate__desc {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--fg);
+  opacity: 0.85;
+}
+
+/* ===== 頁尾 ===== */
+.portal__footer {
+  text-align: center;
+  padding-top: 3rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+}
+
+/* ===== 響應式（手機版） ===== */
+@media (max-width: 768px) {
+  .portal { padding: 2rem 1.5rem; }
+  .portal__gates { grid-template-columns: 1fr; }
+  .gate { min-height: 25vh; padding: 2.5rem 1rem; }
+}
