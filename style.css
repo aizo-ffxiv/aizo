@@ -156,13 +156,13 @@ html, body {
 
 /* 三個入口各自的背景圖 */
 .gate[data-gate="kikan"]::before {
-  background-image: url("assets/kikan.jpg");
+  background-image: url("assets/kikan.png;
 }
 .gate[data-gate="chinrin"]::before {
-  background-image: url("assets/chinrin.jpg");
+  background-image: url("assets/chinrin.png;
 }
 .gate[data-gate="shinkiro"]::before {
-  background-image: url("assets/shinkiro.jpg");
+  background-image: url("assets/shinkiro.png;
 }
 
 /* 漸層暗化層 */
