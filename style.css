@@ -13,10 +13,10 @@
 
 :root {
   --bg: #0a0a0a;
-  --fg: #000000;
-  --muted: #000000;
+  --fg: #f5f5f0;
+  --muted: #8a8a85;
   --accent: #c9a961;
-  --line: rgba(245, 245, 240, 0.365);
+  --line: rgba(245, 245, 240, 0.15);
 }
 
 html, body {
@@ -51,7 +51,9 @@ html, body {
   font-weight: 400;
   color: #c8102e;
   letter-spacing: 0.02em;
-  text-shadow: 0 0 30px rgba(200, 16, 46, 0.4), 0 0 60px rgba(200, 16, 46, 0.15);
+  text-shadow:
+    0 0 30px rgba(200, 16, 46, 0.4),
+    0 0 60px rgba(200, 16, 46, 0.15);
 }
 
 .portal__tagline {
@@ -63,6 +65,7 @@ html, body {
   display: inline-block;
 }
 
+/* tagline 兩邊細線,增加儀式感 */
 .portal__tagline::before,
 .portal__tagline::after {
   content: "";
@@ -74,15 +77,10 @@ html, body {
   opacity: 0.4;
 }
 
-.portal__tagline::before {
-  right: calc(100% + 1rem);
-}
+.portal__tagline::before { right: calc(100% + 1rem); }
+.portal__tagline::after { left: calc(100% + 1rem); }
 
-.portal__tagline::after {
-  left: calc(100% + 1rem);
-}
-
-/* ===== 三入口 ===== */
+/* ===== 三入口容器 ===== */
 .portal__gates {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -111,6 +109,7 @@ html, body {
   );
 }
 
+/* ===== 單個入口 ===== */
 .gate {
   padding: 4rem 2rem;
   display: flex;
@@ -176,17 +175,18 @@ html, body {
   transition: opacity 0.6s ease;
 }
 
-/* Hover 效果 */
+/* Hover:圖片完全顯示 + 微放大 */
 .gate:hover::before {
   opacity: 1;
   transform: scale(1.06);
 }
 
+/* Hover:暗化稍微減弱 */
 .gate:hover::after {
   opacity: 0.7;
 }
 
-/* 文字層 */
+/* 文字層在最上 */
 .gate > * {
   position: relative;
   z-index: 1;
@@ -194,11 +194,12 @@ html, body {
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Hover:文字輕微上移 */
 .gate:hover > * {
   transform: translateY(-3px);
 }
 
-/* 主題色光暈(hover 時) */
+/* 主標題的主題色光暈(hover 時) */
 .gate[data-gate="kikan"] .gate__name-jp,
 .gate[data-gate="chinrin"] .gate__name-jp,
 .gate[data-gate="shinkiro"] .gate__name-jp {
@@ -206,15 +207,21 @@ html, body {
 }
 
 .gate[data-gate="kikan"]:hover .gate__name-jp {
-  text-shadow: 0 0 30px rgba(200, 16, 46, 0.6), 0 2px 12px rgba(0, 0, 0, 0.8);
+  text-shadow:
+    0 0 30px rgba(200, 16, 46, 0.6),
+    0 2px 12px rgba(0, 0, 0, 0.8);
 }
 
 .gate[data-gate="chinrin"]:hover .gate__name-jp {
-  text-shadow: 0 0 30px rgba(201, 169, 97, 0.7), 0 2px 12px rgba(0, 0, 0, 0.8);
+  text-shadow:
+    0 0 30px rgba(201, 169, 97, 0.7),
+    0 2px 12px rgba(0, 0, 0, 0.8);
 }
 
 .gate[data-gate="shinkiro"]:hover .gate__name-jp {
-  text-shadow: 0 0 30px rgba(138, 92, 246, 0.7), 0 2px 12px rgba(0, 0, 0, 0.8);
+  text-shadow:
+    0 0 30px rgba(138, 92, 246, 0.7),
+    0 2px 12px rgba(0, 0, 0, 0.8);
 }
 
 .gate__index {
@@ -260,9 +267,27 @@ html, body {
   letter-spacing: 0.3em;
 }
 
-/* ===== 響應式 ===== */
+/* ===== 響應式（手機版） ===== */
 @media (max-width: 768px) {
-  .portal { padding: 2rem 1.5rem; }
-  .portal__gates { grid-template-columns: 1fr; }
-  .gate { min-height: 25vh; padding: 2.5rem 1rem; }
+  .portal {
+    padding: 2rem 1.5rem;
+  }
+  .portal__gates {
+    grid-template-columns: 1fr;
+  }
+  .gate {
+    min-height: 25vh;
+    padding: 2.5rem 1rem;
+  }
+
+  /* 手機版主標題稍微縮小 */
+  .gate__name-jp {
+    font-size: 1.7rem;
+  }
+
+  /* 手機版 tagline 兩側細線縮短 */
+  .portal__tagline::before,
+  .portal__tagline::after {
+    width: 16px;
+  }
 }
