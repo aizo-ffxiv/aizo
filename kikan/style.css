@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: "Saint";
-  src: url("assets/saint.otf") format("opentype"); 
+  src: url("../assets/saint.otf") format("opentype");
   font-display: swap;
 }
 
