@@ -283,7 +283,7 @@ a { color: inherit; text-decoration: none; }
 
 .member-detail {
   position: fixed;
-  top: 14rem;
+  top: 13.5rem;
   width: calc((100vw - 6rem - 2rem) / 2);
   max-width: 680px;
   display: flex;
@@ -689,3 +689,4 @@ a { color: inherit; text-decoration: none; }
   .member-detail__alias-big {
     font-size: 2.5rem;
   }
+}

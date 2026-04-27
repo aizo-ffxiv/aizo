@@ -9,25 +9,15 @@
   font-display: swap;
 }
 
-/* ===== 防止手機版多餘空白 ===== */
-html, body {
-  overflow-x: hidden;
-  max-width: 100vw;
-}
-
-body {
-  position: relative;
-}
-
 /* ===== 重置 & 變數 ===== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #0c0a08;                              /* 深夜琥珀黑 */
-  --surface: #16120e;                         /* 卡片底 */
-  --fg: #f2ebdc;                              /* 暖米白 */
-  --muted: #8a7e68;                           /* 溫暖灰 */
-  --accent: #c9a961;                          /* 主色：琥珀威士忌 */
+  --bg: #0c0a08;
+  --surface: #16120e;
+  --fg: #f2ebdc;
+  --muted: #8a7e68;
+  --accent: #c9a961;
   --accent-dim: rgba(201, 169, 97, 0.15);
   --line: rgba(242, 235, 220, 0.1);
 }
@@ -40,9 +30,11 @@ html, body {
   font-weight: 300;
   letter-spacing: 0.05em;
   -webkit-font-smoothing: antialiased;
-  cursor: url("assets/cursor.png"), auto; 
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
+body { position: relative; }
 a { color: inherit; text-decoration: none; }
 
 /* ===== 頂部導覽列 ===== */
@@ -69,13 +61,11 @@ a { color: inherit; text-decoration: none; }
   color: inherit;
 }
 
-.navbar__brand:hover {
-  opacity: 0.85;
-}
+.navbar__brand:hover { opacity: 0.85; }
 
 .navbar__logo {
   font-family: "Saint", "Chomsky", serif;
-  font-size: 2.6rem;            /* 從 1.8rem 放大 */
+  font-size: 2.6rem;
   color: var(--accent);
   letter-spacing: 0.02em;
   line-height: 1;
@@ -118,7 +108,6 @@ a { color: inherit; text-decoration: none; }
   border-bottom-color: var(--accent);
 }
 
-
 /* ===== 漢堡按鈕 ===== */
 .navbar__toggle {
   display: none;
@@ -142,143 +131,95 @@ a { color: inherit; text-decoration: none; }
   transform-origin: center;
 }
 
-.navbar__toggle.is-open span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-}
+.navbar__toggle.is-open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
 .navbar__toggle.is-open span:nth-child(2) { opacity: 0; }
-.navbar__toggle.is-open span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
-}
+.navbar__toggle.is-open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
 /* ===== 頁面主容器 ===== */
 .page {
-  padding: 4rem 3rem 6rem;
+  padding: 1.5rem 3rem 6rem;
   max-width: 1400px;
   margin: 0 auto;
 }
 
 .page__title {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .page__title h2 {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 400;
   letter-spacing: 0.3em;
 }
 
 .page__title p {
-  margin-top: 0.8rem;
-  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
   letter-spacing: 0.4em;
   color: var(--muted);
 }
 
 .page__title .divider {
-  width: 48px;
+  width: 40px;
   height: 1px;
   background: var(--accent);
-  margin: 1.2rem auto 0;
+  margin: 0.8rem auto 0;
 }
 
-/* ===== 成員頁面：左右固定分割 ===== */
+/* ===== 成員頁面:左側列表 + 右側固定詳情 ===== */
 .members {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
   align-items: start;
+  position: relative;
 }
 
 .members__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
+  gap: 1rem;
   align-content: start;
 }
 
+/* ===== 成員卡片(滿版照片) ===== */
 .member-card {
   background: var(--surface);
   border: 1px solid var(--line);
-  padding: 2.2rem 1rem 1.6rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-  cursor: pointer;
+  aspect-ratio: 1 / 1;
   position: relative;
-  transition: border-color 0.3s, transform 0.3s, background 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
   animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .member-card:hover {
   border-color: var(--accent);
   transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(201, 169, 97, 0.2);
+  box-shadow: 0 8px 30px rgba(201, 169, 97, 0.25);
 }
 
 .member-card.is-active {
   border-color: var(--accent);
-  background: var(--accent-dim);
-  box-shadow: 0 8px 30px rgba(201, 169, 97, 0.25);
-}
-
-.member-card__number {
-  position: absolute;
-  top: 0.7rem;
-  left: 0.9rem;
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
-  color: var(--muted);
-}
-
-.member-card__badge {
-  position: absolute;
-  top: 0.7rem;
-  right: 0.9rem;
-  font-size: 0.55rem;
-  letter-spacing: 0.35em;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  padding: 0.15rem 0.45rem;
-}
-
-.member-card.is-leader {
-  border-color: rgba(201, 169, 97, 0.4);
-  background: linear-gradient(
-    180deg,
-    rgba(201, 169, 97, 0.05) 0%,
-    var(--surface) 100%
-  );
-}
-
-.member-card.is-leader .member-card__avatar {
-  width: 125px;
-  height: 125px;
-  border-color: var(--accent);
-}
-
-.member-card.is-leader .member-card__name {
-  font-size: 1rem;
+  box-shadow: 0 8px 30px rgba(201, 169, 97, 0.3);
 }
 
 .member-card__avatar {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 1px solid var(--line);
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(255, 255, 255, 0.04);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0.3rem;
-  transition: border-color 0.3s;
+  transition: transform 0.6s ease;
 }
 
-.member-card:hover .member-card__avatar,
-.member-card.is-active .member-card__avatar {
-  border-color: var(--accent);
+.member-card:hover .member-card__avatar {
+  transform: scale(1.05);
 }
 
 .member-card__avatar img {
@@ -288,67 +229,99 @@ a { color: inherit; text-decoration: none; }
 }
 
 .member-card__initials {
-  font-size: 1.2rem;
+  font-size: 2.5rem;
   color: var(--accent);
+  opacity: 0.6;
 }
 
-.member-card__name {
-  font-size: 0.95rem;
-  letter-spacing: 0.15em;
-  margin-top: 0.3rem;
+.member-card__alias {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 1.5rem 0.5rem 0.8rem;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    rgba(0, 0, 0, 0.92) 100%
+  );
+  font-family: "Shippori Mincho", "Noto Serif JP", serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  color: var(--fg);
   white-space: nowrap;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  transition: color 0.3s, letter-spacing 0.3s;
 }
 
-.member-card__title {
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  color: var(--muted);
-  white-space: nowrap;
+.member-card:hover .member-card__alias,
+.member-card.is-active .member-card__alias {
+  color: var(--accent);
+  letter-spacing: 0.22em;
 }
 
-/* ===== 右側：成員詳情 ===== */
+/* ===== 右側詳情(完全固定) ===== */
+.member-detail-wrap {
+  position: relative;
+  height: 0;
+}
+
 .member-detail {
+  position: fixed;
+  top: 13.5rem;
+  width: calc((100vw - 6rem - 2rem) / 2);
+  max-width: 680px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  position: sticky;
-  top: 6rem;
-  max-height: calc(100vh - 7rem);
-  overflow-y: auto;
-  padding-right: 0.5rem;
+  gap: 1rem;
+  max-height: calc(100vh - 12rem);
 }
 
-.member-detail::-webkit-scrollbar { width: 4px; }
-.member-detail::-webkit-scrollbar-track { background: transparent; }
-.member-detail::-webkit-scrollbar-thumb {
-  background: var(--line);
-  border-radius: 2px;
+.member-detail > * {
+  animation: fadeIn 0.4s ease;
 }
-.member-detail::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-.member-detail > * { animation: fadeIn 0.4s ease; }
-
+/* 詳情大圖(自適應比例) */
 .member-detail__photo {
-  aspect-ratio: 3 / 4;
-  max-height: 55vh;
   background: var(--surface);
   overflow: hidden;
   position: relative;
   border: 1px solid var(--line);
+  align-self: center;
+  width: auto;
+  max-width: 100%;
+  max-height: 50vh;
+  transition: aspect-ratio 0.4s ease;
+}
+
+.member-detail__photo[data-ratio="portrait"] {
+  aspect-ratio: 3 / 4;
+  width: calc(50vh * 3 / 4);
+}
+
+.member-detail__photo[data-ratio="landscape"] {
+  aspect-ratio: 16 / 9;
   width: 100%;
-  flex-shrink: 0;
+}
+
+.member-detail__photo[data-ratio="square"] {
+  aspect-ratio: 1 / 1;
+  width: 50vh;
 }
 
 .member-detail__photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
 }
 
 .member-detail__photo-placeholder {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -358,62 +331,91 @@ a { color: inherit; text-decoration: none; }
 }
 
 .member-detail__info {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: end;
+  padding: 0;
+}
+
+.member-detail__info-text {
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 0 2rem;
 }
 
 .member-detail__title {
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   letter-spacing: 0.3em;
-  color: var(--accent);
-  margin-bottom: 0.7rem;
+  color: var(--fg);
+  opacity: 0.85;
+  margin-bottom: 0.4rem;
 }
 
 .member-detail__name {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   letter-spacing: 0.2em;
-  font-weight: 400;
-  margin-bottom: 0.3rem;
+  font-weight: 500;
+  margin-bottom: 0.15rem;
 }
 
 .member-detail__name-en {
-  font-size: 0.75rem;
-  letter-spacing: 0.4em;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
   color: var(--muted);
-  margin-bottom: 1.3rem;
+  margin-bottom: 0;
+}
+
+.member-detail__alias-big {
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  font-style: italic;
+  text-shadow: 0 0 30px rgba(201, 169, 97, 0.35);
+  white-space: nowrap;
+  align-self: end;
+  margin-bottom: -0.15em;
 }
 
 .member-detail__bio {
-  margin-bottom: 1.5rem;
+  margin-top: 0.3rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--line);
 }
 
 .member-detail__bio p {
-  font-size: 0.9rem;
-  line-height: 2;
+  font-size: 0.82rem;
+  line-height: 1.7;
   color: var(--fg);
   opacity: 0.85;
-  margin-bottom: 1em;
+  margin-bottom: 0.6em;
 }
 
 .member-detail__bio p:last-child { margin-bottom: 0; }
 
 .member-detail__links {
   display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-  padding-top: 1.2rem;
-  border-top: 1px solid var(--line);
+  gap: 1.5rem;
+  margin-top: 0.8rem;
 }
 
 .member-detail__link {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   letter-spacing: 0.2em;
-  color: var(--muted);
-  transition: color 0.3s;
+  color: var(--fg);
+  opacity: 0.7;
+  transition: color 0.3s, opacity 0.3s;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 2px;
 }
 
-.member-detail__link:hover { color: var(--accent); }
+.member-detail__link:hover {
+  color: var(--accent);
+  opacity: 1;
+  border-bottom-color: var(--accent);
+}
 
 /* ===== 一般內容頁 ===== */
 .content {
@@ -437,60 +439,6 @@ a { color: inherit; text-decoration: none; }
   color: var(--accent);
 }
 
-/* ===== MENU 酒單頁 ===== */
-.menu-list {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-.menu-category {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.menu-category__title {
-  font-size: 0.85rem;
-  letter-spacing: 0.4em;
-  color: var(--accent);
-  padding-bottom: 0.8rem;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 0.5rem;
-}
-
-.menu-item {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 1.5rem;
-  padding: 1rem 0;
-  align-items: baseline;
-}
-
-.menu-item__name {
-  font-size: 1rem;
-  letter-spacing: 0.1em;
-}
-
-.menu-item__desc {
-  font-size: 0.8rem;
-  color: var(--muted);
-  margin-top: 0.3rem;
-  line-height: 1.7;
-}
-
-.menu-item__price {
-  font-family: "Shippori Mincho", serif;
-  font-size: 0.95rem;
-  color: var(--accent);
-  letter-spacing: 0.1em;
-  white-space: nowrap;
-}
-
-/* ===== 首頁 Hero ===== */
 /* ===== 首頁 Hero ===== */
 .hero {
   min-height: calc(100vh - 80px);
@@ -530,10 +478,7 @@ a { color: inherit; text-decoration: none; }
   pointer-events: none;
 }
 
-.hero > * {
-  position: relative;
-  z-index: 1;
-}
+.hero > * { position: relative; z-index: 1; }
 
 .hero__title {
   font-size: clamp(3rem, 6vw, 5rem);
@@ -542,7 +487,7 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 1.5rem;
   color: var(--accent);
   text-shadow:
-    0 0 30px rgba(201, 169, 97, 0.55),
+    0 0 25px rgba(201, 169, 97, 0.55),
     0 2px 12px rgba(0, 0, 0, 0.8);
 }
 
@@ -573,82 +518,6 @@ a { color: inherit; text-decoration: none; }
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-/* ===== 響應式 ===== */
-@media (max-width: 900px) {
-  .navbar { padding: 1rem 1.5rem; }
-  .navbar__toggle { display: flex; }
-
-  .navbar__menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: min(280px, 80vw);
-    height: 100vh;
-    background: rgba(12, 10, 8, 0.97);
-    backdrop-filter: blur(20px);
-    border-left: 1px solid var(--line);
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 6rem 2.5rem 2rem;
-    gap: 2rem;
-    transform: translateX(100%);
-    transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1);
-  }
-  .navbar__menu.is-open { transform: translateX(0); }
-
-  .navbar__nav {
-    flex-direction: column;
-    gap: 1.6rem;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .navbar__link { font-size: 1rem; letter-spacing: 0.3em; display: block; }
-
-
-  .navbar__menu::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-    z-index: -1;
-    display: none;
-  }
-  .navbar__menu.is-open::before {
-    display: block;
-    opacity: 1;
-  }
-
-  .navbar__menu.is-open::before { opacity: 1; }
-
-  .page { padding: 2.5rem 1rem 4rem; }
-
-  .members { grid-template-columns: 1fr; gap: 2rem; }
-  .member-detail {
-    position: static;
-    order: -1;
-    max-height: none;
-    overflow-y: visible;
-  }
-
-  .members__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .member-card { padding: 1.8rem 0.8rem 1.4rem; }
-  .member-card__avatar { width: 90px; height: 90px; }
-  .member-card.is-leader .member-card__avatar { width: 100px; height: 100px; }
-  .member-card__name { font-size: 0.9rem; }
 }
 
 /* ===== 情報未公開頁面 ===== */
@@ -699,4 +568,98 @@ a { color: inherit; text-decoration: none; }
   color: var(--muted);
   line-height: 2;
   max-width: 480px;
+}
+
+/* ===== 響應式（手機版） ===== */
+@media (max-width: 900px) {
+  .navbar { padding: 1rem 1.5rem; }
+  .navbar__toggle { display: flex; }
+
+  .navbar__menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(280px, 80vw);
+    height: 100vh;
+    background: rgba(12, 10, 8, 0.97);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid var(--line);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 6rem 2.5rem 2rem;
+    gap: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+  }
+  .navbar__menu.is-open { transform: translateX(0); }
+
+  .navbar__nav {
+    flex-direction: column;
+    gap: 1.6rem;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .navbar__link { font-size: 1rem; letter-spacing: 0.3em; display: block; }
+
+  .navbar__menu::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: -1;
+    display: none;
+  }
+  .navbar__menu.is-open::before {
+    display: block;
+    opacity: 1;
+  }
+
+  .page { padding: 2.5rem 1rem 4rem; }
+
+  .members {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .member-detail-wrap { height: auto; order: -1; }
+
+  .member-detail {
+    position: static;
+    width: 100%;
+    max-width: none;
+    max-height: none;
+  }
+
+  .member-detail__photo[data-ratio="portrait"],
+  .member-detail__photo[data-ratio="landscape"],
+  .member-detail__photo[data-ratio="square"] {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .members__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .member-card__alias {
+    font-size: 0.85rem;
+    padding: 1.4rem 0.5rem 0.8rem;
+  }
+
+  .member-detail__info {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .member-detail__alias-big {
+    font-size: 2.5rem;
+  }
 }

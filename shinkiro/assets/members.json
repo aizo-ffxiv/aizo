@@ -1,0 +1,318 @@
+[
+  {
+    "id": "01",
+    "name": "牛牛",
+    "nameEn": "BULL",
+    "alias": "Direct",
+    "title": "領路人",
+    "avatar": "assets/bull_avatar.png",
+    "photo": "assets/bull_photo.png",
+    "bio": "『可以掰我的屁股嗎?我需要幫忙』",
+    "links": []
+  },
+  {
+    "id": "02",
+    "name": "地毯",
+    "nameEn": "RUG",
+    "alias": "Carpet",
+    "title": "絲絨野獸",
+    "avatar": "assets/rug_avatar.png",
+    "photo": "assets/rug_photo.png",
+    "bio": "閉嘴，踩我。\n\n一想到你的屎沖進下水道和別人的黏在一起我就吃醋",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@ff14_rug" }
+    ]
+  },
+  {
+    "id": "03",
+    "name": "韓",
+    "nameEn": "JASON",
+    "alias": "Pulse",
+    "title": "緋紅陷阱",
+    "avatar": "assets/jason_avatar.png",
+    "photo": "assets/jason_photo.png",
+    "bio": "我的兄弟都叫我韓。",
+    "links": []
+  },
+  {
+    "id": "04",
+    "name": "我是胖達",
+    "nameEn": "PANDA",
+    "alias": "Lush",
+    "title": "粉色夢境",
+    "avatar": "assets/panda_avatar.png",
+    "photo": "assets/panda_photo.png",
+    "bio": "『無論遇到什麼困難，屁股永遠在你身後。』我是胖達☆*―公肥控！立志當WAX的狗。",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@blpanda_1123?hl=zh-tw" }
+    ]
+  },
+  {
+    "id": "05",
+    "name": "芋頭",
+    "nameEn": "TARO",
+    "alias": "Harmonizer",
+    "title": "紫影調和",
+    "avatar": "assets/taro_avatar.png",
+    "photo": "assets/taro_photo.png",
+    "bio": "26年2月1日在海督遇見牛哥從此之後走上這條不歸路。",
+    "links": []
+  },
+  {
+    "id": "06",
+    "name": "月費",
+    "nameEn": "TSUKIFEE",
+    "alias": "Momentum",
+    "title": "舞動核心",
+    "avatar": "assets/tsukifee_avatar.png",
+    "photo": "assets/tsukifee_photo.png",
+    "bio": "付一輩子月費跳一輩子舞，你各位也要來一輩子愛憎喔!",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@deepdarkfantsy_14" }
+    ]
+  },
+  {
+    "id": "07",
+    "name": "姆姆貓",
+    "nameEn": "MUMU",
+    "alias": "Plaything",
+    "title": "律動支配",
+    "avatar": "assets/mumu_avatar.png",
+    "photo": "assets/mumu_photo.png",
+    "bio": "想在這裡盡情放縱與平常不同的一面？來吧！我會把你所有的假面都踩在腳下，一起跳舞吧！",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@mumu.ff14" }
+    ]
+  },
+  {
+    "id": "08",
+    "name": "雪小丸",
+    "nameEn": "MARU",
+    "alias": "Solace",
+    "title": "蒼翠之影",
+    "avatar": "assets/maru_avatar.png",
+    "photo": "assets/maru_photo.png",
+    "bio": "「有些話說不出口，所以我選擇用琴弦來傳遞這份心情。」",
+    "links": []
+  },
+  {
+    "id": "09",
+    "name": "雪冽希鈴",
+    "nameEn": "SHIREEN",
+    "alias": "Serene",
+    "title": "純白魔女",
+    "avatar": "assets/shireen_avatar.png",
+    "photo": "assets/shireen_photo.png",
+    "bio": "—在那雨聲迴響朦朧的街燈上，即使你無處可去，但只要有吾在的地方...那就是你的歸屬。",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@snowshireen" }
+    ]
+  },
+  {
+    "id": "10",
+    "name": "雪冽希鈴 & 雪小丸",
+    "nameEn": "SHIREEN & MARU",
+    "alias": "The Binary",
+    "title": "悖論觀察者",
+    "avatar": "assets/shireen&maru_avatar.png",
+    "photo": "assets/shireen&maru_photo.png",
+    "bio": "―「在我們之間，沒有祕密，只有共鳴。命運...將你.我.緊緊相連。」",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@snowshireen" }
+    ]
+  },
+  {
+    "id": "11",
+    "name": "小梨子",
+    "nameEn": "LYCHEE",
+    "alias": "Crisp",
+    "title": "梨夢舞伶",
+    "avatar": "assets/lychee_avatar.png",
+    "photo": "assets/lychee_photo.png",
+    "bio": "有人說梨子吃起來清甜，但我的舞……可能會讓你有點『上火』。\n\n接下來這幾分鐘，你的眼睛歸我管。準備好感受這份危險的甜味了嗎？",
+    "links": []
+  },
+  {
+    "id": "12",
+    "name": "沄",
+    "nameEn": "YUN",
+    "alias": "Mimic",
+    "title": "萬相流轉",
+    "avatar": "assets/yun_avatar.png",
+    "photo": "assets/yun_photo.png",
+    "bio": "幻想藥中毒的變色龍，每次遇到的我都不一定會是同樣的。我會推薦適合您的調酒。",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@cc.yday" }
+    ]
+  },
+  {
+    "id": "13",
+    "name": "豆漿",
+    "nameEn": "DOULIN",
+    "alias": "Valve",
+    "title": "緩衝體",
+    "avatar": "assets/doulin_avatar.png",
+    "photo": "assets/doulin_photo.png",
+    "bio": "給我魯加男或高原男，我給你我的全部",
+    "links": []
+  },
+  {
+    "id": "14",
+    "name": "貓蟲",
+    "nameEn": "C.B.",
+    "alias": "Sentinel",
+    "title": "引導者",
+    "avatar": "assets/C.B._avatar.png",
+    "photo": "assets/C.B._photo.png",
+    "bio": "在你徹底迷失之前，我會是這片虛幻中唯一的座標。我一直都在，負責確保你的方位。",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@silverflag_ffxiv" }
+    ]
+  },
+  {
+    "id": "15",
+    "name": "Chichy",
+    "nameEn": "CHICHY",
+    "alias": "Chronicle",
+    "title": "觀測體",
+    "avatar": "assets/chichy_avatar.png",
+    "photo": "assets/chichy_photo.png",
+    "bio": "80%時間是一隻兔子。觀測命運包含留下時空畫面，記得看到我可以擺個你最有記憶點的姿勢讓我留下時光碎片 💕",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@crazyrabbit777777" }
+    ]
+  },
+  {
+    "id": "16",
+    "name": "東吉",
+    "nameEn": "HEISENBERG",
+    "alias": "Confessor",
+    "title": "觀測者",
+    "avatar": "assets/donji_avatar.png",
+    "photo": "assets/donji_photo.png",
+    "bio": "阿咪狗，你要不要來點GOOD SHIT，我這邊有一批很屌的開心龍男汁，喝了包爽。",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@ericchen0626" }
+    ]
+  },
+  {
+    "id": "17",
+    "name": "Lio",
+    "nameEn": "",
+    "alias": "Core",
+    "title": "靜侍者",
+    "avatar": "assets/lio_avatar.png",
+    "photo": "assets/lio_photo.png",
+    "bio": "在迷失於無邊的浮光掠影前，請記得我這裡永遠為你留著位置。",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@lio04_26?igshid=NTc4MTIwNjQ2YQ==" }
+    ]
+  },
+  {
+    "id": "18",
+    "name": "伊萊諾斯",
+    "nameEn": "ILAINOSU",
+    "alias": "Liminal",
+    "title": "執行者",
+    "avatar": "assets/ilainosu_avatar.png",
+    "photo": "assets/ilainosu_photo.png",
+    "bio": "所有的煩惱在這裡都不重要，只需要盡情享受今晚限定的相遇。",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@ilainosu.ffxiv?hl=zh-tw" }
+    ]
+  },
+  {
+    "id": "19",
+    "name": "邪惡超布丁",
+    "nameEn": "puddind",
+    "alias": "Spark",
+    "title": "籌劃師",
+    "avatar": "assets/puddind_avatar.png",
+    "photo": "assets/puddind_photo.png",
+    "bio": "這裡是你的\"思念憶\",還是我的\"淒美地\"呢?",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@pudd.ind" }
+    ]
+  },
+  {
+    "id": "20",
+    "name": "諾亞恩佩里特",
+    "nameEn": "NOAH",
+    "alias": "Noble",
+    "title": "轉播台",
+    "avatar": "assets/noah_avatar.png",
+    "photo": "assets/noah_photo.png",
+    "bio": "「我的眨眼不代表承諾，但絕對代表我現在只注視著您；如果您不知道該成為什麼樣的面貌，也許能從我的注視裡尋得您想要的答案。」",
+    "links": []
+  },
+  {
+    "id": "21",
+    "name": "布諾",
+    "nameEn": "BUNO",
+    "alias": "Succubus",
+    "title": "誘導體",
+    "avatar": "assets/buno_avatar.png",
+    "photo": "assets/buno_photo.png",
+    "bio": "「你不是一直都想這麼做嗎？」",
+    "links": []
+  },
+  {
+    "id": "22",
+    "name": "安緹莉",
+    "nameEn": "TILLY",
+    "alias": "Architect",
+    "title": "築夢師",
+    "avatar": "assets/tilly_avatar.png",
+    "photo": "assets/tilly_photo.png",
+    "bio": "神秘的常客，時不時會在這裡看見她的蹤影",
+    "links": []
+  },
+  {
+    "id": "23",
+    "name": "夜悅茹",
+    "nameEn": "YUE-RU",
+    "alias": "Analyst",
+    "title": "分析師",
+    "avatar": "assets/yueru_avatar.png",
+    "photo": "assets/yueru_photo.png",
+    "bio": "「真相在數據面前毫無隱藏，而我，只負責朗讀數據的判決。」",
+    "links": []
+  },
+  {
+    "id": "24",
+    "name": "泡泡龍",
+    "nameEn": "BUBBLE",
+    "alias": "Mirage",
+    "title": "會計師",
+    "avatar": "assets/bubble_avatar.png",
+    "photo": "assets/bubble_photo.png",
+    "bio": "泡泡於蜃氣幻境中與你深情擁抱，用律動與酒意，守護這場沉溺。",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@fiori852hz" }
+    ]
+  },
+  {
+    "id": "25",
+    "name": "吱吱",
+    "nameEn": "ZEZE",
+    "alias": "Zenith",
+    "title": "座標原點",
+    "avatar": "assets/zeze_avatar.png",
+    "photo": "assets/zeze_photo.png",
+    "bio": "所有行動皆需依附於他所構築的格局。當你踏入這片境域，即代表已交付了行走的權利。他是座標的原點。",
+    "links": []
+  },
+  {
+    "id": "26",
+    "name": "Max",
+    "nameEn": "",
+    "alias": "Curator",
+    "title": "機關長",
+    "avatar": "assets/max_avatar.png",
+    "photo": "assets/max_photo.png",
+    "bio": "我是 Max。在泡沫破滅前，盡情起舞吧。",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@max_azk0327?hl=zh-tw" }
+    ]
+  }
+]
