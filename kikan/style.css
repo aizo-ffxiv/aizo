@@ -9,16 +9,6 @@
   font-display: swap;
 }
 
-/* ===== 防止手機版多餘空白 ===== */
-html, body {
-  overflow-x: hidden;
-  max-width: 100vw;
-}
-
-body {
-  position: relative;
-}
-
 /* ===== 重置 & 變數 ===== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -39,6 +29,12 @@ html, body {
   font-weight: 300;
   letter-spacing: 0.05em;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  position: relative;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -73,7 +69,7 @@ a { color: inherit; text-decoration: none; }
 
 .navbar__logo {
   font-family: "Saint", "Chomsky", serif;
-  font-size: 2.6rem;            /* 從 1.8rem 放大 */
+  font-size: 2.6rem;
   color: var(--accent);
   letter-spacing: 0.02em;
   line-height: 1;
@@ -115,7 +111,6 @@ a { color: inherit; text-decoration: none; }
   color: var(--accent);
   border-bottom-color: var(--accent);
 }
-
 
 /* ===== 漢堡按鈕（桌面版隱藏） ===== */
 .navbar__toggle {
@@ -181,10 +176,11 @@ a { color: inherit; text-decoration: none; }
   background: var(--accent);
   margin: 1.2rem auto 0;
 }
+
 /* ===== 成員頁面:左右分割 ===== */
 .members {
   display: grid;
-  grid-template-columns: 1fr 1fr;     /* 左右各半 */
+  grid-template-columns: 1fr 1fr;
   gap: 2rem;
   align-items: start;
 }
@@ -354,7 +350,6 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 1rem;
 }
 
-/* 大型 alias 字 */
 .member-detail__alias-big {
   font-family: "Saint", "Shippori Mincho", serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
@@ -442,7 +437,6 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
 }
 
-/* 背景圖層 (半透明) */
 .hero::before {
   content: "";
   position: absolute;
@@ -455,7 +449,6 @@ a { color: inherit; text-decoration: none; }
   z-index: 0;
 }
 
-/* 漸層暗化層 */
 .hero::after {
   content: "";
   position: absolute;
@@ -470,7 +463,6 @@ a { color: inherit; text-decoration: none; }
   pointer-events: none;
 }
 
-/* 文字置於最上層 */
 .hero > * {
   position: relative;
   z-index: 1;
@@ -515,6 +507,57 @@ a { color: inherit; text-decoration: none; }
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ===== 情報未公開頁面 ===== */
+.classified {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  gap: 1.5rem;
+}
+
+.classified__icon {
+  font-size: 3rem;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+}
+
+.classified__title {
+  font-size: 1.4rem;
+  letter-spacing: 0.4em;
+  color: var(--fg);
+  font-weight: 400;
+}
+
+.classified__title-en {
+  font-size: 0.75rem;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+  margin-top: 0.5rem;
+}
+
+.classified__divider {
+  width: 60px;
+  height: 1px;
+  background: var(--accent);
+  margin: 1.5rem 0;
+  opacity: 0.5;
+}
+
+.classified__msg {
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  line-height: 2;
+  max-width: 480px;
+}
+
 /* ===== 響應式（手機版） ===== */
 @media (max-width: 900px) {
   .navbar { padding: 1rem 1.5rem; }
@@ -586,69 +629,21 @@ a { color: inherit; text-decoration: none; }
 
   .members__grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .member-card {
-    padding: 1.6rem 0.8rem;
-  }
-
-  .member-card__avatar {
-    width: 85px;
-    height: 85px;
+    gap: 0.8rem;
   }
 
   .member-card__alias {
-    font-size: 1rem;
+    font-size: 0.85rem;
+    padding: 1.4rem 0.5rem 0.8rem;
   }
-}
 
-/* ===== 情報未公開頁面 ===== */
-.classified {
-  min-height: calc(100vh - 200px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 4rem 2rem;
-  gap: 1.5rem;
-}
+  .member-detail__info {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
 
-.classified__icon {
-  font-size: 3rem;
-  letter-spacing: 0.5em;
-  color: var(--accent);
-  opacity: 0.6;
-  margin-bottom: 0.5rem;
-}
-
-.classified__title {
-  font-size: 1.4rem;
-  letter-spacing: 0.4em;
-  color: var(--fg);
-  font-weight: 400;
-}
-
-.classified__title-en {
-  font-size: 0.75rem;
-  letter-spacing: 0.5em;
-  color: var(--accent);
-  margin-top: 0.5rem;
-}
-
-.classified__divider {
-  width: 60px;
-  height: 1px;
-  background: var(--accent);
-  margin: 1.5rem 0;
-  opacity: 0.5;
-}
-
-.classified__msg {
-  font-size: 0.9rem;
-  letter-spacing: 0.15em;
-  color: var(--muted);
-  line-height: 2;
-  max-width: 480px;
+  .member-detail__alias-big {
+    font-size: 2.5rem;
+  }
 }

@@ -110,14 +110,6 @@ function openMemberDetail(id) {
   `;
 }
 
-  // 點擊時讓詳情滾入視窗(桌面版才需要)
-  if (scrollToView && window.innerWidth > 900) {
-    requestAnimationFrame(() => {
-      detail.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  }
-}
-
 
 document.addEventListener("DOMContentLoaded", () => {
   // 自動標記當前頁面導覽列
