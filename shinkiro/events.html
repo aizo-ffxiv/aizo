@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>活動 | 蜃気楼</title>
-  <link rel="icon" type="image/png" href="../assets/favicon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>活動情報 | AIZO SHINKIRŌ</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <nav class="navbar">
-   <a href="../index.html" class="navbar__brand">
+  <!-- 導覽列 -->
+  <header class="navbar">
+    <a href="../index.html" class="navbar__brand">
       <span class="navbar__logo">AIZO</span>
       <span class="navbar__subtitle">SHINKIRŌ ・ 蜃気楼</span>
-   </a>
+    </a>
+
     <button class="navbar__toggle" id="navToggle" aria-label="選單">
-      <span></span><span></span><span></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
+
     <div class="navbar__menu" id="navMenu">
       <ul class="navbar__nav">
         <li><a href="index.html" class="navbar__link">HOME</a></li>
@@ -25,24 +29,37 @@
         <li><a href="entry.html" class="navbar__link">ENTRY</a></li>
         <li><a href="contact.html" class="navbar__link">CONTACT</a></li>
       </ul>
-      
     </div>
-  </nav>
+  </header>
 
-<main>
-  <section class="classified">
-    <div class="classified__icon">━━━━</div>
-    <div>
-      <div class="classified__title">情報未公開</div>
-      <div class="classified__title-en">CLASSIFIED</div>
+  <!-- 主要內容 -->
+  <main class="page">
+    <div class="page__title">
+      <h2>活動情報</h2>
+      <p>EVENTS</p>
+      <div class="divider"></div>
     </div>
-    <div class="classified__divider"></div>
-    <p class="classified__msg">
-      此區情報尚未開放。<br>
-      請等待後續公告。
-    </p>
-  </section>
-</main>
+
+    <!-- 即將舉辦 -->
+    <section class="events-section" id="upcomingSection">
+      <div class="events-section__head">
+        <span class="events-section__label">UPCOMING</span>
+        <span class="events-section__title">即將舉辦</span>
+        <div class="events-section__line"></div>
+      </div>
+      <div class="events-list" id="upcomingList"></div>
+    </section>
+
+    <!-- 定期活動 -->
+    <section class="events-section" id="regularSection" style="display: none;">
+      <div class="events-section__head">
+        <span class="events-section__label">REGULAR</span>
+        <span class="events-section__title">定期活動</span>
+        <div class="events-section__line"></div>
+      </div>
+      <div class="events-grid" id="regularList"></div>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>

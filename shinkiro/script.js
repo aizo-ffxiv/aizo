@@ -124,6 +124,114 @@ function openMemberDetail(id) {
   }
 }
 
+// ═══════════════════════════════════════
+//  活動 EVENTS 載入與渲染
+// ═══════════════════════════════════════
+
+async function loadEvents() {
+  try {
+    const response = await fetch("assets/events.json");
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
+  } catch (err) {
+    console.error("載入活動資料失敗:", err);
+    return null;
+  }
+}
+
+function renderUpcomingEvent(event) {
+  const highlightsHTML = event.highlights && event.highlights.length > 0
+    ? `
+      <ul class="event-card__highlights">
+        ${event.highlights.map(h => `<li>${h}</li>`).join("")}
+      </ul>
+    ` : "";
+
+  const descriptionHTML = (event.description || "")
+    .split(/\n+/)
+    .map(p => p.trim())
+    .filter(p => p.length > 0)
+    .map(p => `<p>${p}</p>`)
+    .join("");
+
+  const imageHTML = event.image
+    ? `<div class="event-card__image"><img src="${event.image}" alt="${event.title}"></div>`
+    : "";
+
+  const tagHTML = event.tag
+    ? `<span class="event-card__tag">${event.tag}</span>`
+    : "";
+
+  return `
+    <article class="event-card" data-id="${event.id}">
+      ${imageHTML}
+      <div class="event-card__body">
+        ${tagHTML}
+        ${event.subtitle ? `<div class="event-card__subtitle">${event.subtitle}</div>` : ""}
+        <h3 class="event-card__title">${event.title}</h3>
+        ${event.intro ? `<p class="event-card__intro">${event.intro}</p>` : ""}
+        <div class="event-card__meta">
+          ${event.date ? `<div class="event-card__meta-item"><span class="event-card__meta-label">DATE</span><span class="event-card__meta-value">${event.date}</span></div>` : ""}
+          ${event.time ? `<div class="event-card__meta-item"><span class="event-card__meta-label">TIME</span><span class="event-card__meta-value">${event.time}</span></div>` : ""}
+          ${event.location ? `<div class="event-card__meta-item"><span class="event-card__meta-label">PLACE</span><span class="event-card__meta-value">${event.location}</span></div>` : ""}
+        </div>
+        ${descriptionHTML ? `<div class="event-card__description">${descriptionHTML}</div>` : ""}
+        ${highlightsHTML}
+      </div>
+    </article>
+  `;
+}
+
+function renderRegularEvent(event) {
+  return `
+    <article class="event-mini" data-id="${event.id}">
+      ${event.tag ? `<span class="event-mini__tag">${event.tag}</span>` : ""}
+      ${event.date ? `<div class="event-mini__date">${event.date}</div>` : ""}
+      <h3 class="event-mini__title">${event.title}</h3>
+      ${event.subtitle ? `<div class="event-mini__subtitle">${event.subtitle}</div>` : ""}
+      ${event.time ? `<div class="event-mini__time">${event.time}</div>` : ""}
+      ${event.intro ? `<p class="event-mini__intro">${event.intro}</p>` : ""}
+    </article>
+  `;
+}
+
+async function initEventsPage() {
+  const upcomingList = document.getElementById("upcomingList");
+  const regularList = document.getElementById("regularList");
+  if (!upcomingList && !regularList) return;
+
+  const data = await loadEvents();
+  if (!data) {
+    if (upcomingList) {
+      upcomingList.innerHTML = `
+        <div style="text-align: center; padding: 3rem; color: var(--muted);">
+          <p>⚠ 無法載入活動資料</p>
+        </div>
+      `;
+    }
+    return;
+  }
+
+  // 即將舉辦
+  if (upcomingList) {
+    if (data.upcoming && data.upcoming.length > 0) {
+      upcomingList.innerHTML = data.upcoming.map(renderUpcomingEvent).join("");
+      document.getElementById("upcomingSection").style.display = "block";
+    } else {
+      document.getElementById("upcomingSection").style.display = "none";
+    }
+  }
+
+  // 定期活動
+  if (regularList) {
+    if (data.regular && data.regular.length > 0) {
+      regularList.innerHTML = data.regular.map(renderRegularEvent).join("");
+      document.getElementById("regularSection").style.display = "block";
+    } else {
+      document.getElementById("regularSection").style.display = "none";
+    }
+  }
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
@@ -133,10 +241,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     else link.classList.remove("is-active");
   });
 
-  if (document.getElementById("membersGrid")) {
+if (document.getElementById("membersGrid")) {
     const success = await loadMembers();
     if (success) renderMembers();
   }
+
+  // 載入活動
+  await initEventsPage();
 
   const toggle = document.getElementById("navToggle");
   const menu = document.getElementById("navMenu");

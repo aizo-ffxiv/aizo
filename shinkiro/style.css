@@ -571,6 +571,305 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ===== 響應式（手機版） ===== */
+/* ===== 活動頁 EVENTS ===== */
+.events-section {
+  margin-bottom: 4rem;
+}
+
+.events-section__head {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.events-section__label {
+  font-size: 0.7rem;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-style: italic;
+  text-shadow: 0 0 12px rgba(138, 92, 246, 0.4);
+}
+
+.events-section__title {
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  color: var(--fg);
+  opacity: 0.85;
+}
+
+.events-section__line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    var(--accent) 0%,
+    transparent 100%
+  );
+  opacity: 0.4;
+}
+
+/* ===== 即將舉辦活動卡(大卡) ===== */
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.event-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: border-color 0.4s, box-shadow 0.4s;
+}
+
+.event-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 40px rgba(138, 92, 246, 0.2);
+}
+
+/* 有圖時:左圖右文 */
+.event-card:has(.event-card__image) {
+  grid-template-columns: 1fr 1fr;
+}
+
+.event-card__image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.event-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.event-card:hover .event-card__image img {
+  transform: scale(1.04);
+}
+
+.event-card__body {
+  padding: 2.5rem 2.5rem 2.8rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.event-card__tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.3rem 0.8rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 8px rgba(138, 92, 246, 0.4);
+}
+
+.event-card__subtitle {
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  letter-spacing: 0.35em;
+  color: var(--accent);
+  opacity: 0.85;
+  margin-bottom: 0.6rem;
+  text-shadow: 0 0 15px rgba(138, 92, 246, 0.3);
+}
+
+.event-card__title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.event-card__intro {
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: var(--fg);
+  opacity: 0.85;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.event-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1rem 0;
+  margin-bottom: 1.5rem;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.event-card__meta-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  font-size: 0.85rem;
+}
+
+.event-card__meta-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+.event-card__meta-value {
+  color: var(--fg);
+  letter-spacing: 0.1em;
+}
+
+.event-card__description {
+  margin-bottom: 1.5rem;
+}
+
+.event-card__description p {
+  font-size: 0.85rem;
+  line-height: 2;
+  color: var(--fg);
+  opacity: 0.85;
+  margin-bottom: 0.8em;
+}
+
+.event-card__description p:last-child {
+  margin-bottom: 0;
+}
+
+.event-card__highlights {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.event-card__highlights li {
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  color: var(--fg);
+  opacity: 0.8;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.event-card__highlights li::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.6rem;
+  top: 0.3em;
+  text-shadow: 0 0 6px rgba(138, 92, 246, 0.5);
+}
+
+/* ===== 定期活動小卡 ===== */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.event-mini {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 1.8rem 1.5rem;
+  position: relative;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.event-mini:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(138, 92, 246, 0.2);
+}
+
+.event-mini__tag {
+  display: inline-block;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.2rem 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.event-mini__date {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 8px rgba(138, 92, 246, 0.3);
+}
+
+.event-mini__title {
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+
+.event-mini__subtitle {
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-style: italic;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  opacity: 0.85;
+  margin-bottom: 0.8rem;
+}
+
+.event-mini__time {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.event-mini__intro {
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: var(--fg);
+  opacity: 0.8;
+}
+
+/* 響應式 */
+@media (max-width: 900px) {
+  .event-card,
+  .event-card:has(.event-card__image) {
+    grid-template-columns: 1fr;
+  }
+
+  .event-card__body {
+    padding: 1.8rem 1.5rem 2rem;
+  }
+
+  .event-card__title {
+    font-size: 1.3rem;
+  }
+
+  .events-section__head {
+    gap: 1rem;
+  }
+
+  .events-section__label {
+    font-size: 0.6rem;
+  }
+}
+
 @media (max-width: 900px) {
   .navbar { padding: 1rem 1.5rem; }
   .navbar__toggle { display: flex; }
