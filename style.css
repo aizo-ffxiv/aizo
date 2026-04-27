@@ -49,12 +49,13 @@ html, body {
 }
 
 .portal__logo {
-  font-family: "Saint", serif;
+  font-family: "Saint", "Chomsky", serif;
   font-size: clamp(4rem, 10vw, 8rem);
   font-weight: 400;
   color: #c8102e;
   letter-spacing: 0.02em;
-  text-shadow: 0 0 20px rgba(200, 16, 46, 0.3);
+  text-shadow: 0 0 30px rgba(200, 16, 46, 0.4), 0 0 60px rgba(200, 16, 46, 0.15);
+  /* ↑ 雙層光暈,更有電影海報感 */
 }
 
 .portal__tagline {
@@ -62,9 +63,30 @@ html, body {
   color: var(--muted);
   font-size: 0.9rem;
   letter-spacing: 0.4em;
+  position: relative;
+  display: inline-block;
 }
 
-/* ===== 三個入口容器 ===== */
+/* tagline 兩邊加細線,增加儀式感 */
+.portal__tagline::before,
+.portal__tagline::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  height: 1px;
+  background: var(--muted);
+  opacity: 0.4;
+}
+
+.portal__tagline::before {
+  right: calc(100% + 1rem);
+}
+
+.portal__tagline::after {
+  left: calc(100% + 1rem);
+}
+
 .portal__gates {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -73,11 +95,27 @@ html, body {
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   align-self: center;
+  position: relative;
+  overflow: hidden;
 }
 
-/* ===== 單個入口 ===== */
+.portal__gates::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(245, 245, 240, 0.4) 50%,
+    transparent 100%
+  );
+}
+
 .gate {
-  background: var(--bg);
   padding: 4rem 2rem;
   display: flex;
   flex-direction: column;
@@ -92,6 +130,17 @@ html, body {
   transition: color 0.6s ease;
 }
 
+/* ───── 三格的主題色底色（圖片載入前 / hover 漸隱時呈現） ───── */
+.gate[data-gate="kikan"] {
+  background: linear-gradient(135deg, #1a0608 0%, #2a0a0e 100%);
+}
+.gate[data-gate="chinrin"] {
+  background: linear-gradient(135deg, #1a1408 0%, #2e2415 100%);
+}
+.gate[data-gate="shinkiro"] {
+  background: linear-gradient(135deg, #0a0818 0%, #1a1432 100%);
+}
+
 /* 背景圖片層 */
 .gate::before {
   content: "";
@@ -101,11 +150,22 @@ html, body {
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0.5;
-  transition: opacity 0.6s ease, transform 0.8s ease;
+  transition: opacity 0.7s ease, transform 1s ease;
   z-index: 0;
 }
 
-/* 漸層暗化層，讓文字更突出 */
+/* 三個入口各自的背景圖 */
+.gate[data-gate="kikan"]::before {
+  background-image: url("assets/kikan.jpg");
+}
+.gate[data-gate="chinrin"]::before {
+  background-image: url("assets/chinrin.jpg");
+}
+.gate[data-gate="shinkiro"]::before {
+  background-image: url("assets/shinkiro.jpg");
+}
+
+/* 漸層暗化層 */
 .gate::after {
   content: "";
   position: absolute;
@@ -114,34 +174,69 @@ html, body {
     to bottom,
     rgba(0, 0, 0, 0.3) 0%,
     rgba(0, 0, 0, 0.1) 50%,
-    rgba(0, 0, 0, 0.5) 100%
+    rgba(0, 0, 0, 0.6) 100%
   );
   z-index: 0;
   pointer-events: none;
-}
-
-/* 三個入口各自的背景圖 */
-.gate[data-gate="kikan"]::before {
-  background-image: url("assets/kikan.png");
-}
-.gate[data-gate="chinrin"]::before {
-  background-image: url("assets/chinrin.png");
-}
-.gate[data-gate="shinkiro"]::before {
-  background-image: url("assets/shinkiro.png");
+  transition: opacity 0.6s ease;
 }
 
 /* Hover 時：圖片完全顯示 + 微放大 */
 .gate:hover::before {
   opacity: 1;
-  transform: scale(1.05);
+  transform: scale(1.06);
+}
+
+/* Hover 時暗化稍微減弱,讓圖更亮 */
+.gate:hover::after {
+  opacity: 0.7;
 }
 
 /* 文字層 */
 .gate > * {
   position: relative;
   z-index: 1;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Hover 時文字輕微下移,有層次 */
+.gate:hover > * {
+  transform: translateY(-3px);
+}
+
+/* ───── 三入口主標題各自的主題色光暈（hover 時顯現） ───── */
+.gate[data-gate="kikan"] .gate__name-jp {
+  transition: text-shadow 0.6s ease, color 0.6s ease;
+}
+.gate[data-gate="kikan"]:hover .gate__name-jp {
+  text-shadow: 0 0 30px rgba(200, 16, 46, 0.6), 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.gate[data-gate="chinrin"] .gate__name-jp {
+  transition: text-shadow 0.6s ease, color 0.6s ease;
+}
+.gate[data-gate="chinrin"]:hover .gate__name-jp {
+  text-shadow: 0 0 30px rgba(201, 169, 97, 0.7), 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.gate[data-gate="shinkiro"] .gate__name-jp {
+  transition: text-shadow 0.6s ease, color 0.6s ease;
+}
+.gate[data-gate="shinkiro"]:hover .gate__name-jp {
+  text-shadow: 0 0 30px rgba(138, 92, 246, 0.7), 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.gate__index {
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: var(--fg);
+  opacity: 0.6;
+  transition: opacity 0.4s;
+}
+
+.gate:hover .gate__index {
+  opacity: 0.85;
 }
 
 .gate__name-jp {
@@ -154,8 +249,8 @@ html, body {
 .gate__name-en {
   font-size: 0.75rem;
   letter-spacing: 0.4em;
-  color: var(--fg);      /* ← 改成白色 */
-  opacity: 0.85;         /* ← 加一點透明度讓它不那麼搶戲 */
+  color: var(--fg);
+  opacity: 0.7;
 }
 
 .gate__desc {
@@ -163,7 +258,7 @@ html, body {
   font-size: 0.8rem;
   letter-spacing: 0.2em;
   color: var(--fg);
-  opacity: 0.85;
+  opacity: 0.75;
 }
 
 /* ===== 頁尾 ===== */
