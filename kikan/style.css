@@ -182,7 +182,7 @@ a { color: inherit; text-decoration: none; }
   margin: 1.2rem auto 0;
 }
 
-/* ===== 成員頁面：左右固定分割 ===== */
+/* ===== 成員頁面:左右分割 ===== */
 .members {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
@@ -190,7 +190,7 @@ a { color: inherit; text-decoration: none; }
   align-items: start;
 }
 
-/* 左側：成員卡片網格（固定 3 欄） */
+/* 左側:成員卡片網格 */
 .members__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -201,11 +201,11 @@ a { color: inherit; text-decoration: none; }
 .member-card {
   background: var(--surface);
   border: 1px solid var(--line);
-  padding: 2.2rem 1rem 1.6rem;    
+  padding: 1.8rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;                     
+  gap: 1rem;
   cursor: pointer;
   position: relative;
   transition: border-color 0.3s, transform 0.3s, background 0.3s, box-shadow 0.3s;
@@ -224,57 +224,16 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 8px 30px rgba(200, 16, 46, 0.25);
 }
 
-.member-card__number {
-  position: absolute;
-  top: 0.7rem;
-  left: 0.9rem;
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
-  color: var(--muted);
-}
-
-.member-card__badge {
-  position: absolute;
-  top: 0.7rem;
-  right: 0.9rem;
-  font-size: 0.55rem;
-  letter-spacing: 0.35em;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  padding: 0.15rem 0.45rem;
-}
-
-/* LEADER 卡片特殊樣式 */
-.member-card.is-leader {
-  border-color: rgba(200, 16, 46, 0.4);
-  background: linear-gradient(
-    180deg,
-    rgba(200, 16, 46, 0.05) 0%,
-    var(--surface) 100%
-  );
-}
-
-.member-card.is-leader .member-card__avatar {
-  width: 125px;        
-  height: 125px;       
-  border-color: var(--accent);
-}
-
-.member-card.is-leader .member-card__name {
-  font-size: 1rem;
-}
-
 .member-card__avatar {
-  width: 110px;        
-  height: 110px;       
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0.3rem;
   transition: border-color 0.3s;
 }
 
@@ -290,49 +249,35 @@ a { color: inherit; text-decoration: none; }
 }
 
 .member-card__initials {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: var(--accent);
 }
 
-.member-card__name {
-  font-size: 0.95rem;
-  letter-spacing: 0.15em;
-  margin-top: 0.3rem;
+/* 卡片上只顯示英文代稱 */
+.member-card__alias {
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.1em;
+  color: var(--fg);
+  opacity: 0.9;
   white-space: nowrap;
+  font-style: italic;
+  transition: color 0.3s;
 }
 
-.member-card__title {
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  color: var(--muted);
-  white-space: nowrap;
+.member-card:hover .member-card__alias,
+.member-card.is-active .member-card__alias {
+  color: var(--accent);
+  opacity: 1;
 }
 
-/* ===== 右側：成員詳情（固定顯示） ===== */
+/* ===== 右側:成員詳情(完整顯示,不滾動) ===== */
 .member-detail {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   position: sticky;
   top: 6rem;
-  max-height: calc(100vh - 7rem);      /* ← 限制總高度不超過視窗 */
-  overflow-y: auto;                     /* ← 內容太多時右側可以滾動 */
-  padding-right: 0.5rem;                /* 留空間給捲軸 */
-}
-
-/* 捲軸美化 */
-.member-detail::-webkit-scrollbar {
-  width: 4px;
-}
-.member-detail::-webkit-scrollbar-track {
-  background: transparent;
-}
-.member-detail::-webkit-scrollbar-thumb {
-  background: var(--line);
-  border-radius: 2px;
-}
-.member-detail::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
 }
 
 .member-detail > * {
@@ -341,20 +286,19 @@ a { color: inherit; text-decoration: none; }
 
 .member-detail__photo {
   aspect-ratio: 3 / 4;
-  max-height: 55vh;                     
   background: var(--surface);
   overflow: hidden;
   position: relative;
   border: 1px solid var(--line);
   width: 100%;
-  flex-shrink: 0;                       
+  flex-shrink: 0;
 }
 
 .member-detail__photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;          
+  object-position: center top;
 }
 
 .member-detail__photo-placeholder {
@@ -392,15 +336,34 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.75rem;
   letter-spacing: 0.4em;
   color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+/* 英文代稱標籤(詳情頁) */
+.member-detail__alias-tag {
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  opacity: 0.9;
+  font-style: italic;
   margin-bottom: 1.3rem;
 }
 
 .member-detail__bio {
+  margin-bottom: 1.5rem;
+}
+
+.member-detail__bio p {
   font-size: 0.9rem;
   line-height: 2;
   color: var(--fg);
   opacity: 0.85;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1em;
+}
+
+.member-detail__bio p:last-child {
+  margin-bottom: 0;
 }
 
 .member-detail__links {
@@ -418,7 +381,9 @@ a { color: inherit; text-decoration: none; }
   transition: color 0.3s;
 }
 
-.member-detail__link:hover { color: var(--accent); }
+.member-detail__link:hover {
+  color: var(--accent);
+}
 
 /* ===== 一般內容頁（服務/預約/聯絡） ===== */
 .content {
@@ -528,7 +493,6 @@ a { color: inherit; text-decoration: none; }
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 /* ===== 響應式（手機版） ===== */
 @media (max-width: 900px) {
   .navbar { padding: 1rem 1.5rem; }
@@ -566,7 +530,6 @@ a { color: inherit; text-decoration: none; }
     display: block;
   }
 
-
   .navbar__menu::before {
     content: "";
     position: fixed;
@@ -586,21 +549,17 @@ a { color: inherit; text-decoration: none; }
     opacity: 1;
   }
 
-  .navbar__menu.is-open::before { opacity: 1; }
-
   .page { padding: 2.5rem 1rem 4rem; }
 
-  /* 手機版：成員頁改為上下堆疊 */
+  /* 手機版:成員頁改為上下堆疊 */
   .members {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
 
-.member-detail {
+  .member-detail {
     position: static;
     order: -1;
-    max-height: none;          
-    overflow-y: visible;
   }
 
   .members__grid {
@@ -608,11 +567,20 @@ a { color: inherit; text-decoration: none; }
     gap: 1rem;
   }
 
-  .member-card { padding: 1.6rem 0.8rem 1.2rem; }
-  .member-card__avatar { width: 90px; height: 90px; }
-  .member-card.is-leader .member-card__avatar { width: 100px; height: 100px; }
-  .member-card__name { font-size: 0.85rem; }
+  .member-card {
+    padding: 1.6rem 0.8rem;
+  }
+
+  .member-card__avatar {
+    width: 85px;
+    height: 85px;
+  }
+
+  .member-card__alias {
+    font-size: 1rem;
+  }
 }
+
 /* ===== 情報未公開頁面 ===== */
 .classified {
   min-height: calc(100vh - 200px);
