@@ -64,10 +64,10 @@ function renderMembers() {
     card.addEventListener("click", () => openMemberDetail(card.dataset.id));
   });
 
-  if (MEMBERS.length > 0) openMemberDetail(MEMBERS[0].id, false);
+  if (MEMBERS.length > 0) openMemberDetail(MEMBERS[0].id);
 }
 
-function openMemberDetail(id, scrollToView = true) {
+function openMemberDetail(id) {
   const member = MEMBER_MAP.get(id);
   if (!member) return;
 
@@ -91,11 +91,15 @@ function openMemberDetail(id, scrollToView = true) {
         ? `<img src="${member.photo}" alt="${member.name}" onerror="this.outerHTML='<div class=\\'member-detail__photo-placeholder\\'>PHOTO</div>'">`
         : `<div class="member-detail__photo-placeholder">PHOTO</div>`}
     </div>
-    <div class="member-detail__info">
-      ${member.title ? `<div class="member-detail__title">${member.title}</div>` : ""}
-      <div class="member-detail__name">${member.name}</div>
-      ${member.nameEn ? `<div class="member-detail__name-en">${member.nameEn}</div>` : ""}
-      ${member.alias ? `<div class="member-detail__alias-tag">「 ${member.alias} 」</div>` : ""}
+    <div>
+      <div class="member-detail__info">
+        <div class="member-detail__info-text">
+          ${member.title ? `<div class="member-detail__title">${member.title}</div>` : ""}
+          <div class="member-detail__name">${member.name}</div>
+          ${member.nameEn ? `<div class="member-detail__name-en">${member.nameEn}</div>` : ""}
+        </div>
+        ${member.alias ? `<div class="member-detail__alias-big">${member.alias}</div>` : ""}
+      </div>
       <div class="member-detail__bio">${bioHTML}</div>
       ${member.links && member.links.length > 0 ? `
         <div class="member-detail__links">
@@ -104,6 +108,7 @@ function openMemberDetail(id, scrollToView = true) {
       ` : ""}
     </div>
   `;
+}
 
   // 點擊時讓詳情滾入視窗(桌面版才需要)
   if (scrollToView && window.innerWidth > 900) {
