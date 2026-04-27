@@ -1,170 +1,40 @@
 // ╔══════════════════════════════════════════════════════════════╗
-// ║   📋 成員資料 — 機関 KIKAN                                    ║
+// ║   機関 KIKAN 成員管理                                         ║
 // ║                                                            ║
-// ║   欄位:                                                     ║
-// ║     id:        排序用,不顯示在前端                           ║
-// ║     name:      中文姓名 (詳情顯示)                            ║
-// ║     nameEn:    羅馬拼音 (詳情顯示)                            ║
-// ║     alias:     英文代稱 (列表卡片 & 詳情都顯示)               ║
-// ║     title:     職位 (詳情顯示)                               ║
-// ║     avatar:    小頭像                                       ║
-// ║     photo:     大張詳情圖                                    ║
-// ║     bio:       簡介(換行用 \n)                              ║
-// ║     links:     [{ label, url }]                            ║
+// ║   要新增/修改/刪除成員?                                       ║
+// ║   → 編輯 assets/members.json 即可                             ║
+// ║   → 不需要碰這個 script.js                                    ║
 // ║                                                            ║
 // ╚══════════════════════════════════════════════════════════════╝
 
-const MEMBERS = [
-  {
-    id: "01",
-    name: "伊萊諾斯",
-    nameEn: "ILAINOSU",
-    alias: "Liminal",
-    title: "執行者",
-    avatar: "assets/ilainosu_kikan_avatar.png",
-    photo: "assets/ilainosu_kikan_photo.png",
-    bio: `透過蠶食人心維繫生命，替人解決問題作為美味煩惱的回報。`,
-    links: [
-      { label: "Threads", url: "https://www.threads.com/@ilainosu.ffxiv?hl=zh-tw" }
-    ]
-  },
-  {
-    id: "02",
-    name: "沄",
-    nameEn: "YUN",
-    alias: "Mimic",
-    title: "幻想藥",
-    avatar: "assets/yun_kikan_avatar.png",
-    photo: "assets/yun_kikan_photo.png",
-    bio: `幻想藥中毒的變色龍，這裡有個隨機掉落的店員、想收集完整版的人設？那得看你與我的緣分了。`,
-    links: [
-      { label: "Threads", url: "https://www.threads.com/@cc.yday" }
-    ]
-  },
-  {
-    id: "03",
-    name: "Chichy",
-    nameEn: "CHICHY",
-    alias: "Chronicle",
-    title: "觀測體",
-    avatar: "assets/chichy_kikan_avatar.png",
-    photo: "assets/chichy_kikan_photo.png",
-    bio: `「時間」與「選擇」交織而成的觀測機關。當你感到焦慮、急於尋求出口，卻又在原地打轉時，她便會被激活。在沉淪域最隱密的角落，那雙粉紅長耳下藏著能看透因果的雙眼。`,
-    links: [
-      { label: "Threads", url: "https://www.threads.com/@crazyrabbit777777" }
-    ]
-  },
-  {
-    id: "04",
-    name: "東吉",
-    nameEn: "DONJI",
-    alias: "Confessor",
-    title: "諮詢師",
-    avatar: "assets/donji_kikan_avatar.png",
-    photo: "assets/donji_kikan_photo.png",
-    bio: `「在音符落下之前——你是自由的；感受、傾聽，最終被理解。」`,
-    links: [
-      { label: "Threads", url: "https://www.threads.com/@ericchen0626" }
-    ]
-  },
-  {
-    id: "05",
-    name: "安緹莉",
-    nameEn: "TILLY",
-    alias: "Architect",
-    title: "築夢師",
-    avatar: "assets/tilly_kikan_avatar.png",
-    photo: "assets/tilly_kikan_photo.png",
-    bio: `只有在裝潢的時候，我感到痛苦並快樂.......`,
-    links: []
-  },
-  {
-    id: "06",
-    name: "姆姆貓",
-    nameEn: "MUMU",
-    alias: "Vibe",
-    title: "律動",
-    avatar: "assets/mumu_kikan_avatar.png",
-    photo: "assets/mumu_kikan_photo.png",
-    bio: `「在這裡，你是我的玩具。別試圖逃跑，那會讓我更興奮。」`,
-    links: []
-  },
-  {
-    id: "07",
-    name: "雪冽希鈴",
-    nameEn: "SHIREEN",
-    alias: "Sentinel",
-    title: "邊境的白色魔女",
-    avatar: "assets/shireen_kikan_avatar.png",
-    photo: "assets/shireen_kikan_photo.png",
-    bio: `—在那雨聲迴響朦朧的街燈上，即使你無處可去，但只要有吾在的地方...那就是你的歸屬。`,
-    links: [
-      { label: "Threads", url: "https://www.threads.com/@silverflag_ffxiv" }
-    ]
-  },
-  {
-    id: "08",
-    name: "泡泡龍",
-    nameEn: "BUBBLE",
-    alias: "Mirage",
-    title: "接待 / 轉播台",
-    avatar: "assets/bubble_kikan_avatar.png",
-    photo: "assets/bubble_kikan_photo.png",
-    bio: `我是機關的財政總管，以諮詢與執行為名深情擁抱你，讓秘密在氣泡中得到永恆守護。`,
-    links: [
-      { label: "Threads", url: "https://www.threads.com/@fiori852hz" }
-    ]
-  },
-  {
-    id: "09",
-    name: "邪惡超布丁",
-    nameEn: "PUDDING",
-    alias: "Spark",
-    title: "老闆娘",
-    avatar: "assets/pudding_kikan_avatar.png",
-    photo: "assets/pudding_kikan_photo.png",
-    bio: `每當直視雙眼的時候，我都看的到你眼底的星空。於是我決定，要讓踏進店裡的你，在這黑白的城市中留下一抹你的色彩。`,
-    links: [
-      { label: "Threads", url: "https://www.threads.com/@pudd.ind" }
-    ]
-  },
-  {
-    id: "10",
-    name: "Max",
-    nameEn: "",
-    alias: "Curator",
-    title: "駕駛員",
-    avatar: "assets/max_kikan_avatar.png",
-    photo: "assets/max_kikan_photo.png",
-    bio: `「因果的終點，由我來畫下句點。」`,
-    links: [
-      { label: "Threads", url: "https://www.threads.com/@max_azk0327?hl=zh-tw" }
-    ]
-  },
-  {
-    id: "11",
-    name: "貓蟲",
-    nameEn: "CATBUG",
-    alias: "C.B.",
-    title: "意識引導者",
-    avatar: "assets/catbug_kikan_avatar.png",
-    photo: "assets/catbug_kikan_photo.png",
-    bio: `在你徹底迷失之前，我會是這片虛幻中唯一的座標。我一直都在，負責確保你的方位。`,
-    links: []
-  }
-];
-
-
-// ──────────────────────────────────────
-//  渲染邏輯
-// ──────────────────────────────────────
+let MEMBERS = [];
+const MEMBER_MAP = new Map();
 
 function initials(name) {
   return name ? name.charAt(0) : "?";
 }
 
-const MEMBER_MAP = new Map();
-MEMBERS.forEach(m => MEMBER_MAP.set(m.id, m));
+async function loadMembers() {
+  try {
+    const response = await fetch("assets/members.json");
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    MEMBERS = await response.json();
+    MEMBERS.forEach(m => MEMBER_MAP.set(m.id, m));
+    return true;
+  } catch (err) {
+    console.error("載入成員資料失敗:", err);
+    const grid = document.getElementById("membersGrid");
+    if (grid) {
+      grid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--muted);">
+          <p style="margin-bottom: 0.5rem;">⚠ 無法載入成員資料</p>
+          <p style="font-size: 0.8rem; opacity: 0.6;">請確認 assets/members.json 是否存在且格式正確</p>
+        </div>
+      `;
+    }
+    return false;
+  }
+}
 
 function renderMembers() {
   const grid = document.getElementById("membersGrid");
@@ -209,7 +79,7 @@ function openMemberDetail(id) {
     .join("");
 
   detail.innerHTML = `
-    <div class="member-detail__photo">
+    <div class="member-detail__photo" data-ratio="square">
       ${member.photo
         ? `<img src="${member.photo}" alt="${member.name}" onerror="this.outerHTML='<div class=\\'member-detail__photo-placeholder\\'>PHOTO</div>'">`
         : `<div class="member-detail__photo-placeholder">PHOTO</div>`}
@@ -231,10 +101,34 @@ function openMemberDetail(id) {
       ` : ""}
     </div>
   `;
+
+  // 圖片載入後自動偵測比例
+  const photoBox = detail.querySelector(".member-detail__photo");
+  const img = photoBox?.querySelector("img");
+  if (img) {
+    const detectRatio = () => {
+      const w = img.naturalWidth;
+      const h = img.naturalHeight;
+      if (!w || !h) return;
+      const ratio = w / h;
+      if (ratio > 1.15) {
+        photoBox.setAttribute("data-ratio", "landscape");
+      } else if (ratio < 0.85) {
+        photoBox.setAttribute("data-ratio", "portrait");
+      } else {
+        photoBox.setAttribute("data-ratio", "square");
+      }
+    };
+    if (img.complete) {
+      detectRatio();
+    } else {
+      img.addEventListener("load", detectRatio);
+    }
+  }
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   // 自動標記當前頁面導覽列
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
   document.querySelectorAll(".navbar__link").forEach(link => {
@@ -246,7 +140,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  renderMembers();
+  // 載入並渲染成員(只在成員頁需要)
+  if (document.getElementById("membersGrid")) {
+    const success = await loadMembers();
+    if (success) renderMembers();
+  }
 
   // 漢堡選單
   const toggle = document.getElementById("navToggle");
