@@ -512,7 +512,6 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ===== 首頁 Hero（夜店霓虹感） ===== */
-/* ===== 首頁 Hero（夜店霓虹感） ===== */
 .hero {
   min-height: calc(100vh - 80px);
   display: flex;
