@@ -1,0 +1,17 @@
+[
+  {
+    "id": "rainbow",
+    "name": "彩虹男模會館",
+    "image": "assets/rainbow.png"
+  },
+  {
+    "id": "catspring",
+    "name": "貓空溫泉鄉",
+    "image": "assets/catspring.png"
+  },
+  {
+    "id": "tanshin",
+    "name": "曇心之境",
+    "image": "assets/tanshin.png"
+  }
+]

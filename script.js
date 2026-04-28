@@ -39,3 +39,63 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 400);
   }
 });
+
+// ═══════════════════════════════════════
+//  Co-Ops 合作店家彈窗
+// ═══════════════════════════════════════
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("coopsBtn");
+  const modal = document.getElementById("coopsModal");
+  const overlay = modal?.querySelector(".modal__overlay");
+  const closeBtn = modal?.querySelector(".modal__close");
+  const shopsContainer = document.getElementById("coopsShops");
+
+  if (!btn || !modal) return;
+
+  // 載入合作店家資料
+  async function loadShops() {
+    try {
+      const response = await fetch("assets/coops.json");
+      if (!response.ok) throw new Error("載入失敗");
+      const shops = await response.json();
+      renderShops(shops);
+    } catch (err) {
+      console.error("載入合作店家失敗:", err);
+      shopsContainer.innerHTML = `<p style="color: var(--muted); text-align: center;">⚠ 暫時無法載入</p>`;
+    }
+  }
+
+function renderShops(shops) {
+  shopsContainer.innerHTML = shops.map(shop => `
+    <div class="shop-card">
+      <div class="shop-card__image">
+        <img src="${shop.image}" alt="${shop.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;shop-card__placeholder&quot;>${shop.name.charAt(0)}</span>'">
+      </div>
+      <div class="shop-card__name">${shop.name}</div>
+    </div>
+  `).join("");
+}
+
+  function openModal() {
+    modal.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    if (!shopsContainer.innerHTML) loadShops();
+  }
+
+  function closeModal() {
+    modal.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  btn.addEventListener("click", openModal);
+  closeBtn?.addEventListener("click", closeModal);
+  overlay?.addEventListener("click", closeModal);
+
+  // ESC 鍵關閉
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) {
+      closeModal();
+    }
+  });
+});
