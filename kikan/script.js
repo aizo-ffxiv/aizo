@@ -102,7 +102,7 @@ function openMemberDetail(id) {
     </div>
   `;
 
-  // 圖片載入後自動偵測比例
+  // 自動偵測圖片比例(原本就有的邏輯保留)
   const photoBox = detail.querySelector(".member-detail__photo");
   const img = photoBox?.querySelector("img");
   if (img) {
@@ -119,17 +119,14 @@ function openMemberDetail(id) {
         photoBox.setAttribute("data-ratio", "square");
       }
     };
-    if (img.complete) {
-      detectRatio();
-    } else {
-      img.addEventListener("load", detectRatio);
-    }
+    if (img.complete) detectRatio();
+    else img.addEventListener("load", detectRatio);
   }
 
-    // 手機版:點擊後自動滾到詳情區
+  // ✨ 新增:手機版點擊後自動滾到頁首
   if (window.innerWidth <= 900) {
     requestAnimationFrame(() => {
-      detail.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
 }

@@ -2,16 +2,25 @@
   {
     "id": "rainbow",
     "name": "彩虹男模會館",
-    "image": "assets/rainbow.png"
+    "image": "assets/rainbow.png",
+    "address": "伊弗利特 ・ 白銀鄉 4-37"
   },
   {
     "id": "catspring",
-    "name": "貓空溫泉鄉",
-    "image": "assets/catspring.png"
+    "name": "貓空",
+    "image": "assets/catspring.png",
+    "address": "鳳凰 ・ 白銀鄉 5-30"
   },
   {
     "id": "tanshin",
     "name": "曇心之境",
-    "image": "assets/tanshin.png"
+    "image": "assets/tanshin.png",
+    "address": "鳳凰 ・ 薰衣草苗圃 13-27"
+  },
+  {
+    "id": "ricebowl",
+    "name": "白飯俱樂部",
+    "image": "assets/ricebowl.png",
+    "address": "鳳凰 ・ 白銀鄉 8-24"
   }
 ]

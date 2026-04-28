@@ -72,7 +72,10 @@ function renderShops(shops) {
       <div class="shop-card__image">
         <img src="${shop.image}" alt="${shop.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;shop-card__placeholder&quot;>${shop.name.charAt(0)}</span>'">
       </div>
-      <div class="shop-card__name">${shop.name}</div>
+      <div class="shop-card__info">
+        <div class="shop-card__name">${shop.name}</div>
+        ${shop.address ? `<div class="shop-card__address">${shop.address}</div>` : ""}
+      </div>
     </div>
   `).join("");
 }

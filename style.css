@@ -495,8 +495,8 @@ html, body {
   position: relative;
   background: #0f0d10;
   border: 1px solid var(--line);
-  padding: 3rem 3rem 3.5rem;
-  max-width: 720px;
+  padding: 2rem 2.5rem 2.5rem;             /* 從 3rem 縮小 */
+  max-width: 580px;                        /* 從 760 縮到 580 */
   width: calc(100vw - 3rem);
   max-height: calc(100vh - 3rem);
   overflow-y: auto;
@@ -528,60 +528,60 @@ html, body {
   opacity: 1;
   transform: rotate(90deg);
 }
-
 .modal__head {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.8rem;                   /* 從 2.5 改 1.8 */
 }
 
 .modal__label {
   font-family: "Saint", "Chomsky", serif;
   font-style: italic;
-  font-size: 0.85rem;
+  font-size: 0.75rem;                      /* 從 0.85 縮 */
   letter-spacing: 0.5em;
   color: #c8102e;
   text-shadow: 0 0 12px rgba(200, 16, 46, 0.4);
   display: block;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
 }
 
 .modal__title {
   font-family: "Shippori Mincho", serif;
-  font-size: 1.6rem;
+  font-size: 1.3rem;                       /* 從 1.6 縮 */
   font-weight: 400;
   letter-spacing: 0.3em;
   margin-bottom: 0.3rem;
 }
 
 .modal__subtitle {
-  font-size: 0.7rem;
+  font-size: 0.65rem;                      /* 從 0.7 縮 */
   letter-spacing: 0.4em;
   color: var(--muted);
 }
 
 .modal__divider {
-  width: 40px;
+  width: 30px;                             /* 從 40 縮 */
   height: 1px;
   background: #c8102e;
-  margin: 1rem auto 0;
+  margin: 0.8rem auto 0;
   box-shadow: 0 0 8px #c8102e;
 }
-
 .modal__shops {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem 1.5rem;                      /* 從 1.5 / 2 縮 */
 }
 
+/* 店家卡片(純展示) */
 .shop-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.6rem;                             /* 從 0.8 縮 */
 }
 
 .shop-card__image {
   width: 100%;
+  max-width: 180px;                        /* ← 新增,限制最大寬度 */
   aspect-ratio: 1 / 1;
   background: var(--bg);
   border: 1px solid var(--line);
@@ -599,22 +599,34 @@ html, body {
 }
 
 .shop-card__placeholder {
-  font-size: 2.2rem;
+  font-size: 1.8rem;                       /* 從 2.2 縮 */
   color: var(--muted);
   font-family: "Shippori Mincho", serif;
   opacity: 0.6;
 }
 
-.shop-card__name {
-  font-size: 0.85rem;
-  letter-spacing: 0.18em;
+.shop-card__info {
   text-align: center;
-  font-family: "Shippori Mincho", serif;
-  color: var(--fg);
-  opacity: 0.9;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-/* 手機版彈窗 */
+.shop-card__name {
+  font-size: 0.85rem;                      /* 從 0.9 縮 */
+  letter-spacing: 0.15em;
+  font-family: "Shippori Mincho", serif;
+  color: var(--fg);
+  opacity: 0.95;
+}
+
+.shop-card__address {
+  font-size: 0.65rem;                      /* 從 0.7 縮 */
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  opacity: 0.85;
+  font-family: "Shippori Mincho", "Noto Serif JP", serif;
+}
 @media (max-width: 768px) {
   .modal__content {
     padding: 2rem 1.5rem 2.5rem;
@@ -633,13 +645,22 @@ html, body {
   }
 
   .shop-card__image {
-    width: 80px;
+    width: 90px;
     flex-shrink: 0;
   }
 
-  .shop-card__name {
+  .shop-card__info {
     text-align: left;
     flex: 1;
+    align-items: flex-start;
+  }
+
+  .shop-card__name {
+    font-size: 0.95rem;
+  }
+
+  .shop-card__address {
+    font-size: 0.7rem;
   }
 
   .modal__title {
