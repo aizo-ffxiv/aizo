@@ -26,19 +26,6 @@
     ]
   },
   {
-    "id": "03",
-    "name": "Chichy",
-    "nameEn": "CHICHY",
-    "alias": "Chronicle",
-    "title": "觀測體",
-    "avatar": "assets/chichy_avatar.png",
-    "photo": "assets/chichy_photo.png",
-    "bio": "「時間」與「選擇」交織而成的觀測機關。當你感到焦慮、急於尋求出口，卻又在原地打轉時，她便會被激活。在沉淪域最隱密的角落，那雙粉紅長耳下藏著能看透因果的雙眼。",
-    "links": [
-      { "label": "Threads", "url": "https://www.threads.com/@crazyrabbit777777" }
-    ]
-  },
-  {
     "id": "04",
     "name": "東吉",
     "nameEn": "DONJI",
