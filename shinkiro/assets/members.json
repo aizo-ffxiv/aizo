@@ -169,19 +169,7 @@
       { "label": "Threads", "url": "https://www.threads.com/@silverflag_ffxiv" }
     ]
   },
-  {
-    "id": "15",
-    "name": "Chichy",
-    "nameEn": "CHICHY",
-    "alias": "Chronicle",
-    "title": "觀測體",
-    "avatar": "assets/chichy_avatar.png",
-    "photo": "assets/chichy_photo.png",
-    "bio": "80%時間是一隻兔子。觀測命運包含留下時空畫面，記得看到我可以擺個你最有記憶點的姿勢讓我留下時光碎片 💕",
-    "links": [
-      { "label": "Threads", "url": "https://www.threads.com/@crazyrabbit777777" }
-    ]
-  },
+
   {
     "id": "16",
     "name": "東吉",
