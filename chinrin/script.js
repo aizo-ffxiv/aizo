@@ -122,7 +122,16 @@ function openMemberDetail(id) {
     if (img.complete) detectRatio();
     else img.addEventListener("load", detectRatio);
   }
+
+    // 手機版:點擊後自動滾到詳情區
+  if (window.innerWidth <= 900) {
+    requestAnimationFrame(() => {
+      detail.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
 }
+
+
 
 
 document.addEventListener("DOMContentLoaded", async () => {
