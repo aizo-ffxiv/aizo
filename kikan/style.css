@@ -574,7 +574,7 @@ a { color: inherit; text-decoration: none; }
 .hero__address-server,
 .hero__address-coord,
 .hero__address > span:not(.hero__address-divider) {
-  color: #4e0814;                       
+  color: #9b9b9b;                       
   letter-spacing: 0.2em;
   font-size: 0.8rem;
 }
