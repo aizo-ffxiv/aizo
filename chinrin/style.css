@@ -559,21 +559,21 @@ a { color: inherit; text-decoration: none; }
   background: rgba(201, 169, 97, 0.1);
 }
 
-.hero__address-server {
-  color: var(--accent);
-  letter-spacing: 0.25em;
-  font-size: 0.78rem;
+.hero__address-server,
+.hero__address-coord,
+.hero__address > span:not(.hero__address-divider) {
+  color: #e8d4a0;                          /* 淺琥珀(高對比好讀) */
+  letter-spacing: 0.2em;
+  font-size: 0.8rem;
 }
 
 .hero__address-divider {
-  color: var(--muted);
-  opacity: 0.6;
+  color: rgba(232, 212, 160, 0.5);         /* 半透明淺琥珀 */
 }
 
 .hero__address-coord {
-  font-family: "Shippori Mincho", "Noto Serif JP", serif;
   letter-spacing: 0.1em;
-  color: var(--accent);   /* 琥珀 */
+  font-family: "Shippori Mincho", "Noto Serif JP", serif;
 }
 
 /* ===== 動畫 ===== */
