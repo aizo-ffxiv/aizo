@@ -292,6 +292,19 @@
   },
   {
     "id": "26",
+    "name": "陪陪",
+    "nameEn": "Pei",
+    "alias": "Insight",
+    "title": "靈犀之眼",
+    "avatar": "assets/peipei_avatar.png",
+    "photo": "assets/peipei_photo.png",
+    "bio": "盡情起舞吧，我會捕捉你的靈魂，在最動人的那刻。",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@ffxivbewith" }
+    ]
+  },
+   {
+    "id": "27",
     "name": "Max",
     "nameEn": "",
     "alias": "Curator",
