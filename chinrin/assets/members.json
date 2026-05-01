@@ -9,7 +9,7 @@
     "photo": "assets/ilainosu_photo.png",
     "bio": "比起酒精，我更想把時間留給和你聊天。",
     "links": [
-      { "label": "Threads", "url": "https://www.threads.com/@ilainosu.ffxiv?hl=zh-tw" }
+      { "label": "Threads", "url": "https://www.threads.com/@ilainosu.ffxiv" }
     ]
   },
   {
@@ -33,7 +33,7 @@
     "photo": "assets/lio_photo.png",
     "bio": "請悄然前來找我，我習慣將言語沉入更幽深的靜默之中。",
     "links": [
-      { "label": "Threads", "url": "https://www.threads.com/@lio04_26?igshid=NTc4MTIwNjQ2YQ==" }
+      { "label": "Threads", "url": "https://www.threads.com/@lio04_26" }
     ]
   },
   {

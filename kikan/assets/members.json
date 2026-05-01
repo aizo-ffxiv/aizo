@@ -9,7 +9,7 @@
     "photo": "assets/ilainosu_photo.png",
     "bio": "透過蠶食人心維繫生命，替人解決問題作為美味煩惱的回報。",
     "links": [
-      { "label": "Threads", "url": "https://www.threads.com/@ilainosu.ffxiv?hl=zh-tw" }
+      { "label": "Threads", "url": "https://www.threads.com/@ilainosu.ffxiv" }
     ]
   },
   {
@@ -26,7 +26,7 @@
     ]
   },
   {
-    "id": "04",
+    "id": "03",
     "name": "東吉",
     "nameEn": "DONJI",
     "alias": "Confessor",
@@ -39,7 +39,7 @@
     ]
   },
   {
-    "id": "05",
+    "id": "04",
     "name": "安緹莉",
     "nameEn": "TILLY",
     "alias": "Architect",
@@ -50,7 +50,7 @@
     "links": []
   },
   {
-    "id": "06",
+    "id": "05",
     "name": "姆姆貓",
     "nameEn": "MUMU",
     "alias": "Vibe",
@@ -61,7 +61,7 @@
     "links": []
   },
   {
-    "id": "07",
+    "id": "06",
     "name": "雪冽希鈴",
     "nameEn": "SHIREEN",
     "alias": "Serene",
@@ -74,7 +74,7 @@
     ]
   },
   {
-    "id": "08",
+    "id": "07",
     "name": "泡泡龍",
     "nameEn": "BUBBLE",
     "alias": "Mirage",
@@ -87,9 +87,9 @@
     ]
   },
   {
-    "id": "09",
+    "id": "08",
     "name": "邪惡超布丁",
-    "nameEn": "PUDDING",
+    "nameEn": "PUDDIND",
     "alias": "Spark",
     "title": "籌劃師",
     "avatar": "assets/puddind_avatar.png",
@@ -100,7 +100,7 @@
     ]
   },
   {
-    "id": "10",
+    "id": "09",
     "name": "貓蟲",
     "nameEn": "C.B.",
     "alias": "Sentinel",
@@ -109,6 +109,19 @@
     "photo": "assets/C.B._photo.png",
     "bio": "在你徹底迷失之前，我會是這片虛幻中唯一的座標。我一直都在，負責確保你的方位。",
     "links": []
+  },
+    {
+    "id": "10",
+    "name": "陪陪",
+    "nameEn": "Pei",
+    "alias": "Sentinel",
+    "title": "引導者",
+    "avatar": "assets/peipei_avatar.png",
+    "photo": "assets/peipei_photo.png",
+    "bio": "「想看清真相？那你得付出代價、還有一點真心。放心，我會替你保管秘密——但你真的願意面對真相嗎？」",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@ffxivbewith" }
+    ]
   },
   {
     "id": "11",
@@ -120,7 +133,7 @@
     "photo": "assets/max_photo.png",
     "bio": "「因果的終點，由我來畫下句點。」",
     "links": [
-      { "label": "Threads", "url": "https://www.threads.com/@max_azk0327?hl=zh-tw" }
+      { "label": "Threads", "url": "https://www.threads.com/@max_azk0327" }
     ]
   }
 ]

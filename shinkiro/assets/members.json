@@ -44,7 +44,7 @@
     "photo": "assets/panda_photo.png",
     "bio": "『無論遇到什麼困難，屁股永遠在你身後。』我是胖達☆*―公肥控！立志當WAX的狗。",
     "links": [
-      { "label": "Threads", "url": "https://www.threads.com/@blpanda_1123?hl=zh-tw" }
+      { "label": "Threads", "url": "https://www.threads.com/@blpanda_1123" }
     ]
   },
   {
@@ -206,13 +206,13 @@
     "photo": "assets/ilainosu_photo.png",
     "bio": "所有的煩惱在這裡都不重要，只需要盡情享受今晚限定的相遇。",
     "links": [
-      { "label": "Threads", "url": "https://www.threads.com/@ilainosu.ffxiv?hl=zh-tw" }
+      { "label": "Threads", "url": "https://www.threads.com/@ilainosu.ffxiv" }
     ]
   },
   {
     "id": "19",
     "name": "邪惡超布丁",
-    "nameEn": "puddind",
+    "nameEn": "PUDDIND",
     "alias": "Spark",
     "title": "籌劃師",
     "avatar": "assets/puddind_avatar.png",
@@ -300,7 +300,7 @@
     "photo": "assets/max_photo.png",
     "bio": "我是 Max。在泡沫破滅前，盡情起舞吧。",
     "links": [
-      { "label": "Threads", "url": "https://www.threads.com/@max_azk0327?hl=zh-tw" }
+      { "label": "Threads", "url": "https://www.threads.com/@max_azk0327" }
     ]
   }
 ]
