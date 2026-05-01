@@ -232,6 +232,80 @@ function renderRegularEvent(event) {
   `;
 }
 
+function renderPastEvent(event) {
+  const tagList = Array.isArray(event.tags) && event.tags.length > 0
+    ? event.tags
+    : (event.tag ? [event.tag] : []);
+  const tagsHTML = tagList.length > 0
+    ? `<div class="past-event__tags">${tagList.map(t => `<span class="past-event__tag">${t}</span>`).join("")}</div>`
+    : "";
+
+  // 內文段落
+  const descHTML = (event.description || "")
+    .split(/\n+/)
+    .map(p => p.trim())
+    .filter(p => p.length > 0)
+    .map(p => `<p class="past-event__desc">${p}</p>`)
+    .join("");
+
+  // sessions 場次
+  const sessionsHTML = Array.isArray(event.sessions) && event.sessions.length > 0
+    ? `
+      <div class="past-event__section-label">SESSIONS</div>
+      <div class="past-event__sessions">
+        ${event.sessions.map(s => `
+          <div class="past-event__session">
+            <div class="past-event__session-name">${s.name || ""}</div>
+            ${s.time ? `<div class="past-event__session-row"><span class="past-event__session-label">TIME</span><span>${s.time}</span></div>` : ""}
+            ${s.location ? `<div class="past-event__session-row"><span class="past-event__session-label">PLACE</span><span>${s.location}</span></div>` : ""}
+            ${s.access ? `<div class="past-event__session-row"><span class="past-event__session-label">ACCESS</span><span>${s.access}</span></div>` : ""}
+          </div>
+        `).join("")}
+      </div>
+    ` : "";
+
+  // highlights
+  const highlightsHTML = Array.isArray(event.highlights) && event.highlights.length > 0
+    ? `
+      <div class="past-event__section-label">HIGHLIGHTS</div>
+      <div class="past-event__highlights">
+        ${event.highlights.map(h => `<span class="past-event__highlight">${h}</span>`).join("")}
+      </div>
+    ` : "";
+
+  // 有任何細節才顯示展開區
+  const hasDetails = event.intro || descHTML || sessionsHTML || highlightsHTML;
+
+  const bodyHTML = hasDetails ? `
+    <div class="past-event__body">
+      <div class="past-event__body-inner">
+        ${event.intro ? `<p class="past-event__intro">${event.intro}</p>` : ""}
+        ${sessionsHTML}
+        ${descHTML ? `<div class="past-event__section-label">DESCRIPTION</div>${descHTML}` : ""}
+        ${highlightsHTML}
+      </div>
+    </div>
+  ` : "";
+
+  const arrowHTML = hasDetails ? `<span class="past-event__arrow">▾</span>` : "";
+  const clickableClass = hasDetails ? "is-clickable" : "";
+
+  return `
+    <article class="past-event ${clickableClass}" data-id="${event.id}">
+      <div class="past-event__head">
+        ${event.date ? `<span class="past-event__date">${event.date}</span>` : ""}
+        <div class="past-event__main">
+          <h3 class="past-event__title">${event.title}</h3>
+          ${event.subtitle ? `<div class="past-event__subtitle">${event.subtitle}</div>` : ""}
+          ${tagsHTML}
+        </div>
+        ${arrowHTML}
+      </div>
+      ${bodyHTML}
+    </article>
+  `;
+}
+
 async function initEventsPage() {
   const upcomingList = document.getElementById("upcomingList");
   const regularList = document.getElementById("regularList");
@@ -266,6 +340,23 @@ async function initEventsPage() {
       document.getElementById("regularSection").style.display = "block";
     } else {
       document.getElementById("regularSection").style.display = "none";
+    }
+  }
+
+  // 過往活動（最新置頂）
+  const pastList = document.getElementById("pastList");
+  if (pastList) {
+    if (data.past && data.past.length > 0) {
+      // 依 sortKey 由新到舊排序;沒寫 sortKey 就用 id 當備援
+      const sorted = [...data.past].sort((a, b) => {
+        const ka = a.sortKey || a.id || "";
+        const kb = b.sortKey || b.id || "";
+        return kb.localeCompare(ka);
+      });
+      pastList.innerHTML = sorted.map(renderPastEvent).join("");
+      document.getElementById("pastSection").style.display = "block";
+    } else {
+      document.getElementById("pastSection").style.display = "none";
     }
   }
 }
@@ -304,4 +395,11 @@ if (document.getElementById("membersGrid")) {
       });
     });
   }
+});
+
+/* ===== 過往活動展開/收合 ===== */
+document.addEventListener('click', e => {
+  const card = e.target.closest('.past-event.is-clickable');
+  if (!card) return;
+  card.classList.toggle('is-open');
 });
