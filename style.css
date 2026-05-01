@@ -693,3 +693,199 @@ html, body {
     font-size: 0.55rem;
   }
 }
+/* ===== 最新通知跳窗 ===== */
+.notice-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: notice-fade 0.4s ease;
+}
+.notice-modal[hidden] { display: none; }
+
+@keyframes notice-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.notice-content {
+  position: relative;
+  background: #0a0a0a;
+  border: 1px solid rgba(201, 169, 97, 0.35);
+  max-width: 440px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 52px 40px 40px;
+  color: #e8e8e8;
+  font-family: "Noto Serif JP", "Shippori Mincho", serif;
+  cursor: pointer;
+  animation: notice-slide 0.5s ease;
+  box-shadow: 0 0 60px rgba(201, 169, 97, 0.12);
+}
+
+@keyframes notice-slide {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.notice-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: none;
+  border: none;
+  color: #c9a961;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 8px;
+  opacity: 0.7;
+  font-family: "Times New Roman", serif;
+  transition: opacity 0.2s;
+}
+.notice-close:hover { opacity: 1; }
+
+/* 標題區 */
+.notice-head {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.notice-subtitle {
+  font-size: 10px;
+  color: #c9a961;
+  letter-spacing: 0.5em;
+  margin-bottom: 14px;
+  font-family: "Times New Roman", serif;
+  padding-left: 0.5em;
+}
+.notice-subtitle:empty { display: none; }
+.notice-title {
+  margin: 0 0 16px;
+  font-size: 22px;
+  color: #e8d4a0;
+  letter-spacing: 0.3em;
+  font-weight: 400;
+  padding-left: 0.3em;
+}
+.notice-divider {
+  height: 1px;
+  width: 40px;
+  background: #c9a961;
+  margin: 0 auto;
+}
+
+/* 引言 */
+.notice-intro {
+  font-size: 14px;
+  line-height: 1.9;
+  color: #d8d8d8;
+  margin: 0 0 24px;
+  text-align: center;
+}
+.notice-intro[hidden] { display: none; }
+
+/* 重點資訊區 */
+.notice-highlight {
+  border-top: 1px solid rgba(201, 169, 97, 0.2);
+  border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+  padding: 22px 4px;
+  margin: 0 0 24px;
+}
+.notice-highlight[hidden] { display: none; }
+
+.notice-highlight__date {
+  font-size: 10px;
+  color: #c9a961;
+  letter-spacing: 0.35em;
+  text-align: center;
+  margin-bottom: 6px;
+  font-family: "Times New Roman", serif;
+}
+.notice-highlight__date:empty { display: none; }
+
+.notice-highlight__label {
+  font-size: 14px;
+  color: #e8d4a0;
+  letter-spacing: 0.2em;
+  text-align: center;
+  margin-bottom: 18px;
+}
+.notice-highlight__label:empty {
+  display: none;
+  margin: 0;
+}
+
+.notice-highlight__rows {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 8px 16px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.notice-highlight__rows:empty { display: none; }
+
+.notice-highlight__time {
+  color: #c9a961;
+  font-family: "Times New Roman", serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  padding-top: 3px;
+  text-align: right;
+}
+.notice-highlight__text {
+  color: #d8d8d8;
+}
+
+/* 結尾文字 */
+.notice-outro {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #b8b8b8;
+  margin: 0 0 28px;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+.notice-outro[hidden] { display: none; }
+
+/* 連結按鈕 */
+.notice-link {
+  display: block;
+  text-align: center;
+  padding: 13px 24px;
+  background: transparent;
+  border: 1px solid #c9a961;
+  color: #c9a961;
+  text-decoration: none;
+  letter-spacing: 0.3em;
+  font-size: 12px;
+  font-family: "Times New Roman", serif;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.notice-link:hover {
+  background: #c9a961;
+  color: #0a0a0a;
+}
+.notice-link[hidden] { display: none; }
+
+/* 手機版 */
+@media (max-width: 600px) {
+  .notice-content {
+    padding: 44px 26px 30px;
+    max-height: 90vh;
+  }
+  .notice-title { font-size: 19px; }
+  .notice-highlight__rows {
+    grid-template-columns: 60px 1fr;
+    gap: 6px 12px;
+    font-size: 12px;
+  }
+  .notice-highlight__time { font-size: 10px; }
+}

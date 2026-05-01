@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "subtitle": "NOTICE",
+  "title": "最新通知",
+  "intro": "歡迎來到 AIZO",
+  "highlight": {
+    "date": "2026 / 05 / 01",
+    "label": "蜃気楼 OPENING NIGHT",
+    "rows": [
+      { "time": "23:59+", "text": "室內 ・ 資格入場制" },
+      { "time": "02:30+", "text": "戶外 After Party ・ 無人數限制" }
+    ]
+  },
+  "outro": "誠摯邀請您參與",
+  "linkText": "VIEW DETAILS",
+  "linkUrl": "https://aizo-ffxiv.github.io/aizo/shinkiro/events.html"
+}

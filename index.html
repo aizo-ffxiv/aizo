@@ -88,5 +88,26 @@
   </main>
 
   <script src="script.js"></script>
+
+<!-- ===== 最新通知跳窗 ===== -->
+<div id="notice-modal" class="notice-modal" hidden>
+  <div class="notice-content" role="dialog" aria-modal="true" aria-labelledby="notice-title">
+    <button class="notice-close" type="button" aria-label="關閉通知">×</button>
+    <div class="notice-head">
+      <div class="notice-subtitle"></div>
+      <h2 id="notice-title" class="notice-title"></h2>
+      <div class="notice-divider"></div>
+    </div>
+    <p class="notice-intro" hidden></p>
+    <div class="notice-highlight" hidden>
+      <div class="notice-highlight__date"></div>
+      <div class="notice-highlight__label"></div>
+      <div class="notice-highlight__rows"></div>
+    </div>
+    <p class="notice-outro" hidden></p>
+    <a class="notice-link" href="#" target="_blank" rel="noopener" hidden></a>
+  </div>
+</div>
+
 </body>
 </html>

@@ -1066,3 +1066,72 @@ a { color: inherit; text-decoration: none; }
     font-size: 2.5rem;
   }
 }
+/* ===== 多重標籤 ===== */
+.event-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.event-card__tags .event-card__tag {
+  margin: 0;
+}
+
+/* ===== 場次區塊 ===== */
+.event-card__sessions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0 24px;
+}
+
+.event-session {
+  border: 1px solid rgba(138, 92, 246, 0.3);
+  background: rgba(138, 92, 246, 0.05);
+  padding: 16px 18px;
+}
+
+.event-session__name {
+  font-size: 15px;
+  color: #8a5cf6;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(138, 92, 246, 0.2);
+  font-weight: 500;
+}
+
+.event-session__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.event-session__row {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.event-session__label {
+  flex-shrink: 0;
+  width: 60px;
+  color: #8a5cf6;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  padding-top: 2px;
+}
+
+.event-session__value {
+  flex: 1;
+  color: #e8e8e8;
+}
+
+/* 手機版：場次改成單欄 */
+@media (max-width: 720px) {
+  .event-card__sessions {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

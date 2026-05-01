@@ -165,9 +165,43 @@ function renderUpcomingEvent(event) {
     ? `<div class="event-card__image"><img src="${event.image}" alt="${event.title}"></div>`
     : "";
 
-  const tagHTML = event.tag
-    ? `<span class="event-card__tag">${event.tag}</span>`
+  // 標籤：優先用 tags 陣列，向下相容單一 tag
+  const tagList = Array.isArray(event.tags) && event.tags.length > 0
+    ? event.tags
+    : (event.tag ? [event.tag] : []);
+  const tagHTML = tagList.length > 0
+    ? `<div class="event-card__tags">${tagList.map(t => `<span class="event-card__tag">${t}</span>`).join("")}</div>`
     : "";
+
+  // 場次：優先用 sessions 陣列，向下相容舊的 date/time/location
+  let metaHTML = "";
+  if (Array.isArray(event.sessions) && event.sessions.length > 0) {
+    const dateHTML = event.date
+      ? `<div class="event-card__meta-item"><span class="event-card__meta-label">DATE</span><span class="event-card__meta-value">${event.date}</span></div>`
+      : "";
+    const sessionsHTML = event.sessions.map(s => `
+      <div class="event-session">
+        <div class="event-session__name">${s.name || ""}</div>
+        <div class="event-session__rows">
+          ${s.time ? `<div class="event-session__row"><span class="event-session__label">TIME</span><span class="event-session__value">${s.time}</span></div>` : ""}
+          ${s.location ? `<div class="event-session__row"><span class="event-session__label">PLACE</span><span class="event-session__value">${s.location}</span></div>` : ""}
+          ${s.access ? `<div class="event-session__row"><span class="event-session__label">ACCESS</span><span class="event-session__value">${s.access}</span></div>` : ""}
+        </div>
+      </div>
+    `).join("");
+    metaHTML = `
+      <div class="event-card__meta">${dateHTML}</div>
+      <div class="event-card__sessions">${sessionsHTML}</div>
+    `;
+  } else {
+    metaHTML = `
+      <div class="event-card__meta">
+        ${event.date ? `<div class="event-card__meta-item"><span class="event-card__meta-label">DATE</span><span class="event-card__meta-value">${event.date}</span></div>` : ""}
+        ${event.time ? `<div class="event-card__meta-item"><span class="event-card__meta-label">TIME</span><span class="event-card__meta-value">${event.time}</span></div>` : ""}
+        ${event.location ? `<div class="event-card__meta-item"><span class="event-card__meta-label">PLACE</span><span class="event-card__meta-value">${event.location}</span></div>` : ""}
+      </div>
+    `;
+  }
 
   return `
     <article class="event-card" data-id="${event.id}">
@@ -177,11 +211,7 @@ function renderUpcomingEvent(event) {
         ${event.subtitle ? `<div class="event-card__subtitle">${event.subtitle}</div>` : ""}
         <h3 class="event-card__title">${event.title}</h3>
         ${event.intro ? `<p class="event-card__intro">${event.intro}</p>` : ""}
-        <div class="event-card__meta">
-          ${event.date ? `<div class="event-card__meta-item"><span class="event-card__meta-label">DATE</span><span class="event-card__meta-value">${event.date}</span></div>` : ""}
-          ${event.time ? `<div class="event-card__meta-item"><span class="event-card__meta-label">TIME</span><span class="event-card__meta-value">${event.time}</span></div>` : ""}
-          ${event.location ? `<div class="event-card__meta-item"><span class="event-card__meta-label">PLACE</span><span class="event-card__meta-value">${event.location}</span></div>` : ""}
-        </div>
+        ${metaHTML}
         ${descriptionHTML ? `<div class="event-card__description">${descriptionHTML}</div>` : ""}
         ${highlightsHTML}
       </div>

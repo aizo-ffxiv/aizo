@@ -6,12 +6,24 @@
       "title": "蜃気楼 – Mirage Opening Night",
       "subtitle": "OPENING NIGHT",
       "date": "05/01 - 05/02",
-      "time": "23:59 – 02:00",
-      "location": "Bahamut｜白銀鄉 17-60（L House）",
-      "tag": "OPENING",
+      "tags": ["OPENING", "資格入場", "After Party"],
       "image": "",
       "intro": "在齒輪轉動與微光閃爍之間，「蜃気楼」將化為一場只存在於深夜的自由爵士之夜。",
       "description": "沒有固定節奏，沒有標準答案——音樂、舞步與情緒在此自由流動。\n\n本次開幕活動將由主持人引導整體氛圍，結合開場舞蹈演出、現場互動與抽獎環節，並開放自由交流空間。\n\n你可以只是靜靜觀賞，也可以隨著節奏靠近人群，甚至失去邊界。\n\n在鋼鐵與燈火之間，這裡不是逃離現實的地方——而是讓慾望被允許存在的夜晚。",
+      "sessions": [
+        {
+          "name": "室內活動",
+          "time": "23:59 – 02:00",
+          "location": "Bahamut｜白銀鄉 17-60（L House）",
+          "access": "資格入場"
+        },
+        {
+          "name": "After Party",
+          "time": "02:30 – late",
+          "location": "戶外",
+          "access": "免入場費・無人數限制"
+        }
+      ],
       "highlights": [
         "主持人引導氛圍",
         "開場舞蹈演出",

@@ -101,4 +101,68 @@ function renderShops(shops) {
       closeModal();
     }
   });
-});
+});/* ===== 最新通知跳窗 ===== */
+(function initNotice() {
+  fetch('assets/notice.json', { cache: 'no-store' })
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      if (!data || !data.enabled) return;
+
+      const modal = document.getElementById('notice-modal');
+      if (!modal) return;
+
+      // 標題區
+      const subtitle = modal.querySelector('.notice-subtitle');
+      const title = modal.querySelector('.notice-title');
+      subtitle.textContent = data.subtitle || '';
+      title.textContent = data.title || '';
+
+      // 引言
+      const intro = modal.querySelector('.notice-intro');
+      if (data.intro && data.intro.trim()) {
+        intro.textContent = data.intro;
+        intro.hidden = false;
+      }
+
+      // 重點資訊區（highlight）
+      const highlight = modal.querySelector('.notice-highlight');
+      if (data.highlight && (data.highlight.date || data.highlight.label || (data.highlight.rows && data.highlight.rows.length))) {
+        modal.querySelector('.notice-highlight__date').textContent = data.highlight.date || '';
+        modal.querySelector('.notice-highlight__label').textContent = data.highlight.label || '';
+
+        const rowsBox = modal.querySelector('.notice-highlight__rows');
+        const rows = Array.isArray(data.highlight.rows) ? data.highlight.rows : [];
+        rowsBox.innerHTML = rows.map(r => `
+          <div class="notice-highlight__time">${r.time || ''}</div>
+          <div class="notice-highlight__text">${r.text || ''}</div>
+        `).join('');
+
+        highlight.hidden = false;
+      }
+
+      // 結尾
+      const outro = modal.querySelector('.notice-outro');
+      if (data.outro && data.outro.trim()) {
+        outro.textContent = data.outro;
+        outro.hidden = false;
+      }
+
+      // 連結按鈕
+      const link = modal.querySelector('.notice-link');
+      if (data.linkText && data.linkUrl) {
+        link.textContent = data.linkText;
+        link.href = data.linkUrl;
+        link.hidden = false;
+      }
+
+      // 顯示視窗
+      modal.hidden = false;
+
+      // 點任意處關閉（連結按鈕除外）
+      modal.addEventListener('click', e => {
+        if (e.target.closest('.notice-link')) return;
+        modal.hidden = true;
+      });
+    })
+    .catch(() => { /* 找不到檔案就靜默略過 */ });
+})();
