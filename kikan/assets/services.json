@@ -1,0 +1,57 @@
+[
+  {
+    "memberId": "01",
+    "items": [
+      { "name": "合作業務諮詢", "price": "詳情請洽詢" },
+      { "name": "煩惱相談 / 雜談", "price": "20w / 30min" },
+      { "name": "網站製作 / 設計委託", "price": "詳情請洽詢" },
+      { "name": "繪圖 / 設計委託", "price": "詳情請洽詢" }
+    ]
+  },
+  {
+    "memberId": "02",
+    "items": [
+      { "name": "拍立得簽繪", "price": "10w / 張" }
+    ]
+  },
+  {
+    "memberId": "03",
+    "items": [
+      { "name": "煩惱相談", "price": "30w / 30min" }
+    ]
+  },
+  {
+    "memberId": "04",
+    "items": [
+      { "name": "煩惱相談 / 雜談", "price": "隨喜 / 30min" },
+      { "name": "角色頭像繪製", "price": "隨喜 NT&GIL / 張" },
+      { "name": "氛圍攝影", "price": "隨喜 / 1hr" }
+    ]
+  },
+  {
+    "memberId": "06",
+    "items": [
+      { "name": "編舞", "price": "20w / 首 起", "note": "視曲子 / 動作複雜度定價" }
+    ]
+  },
+  {
+    "memberId": "07",
+    "items": [
+      { "name": "情感 / 煩惱相談", "price": "50w / 50min" },
+      { "name": "情感 / 煩惱相談", "subName": "三次套組", "price": "135w", "note": "3 times × 50min" }
+    ]
+  },
+  {
+    "memberId": "08",
+    "items": [
+      { "name": "煩惱相談 / 雜談", "price": "20w / 30min" }
+    ]
+  },
+  {
+    "memberId": "10",
+    "items": [
+      { "name": "塔羅占卜", "price": "30w / 30min" },
+      { "name": "命盤流年", "price": "100w / 1hr" }
+    ]
+  }
+]

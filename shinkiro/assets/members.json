@@ -7,8 +7,10 @@
     "title": "領路人",
     "avatar": "assets/bull_avatar.png",
     "photo": "assets/bull_photo.png",
-    "bio": "『可以掰我的屁股嗎?我需要幫忙』",
-    "links": []
+    "bio": "『可以掰我的屁股嗎? 我需要幫忙』",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@e_bull0927" }
+    ]
   },
   {
     "id": "02",
@@ -18,7 +20,7 @@
     "title": "絲絨野獸",
     "avatar": "assets/rug_avatar.png",
     "photo": "assets/rug_photo.png",
-    "bio": "閉嘴，踩我。\n\n一想到你的屎沖進下水道和別人的黏在一起我就吃醋",
+    "bio": "閉嘴，踩我。一想到你的屎沖進下水道和別人的黏在一起我就吃醋。",
     "links": [
       { "label": "Threads", "url": "https://www.threads.com/@ff14_rug" }
     ]
@@ -32,7 +34,9 @@
     "avatar": "assets/jason_avatar.png",
     "photo": "assets/jason_photo.png",
     "bio": "我的兄弟都叫我韓。",
-    "links": []
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@jason.1349_" }
+    ]
   },
   {
     "id": "04",
@@ -42,7 +46,7 @@
     "title": "粉色夢境",
     "avatar": "assets/panda_avatar.png",
     "photo": "assets/panda_photo.png",
-    "bio": "『無論遇到什麼困難，屁股永遠在你身後。』我是胖達☆*―公肥控！立志當WAX的狗。",
+    "bio": "『無論遇到什麼困難，屁股永遠在你身後。』我是胖達☆*―公肥控！立志當 WAX 的狗。",
     "links": [
       { "label": "Threads", "url": "https://www.threads.com/@blpanda_1123" }
     ]
@@ -55,7 +59,7 @@
     "title": "紫影調和",
     "avatar": "assets/taro_avatar.png",
     "photo": "assets/taro_photo.png",
-    "bio": "26年2月1日在海督遇見牛哥從此之後走上這條不歸路。",
+    "bio": "26 年 2 月 1 日在海都遇見牛哥，從此之後走上這條不歸路。",
     "links": []
   },
   {
@@ -66,7 +70,7 @@
     "title": "舞動核心",
     "avatar": "assets/tsukifee_avatar.png",
     "photo": "assets/tsukifee_photo.png",
-    "bio": "付一輩子月費跳一輩子舞，你各位也要來一輩子愛憎喔!",
+    "bio": "付一輩子月費跳一輩子舞，你各位也要來一輩子愛憎喔！",
     "links": [
       { "label": "Threads", "url": "https://www.threads.com/@deepdarkfantsy_14" }
     ]
@@ -81,7 +85,7 @@
     "photo": "assets/mumu_photo.png",
     "bio": "想在這裡盡情放縱與平常不同的一面？來吧！我會把你所有的假面都踩在腳下，一起跳舞吧！",
     "links": [
-      { "label": "Threads", "url": "https://www.threads.com/@mumu.ff14" }
+      { "label": "Threads", "url": "https://www.threads.com/@mumufantsy_14" }
     ]
   },
   {
@@ -92,7 +96,7 @@
     "title": "蒼翠之影",
     "avatar": "assets/maru_avatar.png",
     "photo": "assets/maru_photo.png",
-    "bio": "「來吧。 展現出真實的自我——  無須害怕，我會在你身旁。」",
+    "bio": "「來吧。展現出真實的自我——無須害怕，我會在你身旁。」",
     "links": []
   },
   {
@@ -100,7 +104,7 @@
     "name": "雪冽希鈴",
     "nameEn": "SHIREEN",
     "alias": "Serene",
-    "title": "純白魔女",
+    "title": "白魔女",
     "avatar": "assets/shireen_avatar.png",
     "photo": "assets/shireen_photo.png",
     "bio": "—在那雨聲迴響朦朧的街燈上，即使你無處可去，但只要有吾在的地方...那就是你的歸屬。",
@@ -116,7 +120,7 @@
     "title": "悖論觀察者",
     "avatar": "assets/shireen_maru_avatar.png",
     "photo": "assets/shireen_maru_photo.png",
-    "bio": "―「在我們之間，沒有祕密，只有共鳴。命運……將你.我.緊緊相連。」",
+    "bio": "―「在我們之間，沒有祕密，只有共鳴。命運...將你. 我. 緊緊相連。」",
     "links": [
       { "label": "Threads", "url": "https://www.threads.com/@snowshireen" }
     ]
@@ -129,7 +133,7 @@
     "title": "梨夢舞伶",
     "avatar": "assets/lychee_avatar.png",
     "photo": "assets/lychee_photo.png",
-    "bio": "有人說梨子吃起來清甜，但我的舞……可能會讓你有點『上火』。\n\n接下來這幾分鐘，你的眼睛歸我管。準備好感受這份危險的甜味了嗎？",
+    "bio": "有人說梨子吃起來清甜，但我的舞……可能會讓你有點『上火』。接下來這幾分鐘，你的眼睛歸我管。準備好感受這份危險的甜味了嗎？",
     "links": []
   },
   {
@@ -153,11 +157,22 @@
     "title": "緩衝體",
     "avatar": "assets/doulin_avatar.png",
     "photo": "assets/doulin_photo.png",
-    "bio": "給我魯加男或高原男，我給你我的全部",
+    "bio": "給我魯加男或高原男，我給你我的全部。",
     "links": []
   },
   {
     "id": "14",
+    "name": "儷辭",
+    "nameEn": "RIZZ",
+    "alias": "Lyra",
+    "title": "天琴座",
+    "avatar": "assets/rizz_avatar.png",
+    "photo": "assets/rizz_photo.png",
+    "bio": "在海市蜃樓的入口，為你結算最後的餘溫。",
+    "links": []
+  },
+  {
+    "id": "15",
     "name": "貓蟲",
     "nameEn": "C.B.",
     "alias": "Sentinel",
@@ -166,10 +181,9 @@
     "photo": "assets/C.B._photo.png",
     "bio": "在你徹底迷失之前，我會是這片虛幻中唯一的座標。我一直都在，負責確保你的方位。",
     "links": [
-      { "label": "Threads", "url": "https://www.threads.com/@silverflag_ffxiv" }
+      { "label": "Threads", "url": "https://www.threads.com/@silverflag8624" }
     ]
   },
-
   {
     "id": "16",
     "name": "東吉",
@@ -178,7 +192,7 @@
     "title": "觀測者",
     "avatar": "assets/donji_avatar.png",
     "photo": "assets/donji_photo.png",
-    "bio": "阿咪狗，你要不要來點GOOD SHIT，我這邊有一批很屌的開心龍男汁，喝了包爽。",
+    "bio": "阿咪狗，你要不要來點 GOOD SHIT，我這邊有一批很屌的開心龍男汁，喝了包爽。",
     "links": [
       { "label": "Threads", "url": "https://www.threads.com/@ericchen0626" }
     ]
@@ -193,7 +207,7 @@
     "photo": "assets/lio_photo.png",
     "bio": "在迷失於無邊的浮光掠影前，請記得我這裡永遠為你留著位置。",
     "links": [
-      { "label": "Threads", "url": "https://www.threads.com/@lio04_26?igshid=NTc4MTIwNjQ2YQ==" }
+      { "label": "Threads", "url": "https://www.threads.com/@lio04_26" }
     ]
   },
   {
@@ -217,24 +231,13 @@
     "title": "籌劃師",
     "avatar": "assets/puddind_avatar.png",
     "photo": "assets/puddind_photo.png",
-    "bio": "這裡是你的\"思念憶\",還是我的\"淒美地\"呢?",
+    "bio": "這裡是你的「思念憶」，還是我的「淒美地」呢？",
     "links": [
       { "label": "Threads", "url": "https://www.threads.com/@pudd.ind" }
     ]
   },
   {
     "id": "20",
-    "name": "諾亞恩佩里特",
-    "nameEn": "NOAH",
-    "alias": "Noble",
-    "title": "轉播台",
-    "avatar": "assets/noah_avatar.png",
-    "photo": "assets/noah_photo.png",
-    "bio": "「我的眨眼不代表承諾，但絕對代表我現在只注視著您；如果您不知道該成為什麼樣的面貌，也許能從我的注視裡尋得您想要的答案。」",
-    "links": []
-  },
-  {
-    "id": "21",
     "name": "布諾",
     "nameEn": "BUNO",
     "alias": "Succubus",
@@ -245,18 +248,18 @@
     "links": []
   },
   {
-    "id": "22",
+    "id": "21",
     "name": "安緹莉",
-    "nameEn": "TILLY",
+    "nameEn": "TILI",
     "alias": "Architect",
     "title": "築夢師",
-    "avatar": "assets/tilly_avatar.png",
-    "photo": "assets/tilly_photo.png",
-    "bio": "神秘的常客，時不時會在這裡看見她的蹤影",
+    "avatar": "assets/tili_avatar.png",
+    "photo": "assets/tili_photo.png",
+    "bio": "神秘的常客，時不時會在這裡看見她的蹤影。",
     "links": []
   },
   {
-    "id": "23",
+    "id": "22",
     "name": "夜悅茹",
     "nameEn": "YUE-RU",
     "alias": "Analyst",
@@ -267,7 +270,7 @@
     "links": []
   },
   {
-    "id": "24",
+    "id": "23",
     "name": "泡泡龍",
     "nameEn": "BUBBLE",
     "alias": "Mirage",
@@ -280,7 +283,7 @@
     ]
   },
   {
-    "id": "25",
+    "id": "24",
     "name": "吱吱",
     "nameEn": "ZEZE",
     "alias": "Zenith",
@@ -291,9 +294,9 @@
     "links": []
   },
   {
-    "id": "26",
+    "id": "25",
     "name": "陪陪",
-    "nameEn": "Pei",
+    "nameEn": "PEI",
     "alias": "Insight",
     "title": "靈犀之眼",
     "avatar": "assets/peipei_avatar.png",
@@ -303,7 +306,20 @@
       { "label": "Threads", "url": "https://www.threads.com/@ffxivbewith" }
     ]
   },
-   {
+  {
+    "id": "26",
+    "name": "黑糖",
+    "nameEn": "KOKUTO",
+    "alias": "Brownie",
+    "title": "補光者",
+    "avatar": "assets/kokuto_avatar.png",
+    "photo": "assets/kokuto_photo.png",
+    "bio": "「在光影消失之前，我會為你留下永恆。想在黑夜降臨前捕捉瞬間嗎？」",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@kokuto1642" }
+    ]
+  },
+  {
     "id": "27",
     "name": "Max",
     "nameEn": "",

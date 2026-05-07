@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where python *)",
+      "Bash(npx --yes xlsx --help)",
+      "Bash(npx --yes xlsx-cli \"機關-相談_個人服務.xlsx\" --sheets)",
+      "Bash(npx --yes xlsx-cli \"機關-相談_個人服務.xlsx\" --sheet=2)",
+      "Bash(npx --yes xlsx-cli \"kikan/assets/機關-相談_個人服務.xlsx\" --sheets)",
+      "Bash(cd /e/FFXIV/AZK/aizo && ls kikan/assets/*.xlsx)",
+      "Read(//e/e/FFXIV/AZK/aizo/kikan/**)",
+      "Bash(cd /tmp)",
+      "Bash(npm install *)",
+      "Bash(node read_xlsx.cjs \"/e/FFXIV/AZK/aizo/kikan/assets/機關-相談_個人服務.xlsx\")",
+      "Bash(node /tmp/read_xlsx.cjs \"/e/FFXIV/AZK/aizo/chinrin/assets/沉淪域-爵士酒吧.xlsx\")",
+      "Bash(node /tmp/read_xlsx.cjs \"/e/FFXIV/AZK/aizo/shinkiro/assets/蜃氣樓-夜店.xlsx\")",
+      "Bash([ -f \"chinrin/assets/$n.png\" ])",
+      "Bash([ -f \"kikan/assets/$n.png\" ])",
+      "Bash([ -f \"shinkiro/assets/$n.png\" ])"
+    ]
+  }
+}

@@ -49,6 +49,17 @@
   },
   {
     "id": "05",
+    "name": "儷辭",
+    "nameEn": "RIZZ",
+    "alias": "Lyra",
+    "title": "天琴座",
+    "avatar": "assets/rizz_avatar.png",
+    "photo": "assets/rizz_photo.png",
+    "bio": "別急著結帳，先看著我的眼睛。我是儷辭，負責在沉淪前，收走你的靈魂。",
+    "links": []
+  },
+  {
+    "id": "06",
     "name": "沄",
     "nameEn": "YUN",
     "alias": "Mimic",
@@ -61,17 +72,6 @@
     ]
   },
   {
-    "id": "06",
-    "name": "諾亞恩佩里特",
-    "nameEn": "NOAH",
-    "alias": "Noble",
-    "title": "轉播台",
-    "avatar": "assets/noah_avatar.png",
-    "photo": "assets/noah_photo.png",
-    "bio": "正裝/套裝愛好者，偶爾會歪掉的冷面兔男。大家都叫我少爺，在這領域裡，你可以把這稱呼當作是我的真名。\n\n「我的眨眼不代表承諾，但絕對代表我現在只注視著您；如果您不知道該成為什麼樣的面貌，也許能從我的注視裡尋得您想要的答案。」",
-    "links": []
-  },
-  {
     "id": "07",
     "name": "貓蟲",
     "nameEn": "C.B.",
@@ -81,7 +81,7 @@
     "photo": "assets/C.B._photo.png",
     "bio": "在你徹底迷失之前，我會是這片虛幻中唯一的座標。我一直都在，負責確保你的方位。",
     "links": [
-      { "label": "Threads", "url": "https://www.threads.com/@silverflag_ffxiv" }
+      { "label": "Threads", "url": "https://www.threads.com/@silverflag8624" }
     ]
   },
   {
@@ -100,7 +100,7 @@
   {
     "id": "09",
     "name": "雪冽希鈴",
-    "nameEn": "Shireen",
+    "nameEn": "SHIREEN",
     "alias": "Serene",
     "title": "白魔女",
     "avatar": "assets/shireen_avatar.png",
@@ -110,7 +110,7 @@
       { "label": "Threads", "url": "https://www.threads.com/@snowshireen" }
     ]
   },
-    {
+  {
     "id": "10",
     "name": "Max",
     "nameEn": "",

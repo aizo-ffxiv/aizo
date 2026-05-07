@@ -189,7 +189,6 @@ a { color: inherit; text-decoration: none; }
   align-content: start;
 }
 
-/* 成員卡片 */
 .member-card {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -288,7 +287,9 @@ a { color: inherit; text-decoration: none; }
   animation: fadeIn 0.3s ease;
 }
 
-/* 詳情圖片(桌面版:cover 裁切,但有最大尺寸保護) */
+/* ╔═══════════════════════════════════════╗
+   ║  詳情圖片(blur-bg 模糊背景方案)        ║
+   ╚═══════════════════════════════════════╝ */
 .member-detail__photo {
   background: var(--surface);
   overflow: hidden;
@@ -303,12 +304,17 @@ a { color: inherit; text-decoration: none; }
   justify-content: center;
 }
 
-.member-detail__photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  transition: object-fit 0.4s ease;
+/* 模糊背景層 */
+.member-detail__photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--photo-bg);
+  background-size: cover;
+  background-position: center;
+  filter: blur(28px) brightness(0.5) saturate(1.1);
+  transform: scale(1.15);
+  z-index: 0;
 }
 
 /* 直式圖比例 */
@@ -333,18 +339,15 @@ a { color: inherit; text-decoration: none; }
   height: 40vh;
 }
 
+/* 前景圖完整顯示(不裁切) */
 .member-detail__photo img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
-}
-
-.member-detail__photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  transition: object-fit 0.4s ease;
 }
 
 .member-detail__photo-placeholder {
@@ -353,9 +356,11 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--muted);
-  font-size: 0.75rem;
-  letter-spacing: 0.3em;
+  color: rgba(138, 92, 246, 0.4);
+  font-family: "Times New Roman", serif;
+  letter-spacing: 0.4em;
+  font-size: 16px;
+  z-index: 1;
 }
 
 .member-detail__info {
@@ -512,7 +517,6 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 8px 40px rgba(138, 92, 246, 0.2);
 }
 
-/* 有圖時:左圖右文 */
 .event-card:has(.event-card__image) {
   grid-template-columns: 1fr 1fr;
 }
@@ -623,9 +627,7 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 0.8em;
 }
 
-.event-card__description p:last-child {
-  margin-bottom: 0;
-}
+.event-card__description p:last-child { margin-bottom: 0; }
 
 .event-card__highlights {
   list-style: none;
@@ -653,6 +655,68 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.6rem;
   top: 0.3em;
   text-shadow: 0 0 6px rgba(138, 92, 246, 0.5);
+}
+
+/* ===== 多重標籤 ===== */
+.event-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.event-card__tags .event-card__tag {
+  margin: 0;
+}
+
+/* ===== 場次區塊 ===== */
+.event-card__sessions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0 24px;
+}
+
+.event-session {
+  border: 1px solid rgba(138, 92, 246, 0.3);
+  background: rgba(138, 92, 246, 0.05);
+  padding: 16px 18px;
+}
+
+.event-session__name {
+  font-size: 15px;
+  color: #8a5cf6;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(138, 92, 246, 0.2);
+  font-weight: 500;
+}
+
+.event-session__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.event-session__row {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.event-session__label {
+  flex-shrink: 0;
+  width: 60px;
+  color: #8a5cf6;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  padding-top: 2px;
+}
+
+.event-session__value {
+  flex: 1;
+  color: #e8e8e8;
 }
 
 /* ===== 定期活動小卡 ===== */
@@ -725,416 +789,6 @@ a { color: inherit; text-decoration: none; }
   opacity: 0.8;
 }
 
-/* ═════════════════════════════════════════
-   一般內容頁
-   ═════════════════════════════════════════ */
-
-.content {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 2rem 0;
-}
-
-.content p {
-  font-size: 0.95rem;
-  line-height: 2;
-  margin-bottom: 1.5rem;
-  color: var(--fg);
-  opacity: 0.85;
-}
-
-.content h3 {
-  font-size: 1.2rem;
-  letter-spacing: 0.2em;
-  margin: 2.5rem 0 1rem;
-  color: var(--accent);
-}
-
-/* ═════════════════════════════════════════
-   首頁 Hero
-   ═════════════════════════════════════════ */
-
-.hero {
-  min-height: calc(100vh - 80px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 4rem 2rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("../assets/shinkiro.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.4;
-  z-index: 0;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(7, 6, 13, 0.5) 0%,
-      rgba(7, 6, 13, 0.3) 50%,
-      rgba(7, 6, 13, 0.7) 100%
-    ),
-    radial-gradient(
-      ellipse at 30% 40%,
-      rgba(138, 92, 246, 0.15) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse at 70% 60%,
-      rgba(92, 184, 246, 0.12) 0%,
-      transparent 50%
-    );
-  z-index: 0;
-  pointer-events: none;
-  animation: neonPulse 8s ease-in-out infinite alternate;
-}
-
-@keyframes neonPulse {
-  from { opacity: 0.85; }
-  to { opacity: 1; }
-}
-
-.hero > * { position: relative; z-index: 1; }
-
-.hero__title {
-  font-size: clamp(3rem, 6vw, 5rem);
-  font-weight: 400;
-  letter-spacing: 0.25em;
-  margin-bottom: 1.5rem;
-  color: var(--accent);
-  text-shadow:
-    0 0 30px rgba(138, 92, 246, 0.6),
-    0 0 60px rgba(92, 184, 246, 0.3),
-    0 2px 12px rgba(0, 0, 0, 0.8);
-}
-
-.hero__subtitle {
-  font-size: 0.85rem;
-  letter-spacing: 0.5em;
-  color: var(--fg);
-  opacity: 0.8;
-  margin-bottom: 3rem;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-}
-
-.hero__intro {
-  max-width: 600px;
-  font-size: 1rem;
-  line-height: 2.2;
-  color: var(--fg);
-  opacity: 0.9;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-}
-
-/* ===== Hero 地址 ===== */
-.hero__address {
-  margin-top: 2.5rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 0.7rem 1.6rem;
-  border: 1px solid rgba(138, 92, 246, 0.35);
-  background: rgba(138, 92, 246, 0.07);
-  font-family: "Shippori Mincho", "Noto Serif JP", serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.2em;
-  color: var(--fg);
-  opacity: 0.95;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-  transition: border-color 0.4s, background 0.4s, box-shadow 0.4s;
-}
-
-.hero__address:hover {
-  border-color: var(--accent);
-  background: rgba(138, 92, 246, 0.15);
-  box-shadow: 0 0 20px rgba(138, 92, 246, 0.3);
-}
-
-.hero__address-server,
-.hero__address-coord,
-.hero__address > span:not(.hero__address-divider) {
-  color: #c4afff;                          /* 淺紫(高對比好讀) */
-  letter-spacing: 0.2em;
-  font-size: 0.8rem;
-  text-shadow: 0 0 8px rgba(138, 92, 246, 0.4);
-}
-
-.hero__address-divider {
-  color: rgba(196, 175, 255, 0.5);         /* 半透明淺紫 */
-}
-
-.hero__address-coord {
-  letter-spacing: 0.1em;
-  font-family: "Shippori Mincho", "Noto Serif JP", serif;
-}
-
-/* ═════════════════════════════════════════
-   情報未公開頁面
-   ═════════════════════════════════════════ */
-
-.classified {
-  min-height: calc(100vh - 200px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 4rem 2rem;
-  gap: 1.5rem;
-}
-
-.classified__icon {
-  font-size: 3rem;
-  letter-spacing: 0.5em;
-  color: var(--accent);
-  opacity: 0.6;
-  margin-bottom: 0.5rem;
-}
-
-.classified__title {
-  font-size: 1.4rem;
-  letter-spacing: 0.4em;
-  color: var(--fg);
-  font-weight: 400;
-}
-
-.classified__title-en {
-  font-size: 0.75rem;
-  letter-spacing: 0.5em;
-  color: var(--accent);
-  margin-top: 0.5rem;
-}
-
-.classified__divider {
-  width: 60px;
-  height: 1px;
-  background: var(--accent);
-  margin: 1.5rem 0;
-  opacity: 0.5;
-}
-
-.classified__msg {
-  font-size: 0.9rem;
-  letter-spacing: 0.15em;
-  color: var(--muted);
-  line-height: 2;
-  max-width: 480px;
-}
-
-/* ═════════════════════════════════════════
-   動畫
-   ═════════════════════════════════════════ */
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@media (max-width: 900px) {
-  /* ─── navbar 手機版保持原樣 ─── */
-  .navbar { padding: 1rem 1.5rem; }
-  .navbar__toggle { display: flex; }
-
-  .navbar__menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: min(280px, 80vw);
-    height: 100vh;
-    background: rgba(10, 10, 10, 0.97);   /* 各子站自己改 */
-    backdrop-filter: blur(20px);
-    border-left: 1px solid var(--line);
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 6rem 2.5rem 2rem;
-    gap: 2rem;
-    transform: translateX(100%);
-    transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1);
-  }
-  .navbar__menu.is-open { transform: translateX(0); }
-
-  .navbar__nav {
-    flex-direction: column;
-    gap: 1.6rem;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .navbar__link { font-size: 1rem; letter-spacing: 0.3em; display: block; }
-
-  .navbar__menu::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-    z-index: -1;
-    display: none;
-  }
-  .navbar__menu.is-open::before {
-    display: block;
-    opacity: 1;
-  }
-
-  .page { padding: 2.5rem 1rem 4rem; }
-
-  /* ═════════════════════════════════════════
-     成員頁:手機版上下排列
-     ═════════════════════════════════════════ */
-
-  .members {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  /* 詳情區改成置頂、不固定 */
-  .member-detail-wrap {
-    height: auto;
-    order: -1;
-  }
-
-  .member-detail {
-    position: static;
-    width: 100%;
-    max-width: none;
-    max-height: none;
-    top: auto;
-  }
-
-  /* 手機版圖片:完整顯示,不裁切人臉 */
-  .member-detail__photo,
-  .member-detail__photo[data-ratio="portrait"],
-  .member-detail__photo[data-ratio="landscape"],
-  .member-detail__photo[data-ratio="square"] {
-    width: 100%;
-    height: auto;
-    max-height: 60vh;
-    aspect-ratio: auto;
-    background: var(--surface);
-  }
-
-  /* 關鍵:用 contain 完整顯示,不裁切 */
-  .member-detail__photo img {
-    width: 100%;
-    height: auto;
-    max-height: 60vh;
-    object-fit: contain;
-    object-position: center;
-  }
-
-  /* 列表縮小 */
-  .members__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-  }
-
-  .member-card__alias {
-    font-size: 0.85rem;
-    padding: 1.4rem 0.5rem 0.8rem;
-  }
-
-  .member-detail__info {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    align-items: start;
-  }
-
-  .member-detail__alias-big {
-    font-size: 2.5rem;
-  }
-}
-/* ===== 多重標籤 ===== */
-.event-card__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-.event-card__tags .event-card__tag {
-  margin: 0;
-}
-
-/* ===== 場次區塊 ===== */
-.event-card__sessions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin: 16px 0 24px;
-}
-
-.event-session {
-  border: 1px solid rgba(138, 92, 246, 0.3);
-  background: rgba(138, 92, 246, 0.05);
-  padding: 16px 18px;
-}
-
-.event-session__name {
-  font-size: 15px;
-  color: #8a5cf6;
-  letter-spacing: 0.1em;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(138, 92, 246, 0.2);
-  font-weight: 500;
-}
-
-.event-session__rows {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.event-session__row {
-  display: flex;
-  gap: 12px;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.event-session__label {
-  flex-shrink: 0;
-  width: 60px;
-  color: #8a5cf6;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  padding-top: 2px;
-}
-
-.event-session__value {
-  flex: 1;
-  color: #e8e8e8;
-}
-
-/* 手機版：場次改成單欄 */
-@media (max-width: 720px) {
-  .event-card__sessions {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-}
 /* ===== 過往活動(可展開) ===== */
 .past-event {
   border: 1px solid rgba(138, 92, 246, 0.25);
@@ -1314,8 +968,1450 @@ a { color: inherit; text-decoration: none; }
   flex-shrink: 0;
 }
 
-/* 手機版 */
+/* ═════════════════════════════════════════
+   CASCADE 香檳塔頁
+   ═════════════════════════════════════════ */
+
+.cascade-hero {
+  position: relative;
+  margin: -1.5rem -3rem 3rem;
+  height: 360px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+
+.cascade-hero__image {
+  position: absolute;
+  inset: 0;
+  background-image: url("assets/CASCADE.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.55;
+}
+
+.cascade-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(7, 6, 13, 0.4) 0%,
+    rgba(7, 6, 13, 0.1) 40%,
+    rgba(7, 6, 13, 0.95) 100%
+  );
+}
+
+.cascade-hero__inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.cascade-hero__label {
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+  text-shadow: 0 0 16px rgba(138, 92, 246, 0.5);
+  margin-bottom: 1rem;
+}
+
+.cascade-hero__title {
+  font-size: 2.4rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: #fff;
+  text-shadow:
+    0 0 30px rgba(138, 92, 246, 0.5),
+    0 2px 12px rgba(0, 0, 0, 0.8);
+  margin-bottom: 0.6rem;
+}
+
+.cascade-hero__subtitle {
+  font-size: 0.7rem;
+  letter-spacing: 0.5em;
+  color: var(--accent-2);
+  font-family: "Times New Roman", serif;
+  text-shadow: 0 0 12px rgba(92, 184, 246, 0.5);
+}
+
+.cascade-intro {
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 2;
+  color: var(--fg);
+  opacity: 0.85;
+  font-style: italic;
+}
+
+/* ===== 基礎單價 ===== */
+.cascade-base-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 auto 4rem;
+  padding: 1.4rem 2rem 1.6rem;
+  max-width: 460px;
+  border-top: 1px solid rgba(138, 92, 246, 0.3);
+  border-bottom: 1px solid rgba(138, 92, 246, 0.3);
+  background: linear-gradient(180deg, rgba(138, 92, 246, 0.04), rgba(138, 92, 246, 0.08));
+  position: relative;
+}
+
+.cascade-base-price::before,
+.cascade-base-price::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 14px;
+  background: rgba(138, 92, 246, 0.55);
+}
+.cascade-base-price::before { top: -1px; left: 16px; }
+.cascade-base-price::after  { bottom: -1px; right: 16px; }
+
+.cascade-base-price__label {
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  font-size: 0.72rem;
+  letter-spacing: 0.45em;
+  color: var(--accent-2);
+  text-shadow: 0 0 10px rgba(92, 184, 246, 0.4);
+}
+
+.cascade-base-price__main {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+}
+
+.cascade-base-price__amount {
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-style: italic;
+  font-size: 2.2rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  text-shadow: 0 0 24px rgba(138, 92, 246, 0.5);
+  line-height: 1;
+}
+
+.cascade-base-price__unit {
+  font-family: "Times New Roman", serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.32em;
+  color: var(--fg);
+  opacity: 0.85;
+}
+
+/* ===== 三檔位卡片 ===== */
+.cascade-tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 5rem;
+}
+
+.cascade-tier {
+  background: rgba(138, 92, 246, 0.04);
+  border: 1px solid rgba(138, 92, 246, 0.3);
+  padding: 2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: border-color 0.4s, background 0.4s, box-shadow 0.4s;
+}
+
+.cascade-tier:hover {
+  border-color: rgba(138, 92, 246, 0.6);
+  background: rgba(138, 92, 246, 0.07);
+  box-shadow: 0 8px 30px rgba(138, 92, 246, 0.15);
+}
+
+.cascade-tier__roman {
+  font-family: "Times New Roman", serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+
+.cascade-tier__name {
+  font-family: "Shippori Mincho", "Noto Serif JP", serif;
+  font-size: 1.55rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(138, 92, 246, 0.4);
+  margin-bottom: 0.2rem;
+}
+
+.cascade-tier__name-jp {
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-style: italic;
+  font-size: 1rem;
+  letter-spacing: 0.32em;
+  color: var(--accent-2);
+  margin-bottom: 1.2rem;
+}
+
+.cascade-tier__bottles {
+  font-family: "Times New Roman", serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  text-shadow: 0 0 12px rgba(138, 92, 246, 0.4);
+  padding: 0.8rem 0;
+  margin-bottom: 1rem;
+  border-top: 1px solid rgba(138, 92, 246, 0.2);
+  border-bottom: 1px solid rgba(138, 92, 246, 0.2);
+  text-align: center;
+}
+
+.cascade-tier__access {
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--accent-2);
+  font-style: italic;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.9rem;
+  text-align: center;
+}
+
+.cascade-tier__positioning {
+  font-size: 0.83rem;
+  line-height: 1.85;
+  color: var(--fg);
+  opacity: 0.8;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px dashed rgba(138, 92, 246, 0.25);
+}
+
+.cascade-tier__perks-label {
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0 10px rgba(138, 92, 246, 0.3);
+}
+
+.cascade-tier__perks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.cascade-tier__perks li {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--fg);
+  opacity: 0.9;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.cascade-tier__perks li::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  font-size: 0.55rem;
+  color: var(--accent);
+  text-shadow: 0 0 6px rgba(138, 92, 246, 0.5);
+}
+
+/* ═════════════════════════════════════════
+   CASCADE 累計排名 TOP 10
+   ═════════════════════════════════════════ */
+
+.cascade-ranking {
+  margin-top: 4rem;
+}
+
+.cascade-ranking__head {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.cascade-ranking__label {
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-style: italic;
+  font-size: 0.8rem;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+  text-shadow: 0 0 12px rgba(138, 92, 246, 0.5);
+  margin-bottom: 0.6rem;
+}
+
+.cascade-ranking__title {
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: var(--fg);
+}
+
+.cascade-ranking__updated {
+  margin-top: 0.8rem;
+  font-family: "Times New Roman", serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  color: var(--accent-2);
+  font-style: italic;
+}
+
+.cascade-ranking__divider {
+  width: 60px;
+  height: 1px;
+  background: var(--accent);
+  margin: 1rem auto 0;
+  box-shadow: 0 0 8px var(--accent);
+}
+
+/* TOP 3 領獎台 */
+.cascade-podium {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.cascade-podium-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.5rem;
+  background: rgba(138, 92, 246, 0.04);
+  border: 1px solid;
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.cascade-podium-card:hover {
+  transform: translateY(-4px);
+}
+
+.cascade-podium-card--1 {
+  border-color: rgba(232, 212, 160, 0.5);
+  background: rgba(232, 212, 160, 0.05);
+}
+.cascade-podium-card--1:hover {
+  box-shadow: 0 8px 30px rgba(232, 212, 160, 0.2);
+}
+
+.cascade-podium-card--2 {
+  border-color: rgba(196, 175, 255, 0.4);
+}
+.cascade-podium-card--2:hover {
+  box-shadow: 0 8px 30px rgba(196, 175, 255, 0.18);
+}
+
+.cascade-podium-card--3 {
+  border-color: rgba(184, 124, 96, 0.4);
+}
+.cascade-podium-card--3:hover {
+  box-shadow: 0 8px 30px rgba(184, 124, 96, 0.18);
+}
+
+.cascade-podium-medal {
+  font-family: "Times New Roman", serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.cascade-podium-card--1 .cascade-podium-medal {
+  color: #e8d4a0;
+  text-shadow: 0 0 12px rgba(232, 212, 160, 0.6);
+}
+.cascade-podium-card--2 .cascade-podium-medal {
+  color: #c4afff;
+  text-shadow: 0 0 12px rgba(196, 175, 255, 0.5);
+}
+.cascade-podium-card--3 .cascade-podium-medal {
+  color: #b87c60;
+  text-shadow: 0 0 12px rgba(184, 124, 96, 0.5);
+}
+
+/* TOP 3 照片(blur-bg 模糊背景方案) */
+.cascade-podium-photo-wrap {
+  width: 140px;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 1.2rem;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cascade-podium-photo-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--photo-bg);
+  background-size: cover;
+  background-position: center;
+  filter: blur(28px) brightness(0.5) saturate(1.1);
+  transform: scale(1.15);
+  z-index: 0;
+}
+
+.cascade-podium-photo-wrap img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.cascade-podium-photo-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-style: italic;
+  font-size: 3rem;
+  color: rgba(138, 92, 246, 0.5);
+}
+
+.cascade-podium-name {
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  color: var(--fg);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.cascade-podium-count {
+  font-family: "Times New Roman", serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  text-shadow: 0 0 12px rgba(138, 92, 246, 0.4);
+}
+
+.cascade-podium-count-unit {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  margin-left: 0.4rem;
+}
+
+/* TOP 4-10 列表 */
+.cascade-rest {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem 1.5rem;
+}
+
+.cascade-rest__row {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  background: rgba(138, 92, 246, 0.04);
+  border: 1px solid rgba(138, 92, 246, 0.15);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.cascade-rest__row:hover {
+  border-color: rgba(138, 92, 246, 0.4);
+  background: rgba(138, 92, 246, 0.08);
+}
+
+.cascade-rest__rank {
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  text-align: center;
+}
+
+.cascade-rest__name {
+  font-size: 0.88rem;
+  letter-spacing: 0.12em;
+  color: var(--fg);
+}
+
+.cascade-rest__count {
+  font-family: "Times New Roman", serif;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+
+.cascade-rest__count-unit {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-left: 0.3rem;
+}
+
+/* ═════════════════════════════════════════
+   ENTRY 預約頁
+   ═════════════════════════════════════════ */
+
+.entry-hero {
+  position: relative;
+  margin: -1.5rem -3rem 3rem;
+  padding: 4rem 2rem 4.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(138, 92, 246, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 60%, rgba(92, 184, 246, 0.12) 0%, transparent 60%),
+    var(--bg);
+}
+
+.entry-hero__label {
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+  text-shadow: 0 0 16px rgba(138, 92, 246, 0.5);
+  margin-bottom: 1rem;
+}
+
+.entry-hero__title {
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: var(--fg);
+  margin-bottom: 0.6rem;
+}
+
+.entry-hero__subtitle {
+  font-size: 0.7rem;
+  letter-spacing: 0.5em;
+  color: var(--accent-2);
+  font-family: "Times New Roman", serif;
+}
+
+/* 預約區塊 */
+.entry-reservations {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.entry-card {
+  background: rgba(138, 92, 246, 0.04);
+  border: 1px solid rgba(138, 92, 246, 0.3);
+  padding: 2rem 1.8rem;
+  transition: border-color 0.4s, background 0.4s;
+}
+
+.entry-card:hover {
+  border-color: rgba(138, 92, 246, 0.55);
+  background: rgba(138, 92, 246, 0.07);
+}
+
+.entry-card__label {
+  font-family: "Times New Roman", serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+
+.entry-card__title {
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--fg);
+  margin-bottom: 0.3rem;
+}
+
+.entry-card__subtitle {
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: var(--accent-2);
+  margin-bottom: 1.2rem;
+}
+
+.entry-card__slots {
+  font-family: "Times New Roman", serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  padding: 0.8rem 0;
+  margin-bottom: 1.2rem;
+  border-top: 1px solid rgba(138, 92, 246, 0.2);
+  border-bottom: 1px solid rgba(138, 92, 246, 0.2);
+  text-align: center;
+}
+
+/* 同時有 price 區塊時，slots 與 price 合成同一框：slots 拿掉下緣，由 price 收邊 */
+.entry-card:has(.entry-card__price) .entry-card__slots {
+  border-bottom: none;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0;
+}
+
+.entry-card__price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0 1.1rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(138, 92, 246, 0.2);
+}
+
+.entry-card__price-amount {
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-style: italic;
+  font-size: 1.55rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  text-shadow: 0 0 18px rgba(138, 92, 246, 0.4);
+  line-height: 1.1;
+}
+
+.entry-card__price-note {
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  color: var(--muted);
+  opacity: 0.85;
+}
+
+.entry-card__desc {
+  font-size: 0.85rem;
+  line-height: 1.85;
+  color: var(--fg);
+  opacity: 0.85;
+  margin-bottom: 1.2rem;
+}
+
+.entry-card__perks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.entry-card__perks li {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--fg);
+  opacity: 0.9;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.entry-card__perks li::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  font-size: 0.55rem;
+  color: var(--accent);
+}
+
+/* 守則區 */
+.entry-guidelines {
+  margin-top: 2rem;
+}
+
+.entry-guidelines__head {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.entry-guidelines__label {
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-style: italic;
+  font-size: 0.8rem;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+  text-shadow: 0 0 12px rgba(138, 92, 246, 0.5);
+  margin-bottom: 0.6rem;
+}
+
+.entry-guidelines__title {
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: var(--fg);
+}
+
+.entry-guidelines__divider {
+  width: 50px;
+  height: 1px;
+  background: var(--accent);
+  margin: 1rem auto 0;
+}
+
+.entry-guideline {
+  margin-bottom: 2rem;
+  padding: 1.5rem 1.8rem;
+  background: rgba(138, 92, 246, 0.03);
+  border-left: 2px solid rgba(138, 92, 246, 0.4);
+}
+
+.entry-guideline__head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px dashed rgba(138, 92, 246, 0.2);
+}
+
+.entry-guideline__title {
+  font-size: 1rem;
+  letter-spacing: 0.25em;
+  color: var(--fg);
+  font-weight: 500;
+}
+
+.entry-guideline__title-en {
+  font-family: "Times New Roman", serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  color: var(--accent);
+  font-style: italic;
+}
+
+.entry-guideline__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.entry-guideline__list li {
+  font-size: 0.83rem;
+  line-height: 1.85;
+  color: var(--fg);
+  opacity: 0.88;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.entry-guideline__list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* ═════════════════════════════════════════
+   一般內容頁
+   ═════════════════════════════════════════ */
+
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.content p {
+  font-size: 0.95rem;
+  line-height: 2;
+  margin-bottom: 1.5rem;
+  color: var(--fg);
+  opacity: 0.85;
+}
+
+.content h3 {
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  margin: 2.5rem 0 1rem;
+  color: var(--accent);
+}
+
+/* ═════════════════════════════════════════
+   首頁 Hero
+   ═════════════════════════════════════════ */
+
+.hero {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/shinkiro.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(7, 6, 13, 0.5) 0%,
+      rgba(7, 6, 13, 0.3) 50%,
+      rgba(7, 6, 13, 0.7) 100%
+    ),
+    radial-gradient(
+      ellipse at 30% 40%,
+      rgba(138, 92, 246, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 70% 60%,
+      rgba(92, 184, 246, 0.12) 0%,
+      transparent 50%
+    );
+  z-index: 0;
+  pointer-events: none;
+  animation: neonPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse {
+  from { opacity: 0.85; }
+  to { opacity: 1; }
+}
+
+.hero > * { position: relative; z-index: 1; }
+
+.hero__title {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+  text-shadow:
+    0 0 30px rgba(138, 92, 246, 0.6),
+    0 0 60px rgba(92, 184, 246, 0.3),
+    0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.hero__subtitle {
+  font-size: 0.85rem;
+  letter-spacing: 0.5em;
+  color: var(--fg);
+  opacity: 0.8;
+  margin-bottom: 3rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.hero__intro {
+  max-width: 600px;
+  font-size: 1rem;
+  line-height: 2.2;
+  color: var(--fg);
+  opacity: 0.9;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* ===== Hero 地址 ===== */
+.hero__address {
+  margin-top: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 1.6rem;
+  border: 1px solid rgba(138, 92, 246, 0.35);
+  background: rgba(138, 92, 246, 0.07);
+  font-family: "Shippori Mincho", "Noto Serif JP", serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--fg);
+  opacity: 0.95;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  transition: border-color 0.4s, background 0.4s, box-shadow 0.4s;
+}
+
+.hero__address:hover {
+  border-color: var(--accent);
+  background: rgba(138, 92, 246, 0.15);
+  box-shadow: 0 0 20px rgba(138, 92, 246, 0.3);
+}
+
+.hero__address-server,
+.hero__address-coord,
+.hero__address > span:not(.hero__address-divider) {
+  color: #c4afff;
+  letter-spacing: 0.2em;
+  font-size: 0.8rem;
+  text-shadow: 0 0 8px rgba(138, 92, 246, 0.4);
+}
+
+.hero__address-divider {
+  color: rgba(196, 175, 255, 0.5);
+}
+
+.hero__address-coord {
+  letter-spacing: 0.1em;
+  font-family: "Shippori Mincho", "Noto Serif JP", serif;
+}
+
+/* ═════════════════════════════════════════
+   情報未公開頁面
+   ═════════════════════════════════════════ */
+
+.classified {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  gap: 1.5rem;
+}
+
+.classified__icon {
+  font-size: 3rem;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+}
+
+.classified__title {
+  font-size: 1.4rem;
+  letter-spacing: 0.4em;
+  color: var(--fg);
+  font-weight: 400;
+}
+
+.classified__title-en {
+  font-size: 0.75rem;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+  margin-top: 0.5rem;
+}
+
+.classified__divider {
+  width: 60px;
+  height: 1px;
+  background: var(--accent);
+  margin: 1.5rem 0;
+  opacity: 0.5;
+}
+
+.classified__msg {
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  line-height: 2;
+  max-width: 480px;
+}
+
+/* ═════════════════════════════════════════
+   動畫
+   ═════════════════════════════════════════ */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═════════════════════════════════════════
+   CONTACT 聯絡頁
+   ═════════════════════════════════════════ */
+.contact-discord {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  max-width: 720px;
+  margin: 0 auto 4rem;
+  padding: 1.5rem 1.8rem;
+  background: linear-gradient(135deg, rgba(88, 101, 242, 0.08), rgba(88, 101, 242, 0.18));
+  border: 1px solid rgba(88, 101, 242, 0.4);
+  text-decoration: none;
+  color: var(--fg);
+  position: relative;
+  transition: border-color 0.4s, background 0.4s, transform 0.4s, box-shadow 0.4s;
+}
+
+.contact-discord:hover {
+  border-color: rgba(88, 101, 242, 0.85);
+  background: linear-gradient(135deg, rgba(88, 101, 242, 0.14), rgba(88, 101, 242, 0.28));
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(88, 101, 242, 0.3);
+}
+
+.contact-discord__icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  color: #5865F2;
+  filter: drop-shadow(0 0 8px rgba(88, 101, 242, 0.6));
+}
+
+.contact-discord__icon svg { width: 100%; height: 100%; display: block; }
+
+.contact-discord__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-discord__label {
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  font-size: 0.7rem;
+  letter-spacing: 0.42em;
+  color: #a4afff;
+  text-shadow: 0 0 8px rgba(88, 101, 242, 0.5);
+}
+
+.contact-discord__handle {
+  font-family: "Times New Roman", serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+  color: var(--fg);
+}
+
+.contact-discord__arrow {
+  font-family: "Times New Roman", serif;
+  font-size: 1.4rem;
+  color: #a4afff;
+  opacity: 0.7;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.contact-discord:hover .contact-discord__arrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* 直接聯絡人 */
+.contact-people {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.contact-people__head {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.contact-people__label {
+  font-family: "Saint", "Shippori Mincho", serif;
+  font-style: italic;
+  font-size: 0.8rem;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--accent) 45%, transparent);
+  margin-bottom: 0.6rem;
+}
+
+.contact-people__title {
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: var(--fg);
+}
+
+.contact-people__divider {
+  width: 50px;
+  height: 1px;
+  background: var(--accent);
+  margin: 1rem auto 0;
+}
+
+.contact-people__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+}
+
+.contact-person {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.2rem 1.4rem;
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  text-decoration: none;
+  color: var(--fg);
+  transition: border-color 0.4s, background 0.4s, transform 0.4s, box-shadow 0.4s;
+  animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.contact-person:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.contact-person__avatar {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-person__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contact-person__initials {
+  font-size: 1.6rem;
+  color: var(--accent);
+  opacity: 0.6;
+}
+
+.contact-person__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.contact-person__role {
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  color: var(--muted);
+  margin-bottom: 0.15rem;
+}
+
+.contact-person__name {
+  font-size: 1.1rem;
+  letter-spacing: 0.16em;
+  color: var(--fg);
+  font-weight: 500;
+}
+
+.contact-person__server {
+  font-family: "Times New Roman", serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.contact-person__action {
+  font-family: "Times New Roman", serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  color: var(--accent);
+  margin-top: 0.5rem;
+  opacity: 0.85;
+  transition: opacity 0.3s, letter-spacing 0.3s;
+}
+
+.contact-person:hover .contact-person__action {
+  opacity: 1;
+  letter-spacing: 0.36em;
+}
+
+/* ═════════════════════════════════════════
+   詳情跳窗 (手機版用)
+   ═════════════════════════════════════════ */
+.member-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.member-modal.is-open {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.member-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+
+.member-modal__content {
+  position: relative;
+  background: #0f0d0e;
+  border: 1px solid rgba(138, 92, 246, 0.35);
+  width: calc(100vw - 2rem);
+  max-width: 520px;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+  transform: translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.member-modal.is-open .member-modal__content {
+  transform: translateY(0);
+}
+
+.member-modal__close {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.8rem;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  color: var(--fg);
+  font-size: 1.8rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s, transform 0.3s;
+  line-height: 1;
+  font-family: "Times New Roman", serif;
+}
+
+.member-modal__close:hover {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+/* modal 內的詳情面板：覆寫桌機 fixed 定位，改為 static + 留白 */
+.member-detail--modal {
+  position: static;
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  top: auto;
+  padding: 1.8rem 1.4rem 1.5rem;
+  gap: 1.2rem;
+}
+
+/* ═════════════════════════════════════════
+   手機版
+   ═════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .navbar { padding: 1rem 1.5rem; }
+  .navbar__toggle { display: flex; }
+
+  .navbar__menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(280px, 80vw);
+    height: 100vh;
+    background: rgba(10, 10, 10, 0.97);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid var(--line);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 6rem 2.5rem 2rem;
+    gap: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+  }
+  .navbar__menu.is-open { transform: translateX(0); }
+
+  .navbar__nav {
+    flex-direction: column;
+    gap: 1.6rem;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .navbar__link { font-size: 1rem; letter-spacing: 0.3em; display: block; }
+
+  .navbar__menu::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: -1;
+    display: none;
+  }
+  .navbar__menu.is-open::before {
+    display: block;
+    opacity: 1;
+  }
+
+  .page { padding: 2.5rem 1rem 4rem; }
+
+  /* 成員頁 手機版 */
+  .members {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* 內嵌詳情面板改用 modal 呈現，手機版隱藏 */
+  .member-detail-wrap {
+    display: none;
+  }
+
+  /* modal 內的 detail 仍套用以下手機尺寸樣式 */
+  .member-detail {
+    position: static;
+    width: 100%;
+    max-width: none;
+    max-height: none;
+    top: auto;
+  }
+
+  .member-detail__photo,
+  .member-detail__photo[data-ratio="portrait"],
+  .member-detail__photo[data-ratio="landscape"],
+  .member-detail__photo[data-ratio="square"] {
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+    aspect-ratio: auto;
+    background: var(--surface);
+  }
+
+  .member-detail__photo img {
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .members__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .member-card__alias {
+    font-size: 0.85rem;
+    padding: 1.4rem 0.5rem 0.8rem;
+  }
+
+  .member-detail__info {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .member-detail__alias-big {
+    font-size: 2.5rem;
+  }
+
+  /* CASCADE 手機版 */
+  .cascade-hero {
+    margin: -2.5rem -1rem 2.5rem;
+    height: 280px;
+  }
+
+  .cascade-hero__title {
+    font-size: 1.6rem;
+    letter-spacing: 0.2em;
+  }
+
+  .cascade-tiers {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .cascade-podium {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .cascade-rest {
+    grid-template-columns: 1fr;
+  }
+
+  /* ENTRY 手機版 */
+  .entry-hero {
+    margin: -2.5rem -1rem 2.5rem;
+    padding: 3rem 1rem 3rem;
+  }
+
+  .entry-hero__title {
+    font-size: 1.5rem;
+    letter-spacing: 0.2em;
+  }
+
+  .entry-reservations {
+    grid-template-columns: 1fr;
+  }
+
+  .entry-guideline {
+    padding: 1.2rem 1.2rem;
+  }
+
+  .entry-guideline__head {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  /* 聯絡頁 手機版 */
+  .contact-discord {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.4rem 1.2rem;
+    gap: 1rem;
+  }
+  .contact-discord__handle { font-size: 0.95rem; }
+  .contact-discord__arrow { display: none; }
+  .contact-people__grid { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 720px) {
+  .event-card__sessions {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
   .past-event__head {
     flex-wrap: wrap;
     gap: 10px;

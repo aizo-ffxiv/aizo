@@ -1,0 +1,62 @@
+[
+  {
+    "name": "莫爾斯之吻",
+    "nameJp": "モースの口づけ",
+    "nameEn": "MORS — KISS",
+    "image": "assets/mors.jpg",
+    "price": "20,000",
+    "priceUnit": "GIL",
+    "desc": "以伊修加德產蜜露為基底，融合冰晶之露與微量的暗夜薰香。入口先見銀光的甜，後落入暗冷的尾韻。",
+    "quote": "死神的初吻 ・ 不痛 ・ 只冷"
+  },
+  {
+    "name": "曙光秘境",
+    "nameJp": "曙光の秘境",
+    "nameEn": "DAWN — SANCTUARY",
+    "image": "assets/dawn.jpg",
+    "price": "20,000",
+    "priceUnit": "GIL",
+    "desc": "拉諾西亞晨露混入葡萄汁與少量金露，金箔懸於杯口。光的甘味在舌尖緩慢蔓開，像第一道破曉。",
+    "quote": "你已抵達光所不及的角落"
+  },
+  {
+    "name": "霧中告解",
+    "nameJp": "霧の中の告解",
+    "nameEn": "MIST — CONFESSION",
+    "image": "assets/mist.jpg",
+    "price": "20,000",
+    "priceUnit": "GIL",
+    "desc": "森都之霧為基調，杯緣繚繞如告解室般的薄煙。以銀露酒沖兌花蜜，飲後唇齒留下無法言說之物。",
+    "quote": "說吧 ・ 在霧散之前"
+  },
+  {
+    "name": "憂鬱深海",
+    "nameJp": "憂鬱の深海",
+    "nameEn": "MELANCHOLY — ABYSS",
+    "image": "assets/melancholy.jpg",
+    "price": "20,000",
+    "priceUnit": "GIL",
+    "desc": "深海藍系雞尾酒，以鹽花封口，飲時先苦後甘。深處藏有一抹紫，像沉沒之物悄悄浮起。",
+    "quote": "下潛 ・ 不必再回來"
+  },
+  {
+    "name": "愛憎餘燼",
+    "nameJp": "愛憎の残り火",
+    "nameEn": "AIZO — EMBER",
+    "image": "assets/aizo.jpg",
+    "price": "20,000",
+    "priceUnit": "GIL",
+    "desc": "本店招牌。以紅酒、香料與微焰處理過的火晶碎片調製。入口先燙後涼，餘味在喉間久久不散。",
+    "quote": "燒不盡 ・ 也忘不去"
+  },
+  {
+    "name": "嫉妒猛毒",
+    "nameJp": "嫉妒の猛毒",
+    "nameEn": "ENVY — TOXIN",
+    "image": "assets/envy.jpg",
+    "price": "20,000",
+    "priceUnit": "GIL",
+    "desc": "翠綠如蛇瞳，以薄荷精油與微量苦艾調出。表面寧靜，飲入後綠光在腹中緩慢翻湧。",
+    "quote": "看著她 ・ 然後喝光它"
+  }
+]

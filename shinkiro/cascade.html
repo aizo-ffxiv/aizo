@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CASCADE ・ 蜃気楼 SHINKIRŌ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 導覽列 -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__brand">
+      <span class="navbar__logo">AIZO</span>
+      <span class="navbar__subtitle">SHINKIRŌ</span>
+    </a>
+
+    <button class="navbar__toggle" id="navToggle" aria-label="選單">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="navbar__menu" id="navMenu">
+      <ul class="navbar__nav">
+        <li><a href="index.html" class="navbar__link">HOME</a></li>
+        <li><a href="members.html" class="navbar__link">MEMBERS</a></li>
+        <li><a href="events.html" class="navbar__link">EVENTS</a></li>
+        <li><a href="cascade.html" class="navbar__link">CASCADE</a></li>
+        <li><a href="entry.html" class="navbar__link">ENTRY</a></li>
+        <li><a href="contact.html" class="navbar__link">CONTACT</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 主內容 -->
+  <main class="page">
+
+    <!-- Hero -->
+    <section class="cascade-hero">
+      <div class="cascade-hero__image"></div>
+      <div class="cascade-hero__inner">
+        <div class="cascade-hero__label">— Champagne Cascade —</div>
+        <h1 class="cascade-hero__title">香檳塔</h1>
+        <div class="cascade-hero__subtitle">FLOWING ・ NIGHT ・ RITUAL</div>
+      </div>
+    </section>
+
+    <!-- 簡介 -->
+    <p class="cascade-intro" id="cascadeIntro">
+      於蜃氣樓的特定夜晚，由賓客點訂香檳並親手傾注，匯聚成名為「香檳塔」的儀式。
+    </p>
+
+    <!-- 基礎單價 -->
+    <section class="cascade-base-price" id="cascadeBasePrice" hidden>
+      <span class="cascade-base-price__label" id="cascadeBasePriceLabel"></span>
+      <div class="cascade-base-price__main">
+        <span class="cascade-base-price__amount" id="cascadeBasePriceAmount"></span>
+        <span class="cascade-base-price__unit" id="cascadeBasePriceUnit"></span>
+      </div>
+    </section>
+
+    <!-- 三檔位 -->
+    <section class="cascade-tiers" id="cascadeTiers">
+      <!-- JS 注入 -->
+    </section>
+
+    <!-- 累計排名 TOP 10 -->
+    <section class="cascade-ranking" id="cascadeRankingSection">
+      <div class="cascade-ranking__head">
+        <div class="cascade-ranking__label">— Cumulative Ranking —</div>
+        <h2 class="cascade-ranking__title">累計榜 TOP 10</h2>
+        <div class="cascade-ranking__divider"></div>
+        <div class="cascade-ranking__updated" id="cascadeUpdated"></div>
+      </div>
+
+      <!-- TOP 3 -->
+      <div class="cascade-podium" id="cascadePodium">
+        <!-- JS 注入 -->
+      </div>
+
+      <!-- TOP 4-10 -->
+      <div class="cascade-rest" id="cascadeRest">
+        <!-- JS 注入 -->
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

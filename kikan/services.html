@@ -1,52 +1,54 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>服務項目 | AIZO KIKAN</title>
-  <link rel="icon" type="image/png" href="../assets/favicon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SERVICES ・ 機関 KIKAN</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- 導覽列 -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__brand">
+      <span class="navbar__logo">AIZO</span>
+      <span class="navbar__subtitle">KIKAN ・ 機 関</span>
+    </a>
 
-<nav class="navbar">
-  <a href="../index.html" class="navbar__brand">
-    <span class="navbar__logo">AIZO</span>
-    <span class="navbar__subtitle">KIKAN ・ 愛憎機関</span>
-  </a>
-  
-  <button class="navbar__toggle" id="navToggle" aria-label="選單">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  
-  <div class="navbar__menu" id="navMenu">
-    <ul class="navbar__nav">
-      <li><a href="index.html" class="navbar__link">HOME</a></li>
-      <li><a href="members.html" class="navbar__link">MEMBERS</a></li>
-      <li><a href="services.html" class="navbar__link">SERVICES</a></li>
-      <li><a href="booking.html" class="navbar__link">BOOKING</a></li>
-      <li><a href="contact.html" class="navbar__link">CONTACT</a></li>
-    </ul>
-    
-  </div>
-</nav>
+    <button class="navbar__toggle" id="navToggle" aria-label="選單">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
- <main>
-  <section class="classified">
-    <div class="classified__icon">━━━━</div>
-    <div>
-      <div class="classified__title">情報未公開</div>
-      <div class="classified__title-en">CLASSIFIED</div>
+    <div class="navbar__menu" id="navMenu">
+      <ul class="navbar__nav">
+        <li><a href="index.html" class="navbar__link">HOME</a></li>
+        <li><a href="members.html" class="navbar__link">MEMBERS</a></li>
+        <li><a href="services.html" class="navbar__link">SERVICES</a></li>
+        <li><a href="booking.html" class="navbar__link">BOOKING</a></li>
+        <li><a href="contact.html" class="navbar__link">CONTACT</a></li>
+      </ul>
     </div>
-    <div class="classified__divider"></div>
-    <p class="classified__msg">
-      此區情報尚未開放。<br>
-      請等待後續公告。
+  </nav>
+
+  <!-- 主內容 -->
+  <main class="page">
+    <div class="page__title">
+      <h2>業務</h2>
+      <p>SERVICES</p>
+      <div class="divider"></div>
+    </div>
+
+    <p class="services-intro">
+      此處陳列各成員提供的相談業務與價目。<br>
+      若有意預約，請至 BOOKING 留下聯絡方式。
     </p>
-  </section>
-</main>
+
+    <!-- 服務清單 -->
+    <div class="services-grid" id="servicesGrid">
+      <!-- JS 注入 -->
+    </div>
+  </main>
 
   <script src="script.js"></script>
 </body>

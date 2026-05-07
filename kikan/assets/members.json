@@ -40,28 +40,6 @@
   },
   {
     "id": "04",
-    "name": "安緹莉",
-    "nameEn": "TILLY",
-    "alias": "Architect",
-    "title": "築夢師",
-    "avatar": "assets/tilly_avatar.png",
-    "photo": "assets/tilly_photo.png",
-    "bio": "只有在裝潢的時候，我感到痛苦並快樂.......",
-    "links": []
-  },
-  {
-    "id": "05",
-    "name": "姆姆貓",
-    "nameEn": "MUMU",
-    "alias": "Vibe",
-    "title": "律動者",
-    "avatar": "assets/mumu_avatar.png",
-    "photo": "assets/mumu_photo.png",
-    "bio": "「在這裡，你是我的玩具。別試圖逃跑，那會讓我更興奮。」",
-    "links": []
-  },
-  {
-    "id": "06",
     "name": "雪冽希鈴",
     "nameEn": "SHIREEN",
     "alias": "Serene",
@@ -74,11 +52,35 @@
     ]
   },
   {
+    "id": "05",
+    "name": "安緹莉",
+    "nameEn": "TILI",
+    "alias": "Architect",
+    "title": "築夢師",
+    "avatar": "assets/tili_avatar.png",
+    "photo": "assets/tili_photo.png",
+    "bio": "只有在裝潢的時候，我感到痛苦並快樂.......",
+    "links": []
+  },
+  {
+    "id": "06",
+    "name": "姆姆貓",
+    "nameEn": "MUMU",
+    "alias": "Vibe",
+    "title": "律動者",
+    "avatar": "assets/mumu_avatar.png",
+    "photo": "assets/mumu_photo.png",
+    "bio": "「在這裡，你是我的玩具。別試圖逃跑，那會讓我更興奮。」",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@mumufantsy_14" }
+    ]
+  },
+  {
     "id": "07",
     "name": "泡泡龍",
     "nameEn": "BUBBLE",
     "alias": "Mirage",
-    "title": "會計師",
+    "title": "諮詢者",
     "avatar": "assets/bubble_avatar.png",
     "photo": "assets/bubble_photo.png",
     "bio": "我是機關的財政總管，以諮詢與執行為名深情擁抱你，讓秘密在氣泡中得到永恆守護。",
@@ -108,12 +110,14 @@
     "avatar": "assets/C.B._avatar.png",
     "photo": "assets/C.B._photo.png",
     "bio": "在你徹底迷失之前，我會是這片虛幻中唯一的座標。我一直都在，負責確保你的方位。",
-    "links": []
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@silverflag8624" }
+    ]
   },
-    {
+  {
     "id": "10",
     "name": "陪陪",
-    "nameEn": "Pei",
+    "nameEn": "PEI",
     "alias": "Insight",
     "title": "透魂鏡",
     "avatar": "assets/peipei_avatar.png",
@@ -125,10 +129,23 @@
   },
   {
     "id": "11",
+    "name": "黑糖",
+    "nameEn": "KOKUTO",
+    "alias": "Brownie",
+    "title": "捕光者",
+    "avatar": "assets/kokuto_avatar.png",
+    "photo": "assets/kokuto_photo.png",
+    "bio": "「捕捉光，也捕捉那一瞬間的你。在深夜來臨前，歡迎來找我紀錄這片虛幻。」",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@kokuto1642" }
+    ]
+  },
+  {
+    "id": "12",
     "name": "Max",
     "nameEn": "",
     "alias": "Curator",
-    "title": "駕駛員",
+    "title": "機關長",
     "avatar": "assets/max_avatar.png",
     "photo": "assets/max_photo.png",
     "bio": "「因果的終點，由我來畫下句點。」",

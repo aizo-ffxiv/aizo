@@ -1,48 +1,64 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>入場 | 蜃気楼</title>
-  <link rel="icon" type="image/png" href="../assets/favicon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENTRY ・ 蜃気楼 SHINKIRŌ</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+  <!-- 導覽列 -->
   <nav class="navbar">
     <a href="../index.html" class="navbar__brand">
       <span class="navbar__logo">AIZO</span>
-      <span class="navbar__subtitle">SHINKIRŌ ・ 蜃気楼</span>
+      <span class="navbar__subtitle">SHINKIRŌ</span>
     </a>
+
     <button class="navbar__toggle" id="navToggle" aria-label="選單">
-      <span></span><span></span><span></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
+
     <div class="navbar__menu" id="navMenu">
       <ul class="navbar__nav">
         <li><a href="index.html" class="navbar__link">HOME</a></li>
         <li><a href="members.html" class="navbar__link">MEMBERS</a></li>
         <li><a href="events.html" class="navbar__link">EVENTS</a></li>
+        <li><a href="cascade.html" class="navbar__link">CASCADE</a></li>
         <li><a href="entry.html" class="navbar__link">ENTRY</a></li>
         <li><a href="contact.html" class="navbar__link">CONTACT</a></li>
       </ul>
-      
     </div>
   </nav>
 
-<main>
-  <section class="classified">
-    <div class="classified__icon">━━━━</div>
-    <div>
-      <div class="classified__title">情報未公開</div>
-      <div class="classified__title-en">CLASSIFIED</div>
+  <!-- 主內容 -->
+  <main class="page">
+    <div class="page__title">
+      <h2>入場・預約</h2>
+      <p>ENTRY</p>
+      <div class="divider"></div>
     </div>
-    <div class="classified__divider"></div>
-    <p class="classified__msg">
-      此區情報尚未開放。<br>
-      請等待後續公告。
-    </p>
-  </section>
-</main>
+
+    <!-- 預約區(VIP + 一般) -->
+    <section class="entry-reservations" id="entryReservations">
+      <!-- JS 注入 -->
+    </section>
+
+    <!-- 守則區 -->
+    <section class="entry-guidelines">
+      <div class="entry-guidelines__head">
+        <div class="entry-guidelines__label">— Guidelines —</div>
+        <h2 class="entry-guidelines__title">入場守則</h2>
+        <div class="entry-guidelines__divider"></div>
+      </div>
+
+      <div id="entryGuidelines">
+        <!-- JS 注入 -->
+      </div>
+    </section>
+
+  </main>
 
   <script src="script.js"></script>
 </body>

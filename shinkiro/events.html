@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>活動情報 | AIZO SHINKIRŌ</title>
+  <title>EVENTS ・ 蜃気楼 SHINKIRŌ</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body style="cursor: url('assets/cursor.png'), auto;">
-
+<body>
   <!-- 導覽列 -->
-  <header class="navbar">
+  <nav class="navbar">
     <a href="../index.html" class="navbar__brand">
       <span class="navbar__logo">AIZO</span>
-      <span class="navbar__subtitle">SHINKIRŌ ・ 蜃気楼</span>
+      <span class="navbar__subtitle">SHINKIRŌ</span>
     </a>
 
     <button class="navbar__toggle" id="navToggle" aria-label="選單">
@@ -26,49 +25,57 @@
         <li><a href="index.html" class="navbar__link">HOME</a></li>
         <li><a href="members.html" class="navbar__link">MEMBERS</a></li>
         <li><a href="events.html" class="navbar__link">EVENTS</a></li>
+        <li><a href="cascade.html" class="navbar__link">CASCADE</a></li>
         <li><a href="entry.html" class="navbar__link">ENTRY</a></li>
         <li><a href="contact.html" class="navbar__link">CONTACT</a></li>
       </ul>
     </div>
-  </header>
+  </nav>
 
-  <!-- 主要內容 -->
+  <!-- 主內容 -->
   <main class="page">
     <div class="page__title">
-      <h2>活動情報</h2>
+      <h2>活動</h2>
       <p>EVENTS</p>
       <div class="divider"></div>
     </div>
 
     <!-- 即將舉辦 -->
-    <section class="events-section" id="upcomingSection">
+    <section class="events-section" id="upcomingSection" style="display: none;">
       <div class="events-section__head">
-        <span class="events-section__label">UPCOMING</span>
-        <span class="events-section__title">即將舉辦</span>
-        <div class="events-section__line"></div>
+        <span class="events-section__label">— Upcoming —</span>
+        <h3 class="events-section__title">即將舉辦</h3>
+        <span class="events-section__line"></span>
       </div>
-      <div class="events-list" id="upcomingList"></div>
+      <div class="events-list" id="upcomingList">
+        <!-- JS 注入 -->
+      </div>
     </section>
 
     <!-- 定期活動 -->
     <section class="events-section" id="regularSection" style="display: none;">
       <div class="events-section__head">
-        <span class="events-section__label">REGULAR</span>
-        <span class="events-section__title">定期活動</span>
-        <div class="events-section__line"></div>
+        <span class="events-section__label">— Regular —</span>
+        <h3 class="events-section__title">定期活動</h3>
+        <span class="events-section__line"></span>
       </div>
-      <div class="events-grid" id="regularList"></div>
+      <div class="events-grid" id="regularList">
+        <!-- JS 注入 -->
+      </div>
     </section>
 
     <!-- 過往活動 -->
-<section class="events-section" id="pastSection" style="display: none;">
-  <div class="events-section__head">
-    <span class="events-section__label">PAST</span>
-    <span class="events-section__title">過往活動</span>
-    <div class="events-section__line"></div>
-  </div>
-  <div class="events-grid" id="pastList"></div>
-</section>
+    <section class="events-section" id="pastSection" style="display: none;">
+      <div class="events-section__head">
+        <span class="events-section__label">— Archive —</span>
+        <h3 class="events-section__title">過往活動</h3>
+        <span class="events-section__line"></span>
+      </div>
+      <div id="pastList">
+        <!-- JS 注入 -->
+      </div>
+    </section>
+
   </main>
 
   <script src="script.js"></script>

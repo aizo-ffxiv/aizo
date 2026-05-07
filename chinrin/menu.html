@@ -1,48 +1,54 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>酒單 | 沈淪域</title>
-  <link rel="icon" type="image/png" href="../assets/favicon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MENU ・ 沈淪域 CHINRIN-IKI</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body style="cursor: url('assets/cursor.png'), auto;">
-
+<body>
+  <!-- 導覽列 -->
   <nav class="navbar">
     <a href="../index.html" class="navbar__brand">
       <span class="navbar__logo">AIZO</span>
-      <span class="navbar__subtitle">CHINRIN ・ 沈淪域</span>
+      <span class="navbar__subtitle">CHINRIN-IKI</span>
     </a>
+
     <button class="navbar__toggle" id="navToggle" aria-label="選單">
-      <span></span><span></span><span></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
+
     <div class="navbar__menu" id="navMenu">
       <ul class="navbar__nav">
         <li><a href="index.html" class="navbar__link">HOME</a></li>
         <li><a href="members.html" class="navbar__link">MEMBERS</a></li>
         <li><a href="menu.html" class="navbar__link">MENU</a></li>
-        <li><a href="reservation.html" class="navbar__link">RESERVATION</a></li>
+        <li><a href="entry.html" class="navbar__link">ENTRY</a></li>
         <li><a href="contact.html" class="navbar__link">CONTACT</a></li>
       </ul>
-      
     </div>
   </nav>
 
- <main>
-  <section class="classified">
-    <div class="classified__icon">━━━━</div>
-    <div>
-      <div class="classified__title">情報未公開</div>
-      <div class="classified__title-en">CLASSIFIED</div>
+  <!-- 主內容 -->
+  <main class="page">
+    <div class="page__title">
+      <h2>酒單</h2>
+      <p>MENU</p>
+      <div class="divider"></div>
     </div>
-    <div class="classified__divider"></div>
-    <p class="classified__msg">
-      此區情報尚未開放。<br>
-      請等待後續公告。
+
+    <p class="menu-intro">
+      七種沈淪 ・ 七種解脫。<br>
+      願你在杯底，尋得自己的影。
     </p>
-  </section>
-</main>
+
+    <!-- 酒單列表 -->
+    <div class="menu-list" id="menuList">
+      <!-- JS 注入 -->
+    </div>
+  </main>
 
   <script src="script.js"></script>
 </body>
