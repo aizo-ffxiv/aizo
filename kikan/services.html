@@ -41,7 +41,7 @@
 
     <p class="services-intro">
       此處陳列各成員提供的相談業務與價目。<br>
-      若有意預約，請至 BOOKING 留下聯絡方式。
+      點擊任一張卡片即可線上預約。
     </p>
 
     <!-- 服務清單 -->
@@ -49,6 +49,75 @@
       <!-- JS 注入 -->
     </div>
   </main>
+
+  <!-- 預約 Modal -->
+  <div class="booking-modal" id="bookingModal" aria-hidden="true">
+    <div class="booking-modal__overlay"></div>
+    <div class="booking-modal__content">
+      <button class="booking-modal__close" aria-label="關閉">×</button>
+
+      <header class="booking-modal__header">
+        <div class="booking-modal__label">— RESERVATION —</div>
+        <h2 class="booking-modal__title">線上預約</h2>
+        <div class="booking-modal__divider"></div>
+      </header>
+
+      <form class="booking-form" id="bookingForm" novalidate>
+        <!-- 店員資訊（唯讀） -->
+        <div class="booking-form__staff">
+          <span class="booking-form__staff-label">店員</span>
+          <span class="booking-form__staff-value" id="bookingStaffValue">—</span>
+        </div>
+
+        <!-- honeypot（防機器人，視覺隱藏） -->
+        <div class="booking-form__honeypot" aria-hidden="true">
+          <label>website
+            <input type="text" name="website" tabindex="-1" autocomplete="off">
+          </label>
+        </div>
+
+        <!-- 姓名 -->
+        <label class="booking-form__field">
+          <span class="booking-form__label">姓名 <span class="booking-form__required">*</span></span>
+          <input type="text" name="name" id="bookingName" required maxlength="40" placeholder="遊戲內暱稱" autocomplete="off">
+        </label>
+
+        <!-- Discord ID -->
+        <label class="booking-form__field">
+          <span class="booking-form__label">Discord ID <span class="booking-form__required">*</span></span>
+          <input type="text" name="discord" id="bookingDiscord" required maxlength="60" placeholder="username 或 user#1234" autocomplete="off">
+        </label>
+
+        <!-- 服務 -->
+        <label class="booking-form__field">
+          <span class="booking-form__label">預約服務 <span class="booking-form__required">*</span></span>
+          <select name="service" id="bookingService" required>
+            <option value="">— 請選擇 —</option>
+          </select>
+        </label>
+
+        <!-- 時段 -->
+        <label class="booking-form__field">
+          <span class="booking-form__label">預約時段 <span class="booking-form__required">*</span></span>
+          <select name="slot" id="bookingSlot" required>
+            <option value="">— 請選擇 —</option>
+          </select>
+        </label>
+
+        <!-- 備註 -->
+        <label class="booking-form__field">
+          <span class="booking-form__label">備註</span>
+          <textarea name="note" id="bookingNote" rows="3" maxlength="500" placeholder="（選填）"></textarea>
+        </label>
+
+        <!-- 訊息區 -->
+        <div class="booking-form__message" id="bookingMessage" role="status" aria-live="polite"></div>
+
+        <!-- 送出 -->
+        <button type="submit" class="booking-form__submit" id="bookingSubmit">送出預約</button>
+      </form>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

@@ -210,7 +210,7 @@ function renderServices() {
       : `<li class="service-card__item service-card__item--placeholder">服務內容待補上</li>`;
 
     return `
-      <article class="service-card" style="animation-delay: ${i * 0.05}s">
+      <article class="service-card" data-id="${s.memberId}" role="button" tabindex="0" aria-label="預約 ${member.name}" style="animation-delay: ${i * 0.05}s">
         <header class="service-card__header">
           <div class="service-card__avatar">${avatarHTML}</div>
           <div class="service-card__meta">
@@ -226,6 +226,21 @@ function renderServices() {
       </article>
     `;
   }).join("");
+
+  // 點卡片即開啟預約 modal
+  grid.querySelectorAll(".service-card").forEach(card => {
+    const open = () => {
+      const id = card.dataset.id;
+      if (id) openBookingModal(id);
+    };
+    card.addEventListener("click", open);
+    card.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        open();
+      }
+    });
+  });
 }
 
 async function initServicesPage() {
@@ -234,7 +249,238 @@ async function initServicesPage() {
 
   await loadMembers();
   await loadServices();
+  await loadConfig();
   renderServices();
+}
+
+// ═══════════════════════════════════════
+//  BOOKING 預約功能
+// ═══════════════════════════════════════
+
+let CONFIG = {};
+let BOOKING_CURRENT_MEMBER_ID = null;
+const BOOKING_THROTTLE_MS = 30000;
+const BOOKING_LAST_KEY = "kikan_booking_last_submit";
+
+async function loadConfig() {
+  try {
+    const response = await fetch("assets/config.json");
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    CONFIG = await response.json();
+  } catch (err) {
+    console.warn("載入 config.json 失敗，預約服務將停用:", err);
+    CONFIG = {};
+  }
+}
+
+function isWebhookConfigured() {
+  const url = CONFIG && CONFIG.discordWebhookUrl;
+  if (typeof url !== "string") return false;
+  const trimmed = url.trim();
+  if (trimmed === "") return false;
+  if (trimmed.includes("<貼這裡>") || trimmed.includes("<paste-here>")) return false;
+  return /^https:\/\/discord\.com\/api\/webhooks\//.test(trimmed);
+}
+
+function escapeForOption(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[c]));
+}
+
+function formatServiceLabel(item) {
+  if (!item) return "";
+  const subName = item.subName ? `（${item.subName}）` : "";
+  const note = item.note ? ` ・ ${item.note}` : "";
+  const price = item.price && item.price.trim() ? ` — ${item.price.trim()}` : "";
+  return `${item.name || ""}${subName}${price}${note}`;
+}
+
+function openBookingModal(memberId) {
+  const member = MEMBER_MAP.get(memberId);
+  const service = SERVICES.find(s => s.memberId === memberId);
+  if (!member || !service) return;
+  if (service.bookable === false) return;
+
+  BOOKING_CURRENT_MEMBER_ID = memberId;
+
+  // 店員資訊
+  const staffEl = document.getElementById("bookingStaffValue");
+  if (staffEl) {
+    const aliasPart = member.alias ? ` ・ ${member.alias}` : "";
+    staffEl.textContent = `${member.name}${aliasPart}`;
+  }
+
+  // 服務下拉
+  const serviceSelect = document.getElementById("bookingService");
+  if (serviceSelect) {
+    const items = Array.isArray(service.items) ? service.items : [];
+    serviceSelect.innerHTML = '<option value="">— 請選擇 —</option>' +
+      items.map(item => {
+        const label = formatServiceLabel(item);
+        return `<option value="${escapeForOption(label)}">${escapeForOption(label)}</option>`;
+      }).join("");
+  }
+
+  // 時段下拉
+  const slotSelect = document.getElementById("bookingSlot");
+  if (slotSelect) {
+    const slots = Array.isArray(service.slots) ? service.slots : [];
+    if (slots.length === 0) {
+      slotSelect.innerHTML = '<option value="">（暫無可預約時段，請另洽）</option>';
+      slotSelect.disabled = true;
+    } else {
+      slotSelect.disabled = false;
+      slotSelect.innerHTML = '<option value="">— 請選擇 —</option>' +
+        slots.map(s => `<option value="${escapeForOption(s)}">${escapeForOption(s)}</option>`).join("");
+    }
+  }
+
+  // 重置欄位
+  const form = document.getElementById("bookingForm");
+  if (form) {
+    const nameInput = form.querySelector('input[name="name"]');
+    const discordInput = form.querySelector('input[name="discord"]');
+    const honeypotInput = form.querySelector('input[name="website"]');
+    const noteInput = form.querySelector('textarea[name="note"]');
+    if (nameInput) nameInput.value = "";
+    if (discordInput) discordInput.value = "";
+    if (honeypotInput) honeypotInput.value = "";
+    if (noteInput) noteInput.value = "";
+    setBookingMessage("", "");
+    const submitBtn = document.getElementById("bookingSubmit");
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "送出預約";
+    }
+  }
+
+  const modal = document.getElementById("bookingModal");
+  if (modal) {
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    // 自動聚焦到第一個輸入欄
+    setTimeout(() => {
+      const firstInput = modal.querySelector('input[name="name"]');
+      if (firstInput) firstInput.focus();
+    }, 100);
+  }
+}
+
+function closeBookingModal() {
+  const modal = document.getElementById("bookingModal");
+  if (!modal) return;
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  BOOKING_CURRENT_MEMBER_ID = null;
+}
+
+function setBookingMessage(text, type) {
+  const el = document.getElementById("bookingMessage");
+  if (!el) return;
+  el.textContent = text || "";
+  el.className = "booking-form__message" + (type ? ` booking-form__message--${type}` : "");
+}
+
+async function handleBookingSubmit(e) {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+  const submitBtn = document.getElementById("bookingSubmit");
+
+  // honeypot：若被填，靜默 reject
+  const honeypot = form.querySelector('input[name="website"]');
+  if (honeypot && honeypot.value.trim() !== "") {
+    setBookingMessage("提交失敗，請重新嘗試。", "error");
+    return;
+  }
+
+  // 30 秒節流
+  const lastSubmit = parseInt(sessionStorage.getItem(BOOKING_LAST_KEY) || "0", 10);
+  const now = Date.now();
+  if (lastSubmit && now - lastSubmit < BOOKING_THROTTLE_MS) {
+    const wait = Math.ceil((BOOKING_THROTTLE_MS - (now - lastSubmit)) / 1000);
+    setBookingMessage(`請稍候 ${wait} 秒後再送出。`, "error");
+    return;
+  }
+
+  // 取值
+  const data = new FormData(form);
+  const name = (data.get("name") || "").toString().trim();
+  const discord = (data.get("discord") || "").toString().trim();
+  const service = (data.get("service") || "").toString().trim();
+  const slot = (data.get("slot") || "").toString().trim();
+  const note = (data.get("note") || "").toString().trim();
+
+  // 必填驗證
+  if (!name || !discord || !service || !slot) {
+    setBookingMessage("請填寫所有必填欄位（標 * 者）。", "error");
+    return;
+  }
+
+  // webhook 設定檢查
+  if (!isWebhookConfigured()) {
+    setBookingMessage("預約服務尚未啟用，請聯繫管理員。", "error");
+    return;
+  }
+
+  // 取得成員顯示名稱
+  const member = MEMBER_MAP.get(BOOKING_CURRENT_MEMBER_ID);
+  const memberDisplay = member
+    ? (member.alias ? `${member.name} ・ ${member.alias}` : member.name)
+    : "—";
+
+  // 組 webhook payload（embed 格式，紅色 #c8102e）
+  const payload = {
+    embeds: [{
+      title: "✨ 新預約 ・ NEW BOOKING",
+      color: 0xc8102e,
+      fields: [
+        { name: "店員", value: memberDisplay, inline: false },
+        { name: "服務", value: service, inline: true },
+        { name: "時段", value: slot, inline: true },
+        { name: "賓客", value: name, inline: true },
+        { name: "Discord", value: discord, inline: true },
+        { name: "備註", value: note || "—", inline: false }
+      ],
+      footer: { text: "蜃気樓 機関 ・ KIKAN" },
+      timestamp: new Date().toISOString()
+    }]
+  };
+
+  // 送出
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = "送出中...";
+  }
+  setBookingMessage("", "");
+
+  try {
+    const response = await fetch(CONFIG.discordWebhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Webhook returned ${response.status}`);
+    }
+
+    sessionStorage.setItem(BOOKING_LAST_KEY, String(Date.now()));
+    setBookingMessage("預約成功！我們會透過 Discord 與您聯繫。", "success");
+    if (submitBtn) submitBtn.textContent = "已送出";
+
+    setTimeout(() => closeBookingModal(), 2500);
+  } catch (err) {
+    console.error("Booking submission failed:", err);
+    setBookingMessage("送出失敗，請稍後再試或直接聯繫管理員。", "error");
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "送出預約";
+    }
+  }
 }
 
 // ═══════════════════════════════════════
@@ -271,6 +517,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   // 服務頁
   if (document.getElementById("servicesGrid")) {
     await initServicesPage();
+
+    // 預約 modal 關閉事件
+    const bookingModal = document.getElementById("bookingModal");
+    if (bookingModal) {
+      bookingModal.querySelector(".booking-modal__overlay")?.addEventListener("click", closeBookingModal);
+      bookingModal.querySelector(".booking-modal__close")?.addEventListener("click", closeBookingModal);
+      document.addEventListener("keydown", e => {
+        if (e.key === "Escape" && bookingModal.classList.contains("is-open")) closeBookingModal();
+      });
+    }
+
+    // 預約表單送出事件
+    const bookingForm = document.getElementById("bookingForm");
+    if (bookingForm) bookingForm.addEventListener("submit", handleBookingSubmit);
   }
 
   // 漢堡選單
