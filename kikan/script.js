@@ -300,9 +300,28 @@ function openBookingModal(memberId) {
   const member = MEMBER_MAP.get(memberId);
   const service = SERVICES.find(s => s.memberId === memberId);
   if (!member || !service) return;
-  if (service.bookable === false) return;
 
   BOOKING_CURRENT_MEMBER_ID = memberId;
+
+  const modal = document.getElementById("bookingModal");
+  const form = document.getElementById("bookingForm");
+  const closedBlock = document.getElementById("bookingClosed");
+
+  // 不開放預約：顯示關閉狀態，隱藏表單
+  if (service.bookable === false) {
+    if (form) form.hidden = true;
+    if (closedBlock) closedBlock.hidden = false;
+    if (modal) {
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+    return;
+  }
+
+  // 可預約：顯示表單、隱藏關閉狀態
+  if (form) form.hidden = false;
+  if (closedBlock) closedBlock.hidden = true;
 
   // 店員資訊
   const staffEl = document.getElementById("bookingStaffValue");
@@ -337,7 +356,6 @@ function openBookingModal(memberId) {
   }
 
   // 重置欄位
-  const form = document.getElementById("bookingForm");
   if (form) {
     const nameInput = form.querySelector('input[name="name"]');
     const discordInput = form.querySelector('input[name="discord"]');
@@ -355,7 +373,6 @@ function openBookingModal(memberId) {
     }
   }
 
-  const modal = document.getElementById("bookingModal");
   if (modal) {
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");

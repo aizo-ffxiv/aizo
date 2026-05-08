@@ -1,7 +1,7 @@
 [
   {
     "memberId": "01",
-    "bookable": true,
+    "bookable": false,
     "slots": [
       "週五 21:00 — 21:30",
       "週六 22:00 — 22:30",
@@ -16,7 +16,7 @@
   },
   {
     "memberId": "02",
-    "bookable": true,
+    "bookable": false,
     "slots": [
       "週五 21:00 — 21:30",
       "週六 22:00 — 22:30",
@@ -28,7 +28,7 @@
   },
   {
     "memberId": "03",
-    "bookable": true,
+    "bookable": false,
     "slots": [
       "週五 21:00 — 21:30",
       "週六 22:00 — 22:30",
@@ -40,7 +40,7 @@
   },
   {
     "memberId": "04",
-    "bookable": true,
+    "bookable": false,
     "slots": [
       "週五 21:00 — 21:30",
       "週六 22:00 — 22:30",
@@ -54,7 +54,7 @@
   },
   {
     "memberId": "06",
-    "bookable": true,
+    "bookable": false,
     "slots": [
       "週五 21:00 — 21:30",
       "週六 22:00 — 22:30",
@@ -66,7 +66,7 @@
   },
   {
     "memberId": "07",
-    "bookable": true,
+    "bookable": false,
     "slots": [
       "週五 21:00 — 21:30",
       "週六 22:00 — 22:30",
@@ -79,7 +79,7 @@
   },
   {
     "memberId": "08",
-    "bookable": true,
+    "bookable": false,
     "slots": [
       "週五 21:00 — 21:30",
       "週六 22:00 — 22:30",
@@ -91,7 +91,7 @@
   },
   {
     "memberId": "10",
-    "bookable": true,
+    "bookable": false,
     "slots": [
       "週五 21:00 — 21:30",
       "週六 22:00 — 22:30",

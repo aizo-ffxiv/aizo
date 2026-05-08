@@ -62,6 +62,13 @@
         <div class="booking-modal__divider"></div>
       </header>
 
+      <!-- 預約暫不開放狀態 -->
+      <div class="booking-modal__closed" id="bookingClosed" hidden>
+        <div class="booking-modal__closed-icon" aria-hidden="true">━━</div>
+        <p class="booking-modal__closed-title">此店員目前不開放預約</p>
+        <p class="booking-modal__closed-sub">如有需求，請透過 Discord 或 Threads 直接聯繫成員。</p>
+      </div>
+
       <form class="booking-form" id="bookingForm" novalidate>
         <!-- 店員資訊（唯讀） -->
         <div class="booking-form__staff">
@@ -109,6 +116,9 @@
           <span class="booking-form__label">備註</span>
           <textarea name="note" id="bookingNote" rows="3" maxlength="500" placeholder="（選填）"></textarea>
         </label>
+
+        <!-- 提醒 -->
+        <p class="booking-form__notice">※ 實際預約時間請以最終 DC 預約通知結果為準。</p>
 
         <!-- 訊息區 -->
         <div class="booking-form__message" id="bookingMessage" role="status" aria-live="polite"></div>
