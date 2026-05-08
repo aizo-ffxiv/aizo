@@ -110,8 +110,21 @@
       { "label": "Threads", "url": "https://www.threads.com/@snowshireen" }
     ]
   },
-  {
+    {
     "id": "10",
+    "name": "邪惡超布丁",
+    "nameEn": "PUDDIND",
+    "alias": "Spark",
+    "title": "籌劃師",
+    "avatar": "assets/puddind_avatar.png",
+    "photo": "assets/puddind_photo.png",
+    "bio": "這裡是你的「思念憶」，還是我的「淒美地」呢?",
+    "links": [
+      { "label": "Threads", "url": "https://www.threads.com/@pudd.ind" }
+    ]
+  },
+  {
+    "id": "11",
     "name": "Max",
     "nameEn": "",
     "alias": "Curator",
