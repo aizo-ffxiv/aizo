@@ -239,7 +239,7 @@ html, body {
 
 .gate__name-jp {
   font-family: "Shippori Mincho", "Noto Serif JP", serif;
-  font-size: clamp(1.5rem, 3vh, 2rem);
+  font-size: clamp(1.75rem, 3.2vh, 2.25rem);
   font-weight: 400;
   letter-spacing: 0.2em;
 }
@@ -843,6 +843,94 @@ html, body {
   color: #d8d8d8;
 }
 
+/* 多區塊資訊 */
+.notice-sections {
+  border-top: 1px solid rgba(201, 169, 97, 0.2);
+  margin: 0 0 24px;
+}
+.notice-sections[hidden] { display: none; }
+
+.notice-section {
+  padding: 18px 4px;
+  border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+}
+
+.notice-section__date {
+  font-size: 10px;
+  color: #c9a961;
+  letter-spacing: 0.35em;
+  text-align: center;
+  margin-bottom: 6px;
+  font-family: "Times New Roman", serif;
+}
+.notice-section__date:empty { display: none; }
+
+.notice-section__label {
+  font-size: 14px;
+  color: #e8d4a0;
+  letter-spacing: 0.2em;
+  text-align: center;
+  margin-bottom: 14px;
+}
+.notice-section__label:empty { display: none; margin: 0; }
+
+.notice-section__rows {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 8px 16px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.notice-section__time {
+  color: #c9a961;
+  font-family: "Shippori Mincho", "Noto Serif JP", serif;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  padding-top: 3px;
+  text-align: right;
+}
+
+.notice-section__text {
+  color: #d8d8d8;
+}
+
+.notice-section__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 18px;
+  font-size: 13px;
+  color: #d8d8d8;
+  letter-spacing: 0.12em;
+}
+
+.notice-section__list li {
+  position: relative;
+  padding: 0;
+}
+
+.notice-section__list li + li::before {
+  content: "・";
+  color: rgba(201, 169, 97, 0.5);
+  margin-right: 18px;
+  margin-left: -18px;
+}
+
+.notice-section__link {
+  color: #e8d4a0;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(201, 169, 97, 0.5);
+  transition: color 0.2s, border-color 0.2s;
+}
+.notice-section__link:hover {
+  color: #f4e4b0;
+  border-bottom-color: #c9a961;
+}
+
 /* 結尾文字 */
 .notice-outro {
   font-size: 13px;
@@ -888,4 +976,16 @@ html, body {
     font-size: 12px;
   }
   .notice-highlight__time { font-size: 10px; }
+
+  .notice-section__rows {
+    grid-template-columns: 70px 1fr;
+    gap: 6px 12px;
+    font-size: 12px;
+  }
+  .notice-section__time { font-size: 11px; }
+  .notice-section__list { font-size: 12px; gap: 4px 14px; }
+  .notice-section__list li + li::before {
+    margin-right: 14px;
+    margin-left: -14px;
+  }
 }

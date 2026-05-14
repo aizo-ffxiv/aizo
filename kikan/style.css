@@ -689,6 +689,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0.5rem 0;
 }
 
+
 /* ═════════════════════════════════════════
    一般內容頁
    ═════════════════════════════════════════ */
@@ -1398,6 +1399,24 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.95rem;
   letter-spacing: 0.12em;
   color: var(--fg);
+}
+
+.booking-form__staff-note {
+  padding: 0.75rem 1.1rem;
+  background: rgba(245, 245, 240, 0.03);
+  border-left: 2px solid rgba(200, 16, 46, 0.4);
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: var(--fg);
+  opacity: 0.82;
+  letter-spacing: 0.06em;
+  white-space: normal;
+  word-break: break-word;
+  margin-bottom: 0.4rem;
+}
+
+.booking-form__staff-note[hidden] {
+  display: none;
 }
 
 .booking-form__honeypot {

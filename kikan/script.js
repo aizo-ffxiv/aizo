@@ -330,6 +330,19 @@ function openBookingModal(memberId) {
     staffEl.textContent = `${member.name}${aliasPart}`;
   }
 
+  // 店員備註（services.json 中的 member-level note）
+  const staffNoteEl = document.getElementById("bookingStaffNote");
+  if (staffNoteEl) {
+    const note = typeof service.note === "string" ? service.note.trim() : "";
+    if (note) {
+      staffNoteEl.innerHTML = escapeForOption(note).replace(/\n/g, "<br>");
+      staffNoteEl.hidden = false;
+    } else {
+      staffNoteEl.innerHTML = "";
+      staffNoteEl.hidden = true;
+    }
+  }
+
   // 服務下拉
   const serviceSelect = document.getElementById("bookingService");
   if (serviceSelect) {

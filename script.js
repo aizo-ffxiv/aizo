@@ -102,14 +102,29 @@ function renderShops(shops) {
     }
   });
 });/* ===== 最新通知跳窗 ===== */
-(function initNotice() {
+function initNotice() {
+  const modal = document.getElementById('notice-modal');
+  const noticeBtn = document.getElementById('noticeBtn');
+  if (!modal) return;
+
+  const showModal = () => { modal.hidden = false; };
+  const hideModal = () => { modal.hidden = true; };
+
+  // 點任意處關閉（連結與內嵌 section 連結除外）
+  modal.addEventListener('click', e => {
+    if (e.target.closest('.notice-link')) return;
+    if (e.target.closest('.notice-section__link')) return;
+    hideModal();
+  });
+
+  if (noticeBtn) {
+    noticeBtn.addEventListener('click', showModal);
+  }
+
   fetch('assets/notice.json', { cache: 'no-store' })
     .then(r => r.ok ? r.json() : null)
     .then(data => {
-      if (!data || !data.enabled) return;
-
-      const modal = document.getElementById('notice-modal');
-      if (!modal) return;
+      if (!data) return;
 
       // 標題區
       const subtitle = modal.querySelector('.notice-subtitle');
@@ -124,7 +139,7 @@ function renderShops(shops) {
         intro.hidden = false;
       }
 
-      // 重點資訊區（highlight）
+      // 重點資訊區（highlight，單一區塊；保留向後相容）
       const highlight = modal.querySelector('.notice-highlight');
       if (data.highlight && (data.highlight.date || data.highlight.label || (data.highlight.rows && data.highlight.rows.length))) {
         modal.querySelector('.notice-highlight__date').textContent = data.highlight.date || '';
@@ -138,6 +153,52 @@ function renderShops(shops) {
         `).join('');
 
         highlight.hidden = false;
+      }
+
+      // 多區塊資訊區（sections）
+      const sectionsBox = modal.querySelector('#notice-sections');
+      const sections = Array.isArray(data.sections) ? data.sections : [];
+      if (sectionsBox && sections.length) {
+        const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+
+        sectionsBox.innerHTML = sections.map(sec => {
+          const rows = Array.isArray(sec.rows) ? sec.rows : [];
+          const anyTime = rows.some(r => r && r.time && String(r.time).trim());
+          const dateHTML = sec.date ? `<div class="notice-section__date">${esc(sec.date)}</div>` : '';
+          const labelHTML = sec.label ? `<div class="notice-section__label">${esc(sec.label)}</div>` : '';
+
+          let rowsHTML = '';
+          if (rows.length) {
+            if (anyTime) {
+              rowsHTML = `<div class="notice-section__rows">${
+                rows.map(r => {
+                  const textInner = r.url
+                    ? `<a class="notice-section__link" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.text || '')}</a>`
+                    : esc(r.text || '');
+                  return `
+                    <div class="notice-section__time">${esc(r.time || '')}</div>
+                    <div class="notice-section__text">${textInner}</div>
+                  `;
+                }).join('')
+              }</div>`;
+            } else {
+              rowsHTML = `<ul class="notice-section__list">${
+                rows.map(r => {
+                  const inner = r.url
+                    ? `<a class="notice-section__link" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.text || '')}</a>`
+                    : esc(r.text || '');
+                  return `<li>${inner}</li>`;
+                }).join('')
+              }</ul>`;
+            }
+          }
+
+          return `<div class="notice-section">${dateHTML}${labelHTML}${rowsHTML}</div>`;
+        }).join('');
+
+        sectionsBox.hidden = false;
       }
 
       // 結尾
@@ -155,14 +216,24 @@ function renderShops(shops) {
         link.hidden = false;
       }
 
-      // 顯示視窗
-      modal.hidden = false;
+      // 有實質內容才開放手動按鈕
+      const hasContent = !!(
+        (data.title && data.title.trim()) ||
+        (data.intro && data.intro.trim()) ||
+        (data.highlight && (data.highlight.date || data.highlight.label || (data.highlight.rows && data.highlight.rows.length))) ||
+        sections.length ||
+        (data.outro && data.outro.trim())
+      );
+      if (noticeBtn && hasContent) noticeBtn.hidden = false;
 
-      // 點任意處關閉（連結按鈕除外）
-      modal.addEventListener('click', e => {
-        if (e.target.closest('.notice-link')) return;
-        modal.hidden = true;
-      });
+      // 啟用時自動跳出
+      if (data.enabled && hasContent) showModal();
     })
     .catch(() => { /* 找不到檔案就靜默略過 */ });
-})();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initNotice);
+} else {
+  initNotice();
+}

@@ -1,17 +1,46 @@
 {
-  "enabled": false,
-  "subtitle": "NOTICE",
-  "title": "最新通知",
-  "intro": "歡迎來到 AIZO",
-  "highlight": {
-    "date": "2026 / 05 / 01",
-    "label": "蜃気楼 OPENING NIGHT",
-    "rows": [
-      { "time": "23:59+", "text": "室內 ・ 資格入場制" },
-      { "time": "02:30+", "text": "戶外 After Party ・ 無人數限制" }
-    ]
-  },
-  "outro": "誠摯邀請您參與",
-  "linkText": "VIEW DETAILS",
-  "linkUrl": "https://aizo-ffxiv.github.io/aizo/shinkiro/events.html"
+  "enabled": true,
+  "subtitle": "WEEKLY NOTICE",
+  "title": "本週營業資訊",
+  "intro": "",
+  "sections": [
+    {
+      "label": "沈淪域 ・ 本週營業",
+      "rows": [
+        { "time": "5/15 (五)", "text": "23:59 — 02:00+" },
+        { "time": "5/16 (六)", "text": "23:59 — 02:00+" }
+      ]
+    },
+    {
+      "label": "個人服務",
+      "rows": [
+        { "time": "5/15 (五)", "text": "伊萊諾斯 ・ 沄 ・ 泡泡龍 ・ 姆姆貓" },
+        { "time": "5/16 (六)", "text": "伊萊諾斯 ・ 陪陪 ・ 雪冽希鈴 ・ 姆姆貓" }
+      ]
+    },
+    {
+      "label": "迎賓接待",
+      "rows": [
+        { "text": "雪小丸" },
+        { "text": "安緹莉" }
+      ]
+    },
+    {
+      "label": "吧檯酒水",
+      "rows": [
+        { "text": "貓蟲" }
+      ]
+    },
+    {
+      "date": "05/20 (二) 20:00 — 22:59",
+      "label": "特殊活動 ・ 限額拍立得簽繪",
+      "rows": [
+        { "time": "沄", "text": "貓系學妹戀愛告白主題", "url": "https://www.threads.com/@cc.yday/post/DYSmsInE9Xv" },
+        { "time": "伊萊諾斯", "text": "狐系偶像祕密情人主題（詳情待更新）" }
+      ]
+    }
+  ],
+  "outro": "",
+  "linkText": "",
+  "linkUrl": ""
 }
