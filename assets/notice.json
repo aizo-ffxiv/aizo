@@ -1,46 +1,21 @@
 {
   "enabled": true,
   "subtitle": "WEEKLY NOTICE",
-  "title": "本週營業資訊",
-  "intro": "",
-  "sections": [
-    {
-      "label": "沈淪域 ・ 本週營業",
-      "rows": [
-        { "time": "5/15 (五)", "text": "23:59 — 02:00+" },
-        { "time": "5/16 (六)", "text": "23:59 — 02:00+" }
-      ]
-    },
-    {
-      "label": "個人服務",
-      "rows": [
-        { "time": "5/15 (五)", "text": "伊萊諾斯 ・ 沄 ・ 泡泡龍 ・ 姆姆貓" },
-        { "time": "5/16 (六)", "text": "伊萊諾斯 ・ 陪陪 ・ 雪冽希鈴 ・ 姆姆貓" }
-      ]
-    },
-    {
-      "label": "迎賓接待",
-      "rows": [
-        { "text": "雪小丸" },
-        { "text": "安緹莉" }
-      ]
-    },
-    {
-      "label": "吧檯酒水",
-      "rows": [
-        { "text": "貓蟲" }
-      ]
-    },
-    {
-      "date": "05/20 (二) 20:00 — 22:59",
-      "label": "特殊活動 ・ 限額拍立得簽繪",
-      "rows": [
-        { "time": "沄", "text": "貓系學妹戀愛告白主題", "url": "https://www.threads.com/@cc.yday/post/DYSmsInE9Xv" },
-        { "time": "伊萊諾斯", "text": "狐系偶像祕密情人主題（詳情待更新）" }
-      ]
-    }
-  ],
-  "outro": "",
-  "linkText": "",
-  "linkUrl": ""
+  "title": "本週活動資訊",
+  "intro": "5/20 (三) 沉淪域 ・ 個人主題拍立得之夜",
+  "highlight": {
+    "date": "05.20 (三) ・ 沉淪域 ・ 白銀鄉 3-27",
+    "label": "店員主題",
+    "rows": [
+      { "time": "19:30", "text": "發送巧克力與飲料" },
+      { "time": "20:00", "text": "拍立得時段開始" },
+      { "time": "伊萊諾斯", "text": "狐系偶像的秘密戀人", "url": "https://www.threads.com/@ilainosu.ffxiv/post/DYgoZVmj8wm" },
+      { "time": "沄", "text": "貓系學妹戀愛告白主題 (限額)", "url": "https://www.threads.com/@cc.yday/post/DYSmsInE9Xv" },
+      { "time": "陪陪", "text": "今天的你，值得被偏愛", "url": "https://www.threads.com/@bewith_pei/post/DYhsf5sGreh" },
+      { "time": "雪冽希鈴", "text": "全肯定治癒系 (21:30 後)", "url": "https://www.threads.com/@snowshireen/post/DYhw2vJD769" }
+    ]
+  },
+  "outro": "5/30 (六) 23:59 蜃氣樓重新降臨\n派對主題 ・ 【 ACG 】 ・ 白銀鄉 17-60\n完整詳情請追蹤 Discord",
+  "linkText": "前往 DISCORD",
+  "linkUrl": "https://discord.gg/pgVghgUK3J"
 }

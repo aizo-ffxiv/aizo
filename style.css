@@ -849,6 +849,19 @@ html, body {
   color: #d8d8d8;
 }
 
+.notice-highlight__text--link {
+  color: #d8d8d8;
+  text-decoration: none;
+  cursor: pointer;
+  border-bottom: 1px dashed rgba(201, 169, 97, 0.3);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.notice-highlight__text--link:hover {
+  color: #e8d4a0;
+  border-bottom-color: #c9a961;
+}
+
 /* 多區塊資訊 */
 .notice-sections {
   border-top: 1px solid rgba(201, 169, 97, 0.2);

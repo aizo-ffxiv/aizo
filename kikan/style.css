@@ -582,6 +582,17 @@ a { color: inherit; text-decoration: none; }
   align-self: end;
 }
 
+.service-card__intro {
+  font-size: 0.84rem;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+  opacity: 0.82;
+  margin: 0 0 1.3rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px dashed rgba(200, 16, 46, 0.22);
+}
+
 .service-card__items {
   list-style: none;
   display: flex;
@@ -589,6 +600,42 @@ a { color: inherit; text-decoration: none; }
   gap: 0.95rem;
   padding: 0;
   margin: 0;
+}
+
+.service-card__note {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(245, 245, 240, 0.1);
+}
+
+.service-card__note span {
+  font-size: 0.74rem;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.service-card__link {
+  display: inline-block;
+  margin-top: 1.1rem;
+  font-family: "Times New Roman", serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(200, 16, 46, 0.4);
+  padding-bottom: 2px;
+  transition: color 0.3s, border-color 0.3s, letter-spacing 0.3s;
+}
+
+.service-card__link:hover {
+  color: #e8556e;
+  border-bottom-color: #e8556e;
+  letter-spacing: 0.26em;
 }
 
 .service-card__item {

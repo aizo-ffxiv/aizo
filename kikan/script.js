@@ -209,6 +209,23 @@ function renderServices() {
         }).join("")
       : `<li class="service-card__item service-card__item--placeholder">服務內容待補上</li>`;
 
+    const introHTML = s.intro
+      ? `<p class="service-card__intro">${s.intro}</p>`
+      : ``;
+
+    const noteHTML = s.note
+      ? `<div class="service-card__note">${s.note
+          .split(/\n+/)
+          .map(line => line.trim())
+          .filter(line => line.length > 0)
+          .map(line => `<span>${line}</span>`)
+          .join("")}</div>`
+      : ``;
+
+    const linkHTML = s.link && s.link.url
+      ? `<a class="service-card__link" href="${s.link.url}" target="_blank" rel="noopener">→ ${s.link.label || "詳情"}</a>`
+      : ``;
+
     return `
       <article class="service-card" data-id="${s.memberId}" role="button" tabindex="0" aria-label="預約 ${member.name}" style="animation-delay: ${i * 0.05}s">
         <header class="service-card__header">
@@ -220,9 +237,12 @@ function renderServices() {
           </div>
           ${member.alias ? `<div class="service-card__alias">${member.alias}</div>` : ``}
         </header>
+        ${introHTML}
         <ul class="service-card__items">
           ${itemsHTML}
         </ul>
+        ${noteHTML}
+        ${linkHTML}
       </article>
     `;
   }).join("");
@@ -239,6 +259,10 @@ function renderServices() {
         e.preventDefault();
         open();
       }
+    });
+    // 卡片內的連結點擊不觸發預約跳窗
+    card.querySelectorAll(".service-card__link").forEach(a => {
+      a.addEventListener("click", e => e.stopPropagation());
     });
   });
 }

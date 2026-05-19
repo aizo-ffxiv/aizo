@@ -114,6 +114,7 @@ function initNotice() {
   modal.addEventListener('click', e => {
     if (e.target.closest('.notice-link')) return;
     if (e.target.closest('.notice-section__link')) return;
+    if (e.target.closest('.notice-highlight__text--link')) return;
     hideModal();
   });
 
@@ -147,10 +148,17 @@ function initNotice() {
 
         const rowsBox = modal.querySelector('.notice-highlight__rows');
         const rows = Array.isArray(data.highlight.rows) ? data.highlight.rows : [];
-        rowsBox.innerHTML = rows.map(r => `
-          <div class="notice-highlight__time">${r.time || ''}</div>
-          <div class="notice-highlight__text">${r.text || ''}</div>
-        `).join('');
+        rowsBox.innerHTML = rows.map(r => {
+          const timeHtml = `<div class="notice-highlight__time">${r.time || ''}</div>`;
+          const textContent = r.text || '';
+          let textHtml;
+          if (r.url) {
+            textHtml = `<a class="notice-highlight__text notice-highlight__text--link" href="${r.url}" target="_blank" rel="noopener noreferrer">${textContent}</a>`;
+          } else {
+            textHtml = `<div class="notice-highlight__text">${textContent}</div>`;
+          }
+          return timeHtml + textHtml;
+        }).join('');
 
         highlight.hidden = false;
       }
