@@ -142,9 +142,19 @@ function initNotice() {
 
       // 重點資訊區（highlight，單一區塊；保留向後相容）
       const highlight = modal.querySelector('.notice-highlight');
-      if (data.highlight && (data.highlight.date || data.highlight.label || (data.highlight.rows && data.highlight.rows.length))) {
+      if (data.highlight && (data.highlight.date || data.highlight.label || data.highlight.feature || (data.highlight.rows && data.highlight.rows.length))) {
         modal.querySelector('.notice-highlight__date').textContent = data.highlight.date || '';
         modal.querySelector('.notice-highlight__label').textContent = data.highlight.label || '';
+
+        const featureEl = modal.querySelector('.notice-highlight__feature');
+        if (featureEl) {
+          if (data.highlight.feature && data.highlight.feature.trim()) {
+            featureEl.textContent = data.highlight.feature;
+            featureEl.hidden = false;
+          } else {
+            featureEl.hidden = true;
+          }
+        }
 
         const rowsBox = modal.querySelector('.notice-highlight__rows');
         const rows = Array.isArray(data.highlight.rows) ? data.highlight.rows : [];
@@ -228,7 +238,7 @@ function initNotice() {
       const hasContent = !!(
         (data.title && data.title.trim()) ||
         (data.intro && data.intro.trim()) ||
-        (data.highlight && (data.highlight.date || data.highlight.label || (data.highlight.rows && data.highlight.rows.length))) ||
+        (data.highlight && (data.highlight.date || data.highlight.label || data.highlight.feature || (data.highlight.rows && data.highlight.rows.length))) ||
         sections.length ||
         (data.outro && data.outro.trim())
       );

@@ -213,15 +213,6 @@ function renderServices() {
       ? `<p class="service-card__intro">${s.intro}</p>`
       : ``;
 
-    const noteHTML = s.note
-      ? `<div class="service-card__note">${s.note
-          .split(/\n+/)
-          .map(line => line.trim())
-          .filter(line => line.length > 0)
-          .map(line => `<span>${line}</span>`)
-          .join("")}</div>`
-      : ``;
-
     const linkHTML = s.link && s.link.url
       ? `<a class="service-card__link" href="${s.link.url}" target="_blank" rel="noopener">→ ${s.link.label || "詳情"}</a>`
       : ``;
@@ -241,7 +232,6 @@ function renderServices() {
         <ul class="service-card__items">
           ${itemsHTML}
         </ul>
-        ${noteHTML}
         ${linkHTML}
       </article>
     `;
@@ -355,14 +345,15 @@ function openBookingModal(memberId) {
   }
 
   // 店員備註（services.json 中的 member-level note）
+  // 用 textContent + CSS `white-space: pre-line` 處理換行，避免 innerHTML 風險
   const staffNoteEl = document.getElementById("bookingStaffNote");
   if (staffNoteEl) {
     const note = typeof service.note === "string" ? service.note.trim() : "";
     if (note) {
-      staffNoteEl.innerHTML = escapeForOption(note).replace(/\n/g, "<br>");
+      staffNoteEl.textContent = note;
       staffNoteEl.hidden = false;
     } else {
-      staffNoteEl.innerHTML = "";
+      staffNoteEl.textContent = "";
       staffNoteEl.hidden = true;
     }
   }
