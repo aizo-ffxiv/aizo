@@ -438,6 +438,7 @@ function setBookingMessage(text, type) {
 
 async function handleBookingSubmit(e) {
   e.preventDefault();
+  console.log("[Booking] 開始處理");
 
   const form = e.currentTarget;
   const submitBtn = document.getElementById("bookingSubmit");
@@ -445,6 +446,7 @@ async function handleBookingSubmit(e) {
   // honeypot：若被填，靜默 reject
   const honeypot = form.querySelector('input[name="website"]');
   if (honeypot && honeypot.value.trim() !== "") {
+    console.log("[Booking] honeypot 觸發，靜默 reject");
     setBookingMessage("提交失敗，請重新嘗試。", "error");
     return;
   }
@@ -454,6 +456,7 @@ async function handleBookingSubmit(e) {
   const now = Date.now();
   if (lastSubmit && now - lastSubmit < BOOKING_THROTTLE_MS) {
     const wait = Math.ceil((BOOKING_THROTTLE_MS - (now - lastSubmit)) / 1000);
+    console.log("[Booking] 節流擋下，剩餘秒數：", wait);
     setBookingMessage(`請稍候 ${wait} 秒後再送出。`, "error");
     return;
   }
@@ -468,12 +471,17 @@ async function handleBookingSubmit(e) {
 
   // 必填驗證
   if (!name || !discord || !service || !slot) {
+    console.log("[Booking] 必填欄位缺失", { name: !!name, discord: !!discord, service: !!service, slot: !!slot });
     setBookingMessage("請填寫所有必填欄位（標 * 者）。", "error");
     return;
   }
 
   // 預約端點設定檢查
   if (!isBookingEndpointConfigured()) {
+    console.log("[Booking] endpoint 未設定，提早 return", {
+      bookingEndpoint: CONFIG && CONFIG.bookingEndpoint,
+      discordWebhookUrl: CONFIG && CONFIG.discordWebhookUrl ? "(有值)" : "(無)"
+    });
     setBookingMessage("預約服務尚未啟用，請聯繫管理員。", "error");
     return;
   }
@@ -521,6 +529,11 @@ async function handleBookingSubmit(e) {
 
   const failMessage = "送出失敗，請稍後再試或直接聯繫管理員。";
 
+  console.log("[Booking] 驗證通過，準備送出", {
+    bookingEndpoint: CONFIG.bookingEndpoint,
+    hasDiscord: !!CONFIG.discordWebhookUrl
+  });
+
   // Sheet 與 Discord 平行送：避免 Apps Script 轉發 Discord 被 Cloudflare 擋
   // text/plain 避免 CORS preflight；Apps Script 仍能用 e.postData.contents 解析
   const sheetRequest = fetch(CONFIG.bookingEndpoint, {
@@ -536,9 +549,23 @@ async function handleBookingSubmit(e) {
     body: JSON.stringify(discordPayload)
   });
 
+  console.log("[Booking] 送出兩個請求中...");
   const [sheetResult, discordResult] = await Promise.allSettled([sheetRequest, discordRequest]);
   const sheetOk = sheetResult.status === "fulfilled" && sheetResult.value.ok;
   const discordOk = discordResult.status === "fulfilled" && discordResult.value.ok;
+
+  console.log("[Booking] 結果:", {
+    sheetStatus: sheetResult.status,
+    sheetOk,
+    sheetResponse: sheetResult.status === "fulfilled"
+      ? { status: sheetResult.value.status, type: sheetResult.value.type, ok: sheetResult.value.ok }
+      : sheetResult.reason,
+    discordStatus: discordResult.status,
+    discordOk,
+    discordResponse: discordResult.status === "fulfilled"
+      ? { status: discordResult.value.status, type: discordResult.value.type, ok: discordResult.value.ok }
+      : discordResult.reason
+  });
 
   if (!sheetOk) console.error("Sheet 寫入失敗:", sheetResult);
   if (!discordOk) console.error("Discord 通知失敗:", discordResult);
