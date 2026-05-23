@@ -287,13 +287,13 @@ async function loadConfig() {
   }
 }
 
-function isWebhookConfigured() {
-  const url = CONFIG && CONFIG.discordWebhookUrl;
+function isBookingEndpointConfigured() {
+  const url = CONFIG && CONFIG.bookingEndpoint;
   if (typeof url !== "string") return false;
   const trimmed = url.trim();
   if (trimmed === "") return false;
   if (trimmed.includes("<貼這裡>") || trimmed.includes("<paste-here>")) return false;
-  return /^https:\/\/discord\.com\/api\/webhooks\//.test(trimmed);
+  return /^https:\/\//.test(trimmed);
 }
 
 function escapeForOption(s) {
@@ -465,8 +465,8 @@ async function handleBookingSubmit(e) {
     return;
   }
 
-  // webhook 設定檢查
-  if (!isWebhookConfigured()) {
+  // 預約端點設定檢查
+  if (!isBookingEndpointConfigured()) {
     setBookingMessage("預約服務尚未啟用，請聯繫管理員。", "error");
     return;
   }
@@ -477,22 +477,14 @@ async function handleBookingSubmit(e) {
     ? (member.alias ? `${member.name} ・ ${member.alias}` : member.name)
     : "—";
 
-  // 組 webhook payload（embed 格式，紅色 #c8102e）
+  // 預約 payload（送往 Apps Script 端點，由後端寫入 Sheet 並轉發到 Discord）
   const payload = {
-    embeds: [{
-      title: "✨ 新預約 ・ NEW BOOKING",
-      color: 0xc8102e,
-      fields: [
-        { name: "店員", value: memberDisplay, inline: false },
-        { name: "服務", value: service, inline: true },
-        { name: "時段", value: slot, inline: true },
-        { name: "賓客", value: name, inline: true },
-        { name: "Discord", value: discord, inline: true },
-        { name: "備註", value: note || "—", inline: false }
-      ],
-      footer: { text: "蜃気樓 機関 ・ KIKAN" },
-      timestamp: new Date().toISOString()
-    }]
+    member: memberDisplay,
+    service: service,
+    slot: slot,
+    name: name,
+    discord: discord,
+    note: note
   };
 
   // 送出
@@ -502,15 +494,39 @@ async function handleBookingSubmit(e) {
   }
   setBookingMessage("", "");
 
+  const failMessage = "送出失敗，請稍後再試或直接聯繫管理員。";
+
   try {
-    const response = await fetch(CONFIG.discordWebhookUrl, {
+    // 注意：用 text/plain 避免 CORS preflight；Apps Script 端依然能用
+    // e.postData.contents 拿到原始字串再 JSON.parse
+    const response = await fetch(CONFIG.bookingEndpoint, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload),
+      redirect: "follow"
     });
 
     if (!response.ok) {
-      throw new Error(`Webhook returned ${response.status}`);
+      throw new Error(`Endpoint returned ${response.status}`);
+    }
+
+    let result = null;
+    try {
+      result = await response.json();
+    } catch (_) {
+      result = null;
+    }
+
+    if (!result || result.ok !== true) {
+      const backendError = result && typeof result.error === "string" && result.error.trim()
+        ? result.error.trim()
+        : null;
+      setBookingMessage(backendError || failMessage, "error");
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "送出預約";
+      }
+      return;
     }
 
     sessionStorage.setItem(BOOKING_LAST_KEY, String(Date.now()));
@@ -520,7 +536,7 @@ async function handleBookingSubmit(e) {
     setTimeout(() => closeBookingModal(), 2500);
   } catch (err) {
     console.error("Booking submission failed:", err);
-    setBookingMessage("送出失敗，請稍後再試或直接聯繫管理員。", "error");
+    setBookingMessage(failMessage, "error");
     if (submitBtn) {
       submitBtn.disabled = false;
       submitBtn.textContent = "送出預約";
