@@ -288,12 +288,19 @@ async function loadConfig() {
 }
 
 function isBookingEndpointConfigured() {
-  const url = CONFIG && CONFIG.bookingEndpoint;
-  if (typeof url !== "string") return false;
-  const trimmed = url.trim();
-  if (trimmed === "") return false;
-  if (trimmed.includes("<貼這裡>") || trimmed.includes("<paste-here>")) return false;
-  return /^https:\/\//.test(trimmed);
+  // 兩個 URL 都要設定才算 configured：Sheet 端點 + Discord webhook
+  const isFilled = (url) => {
+    if (typeof url !== "string") return false;
+    const trimmed = url.trim();
+    if (trimmed === "") return false;
+    if (trimmed.includes("<貼這裡>") || trimmed.includes("<paste-here>")) return false;
+    return true;
+  };
+  const ep = CONFIG && CONFIG.bookingEndpoint;
+  const dc = CONFIG && CONFIG.discordWebhookUrl;
+  if (!isFilled(ep) || !/^https:\/\//.test(String(ep).trim())) return false;
+  if (!isFilled(dc) || !/^https:\/\/discord\.com\/api\/webhooks\//.test(String(dc).trim())) return false;
+  return true;
 }
 
 function escapeForOption(s) {
@@ -477,14 +484,32 @@ async function handleBookingSubmit(e) {
     ? (member.alias ? `${member.name} ・ ${member.alias}` : member.name)
     : "—";
 
-  // 預約 payload（送往 Apps Script 端點，由後端寫入 Sheet 並轉發到 Discord）
-  const payload = {
+  // Sheet payload：乾淨 JSON，給 Apps Script 寫入試算表
+  const sheetPayload = {
     member: memberDisplay,
     service: service,
     slot: slot,
     name: name,
     discord: discord,
     note: note
+  };
+
+  // Discord payload：embed 格式，直接送 Discord webhook 通知
+  const discordPayload = {
+    embeds: [{
+      title: "✨ 新預約 ・ NEW BOOKING",
+      color: 0xc8102e,
+      fields: [
+        { name: "店員",    value: memberDisplay,  inline: false },
+        { name: "服務",    value: service,        inline: true  },
+        { name: "時段",    value: slot,           inline: true  },
+        { name: "賓客",    value: name,           inline: true  },
+        { name: "Discord", value: discord,        inline: true  },
+        { name: "備註",    value: note || "—",    inline: false }
+      ],
+      footer: { text: "蜃気樓 機関 ・ KIKAN" },
+      timestamp: new Date().toISOString()
+    }]
   };
 
   // 送出
@@ -496,46 +521,35 @@ async function handleBookingSubmit(e) {
 
   const failMessage = "送出失敗，請稍後再試或直接聯繫管理員。";
 
-  try {
-    // 注意：用 text/plain 避免 CORS preflight；Apps Script 端依然能用
-    // e.postData.contents 拿到原始字串再 JSON.parse
-    const response = await fetch(CONFIG.bookingEndpoint, {
-      method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(payload),
-      redirect: "follow"
-    });
+  // Sheet 與 Discord 平行送：避免 Apps Script 轉發 Discord 被 Cloudflare 擋
+  // text/plain 避免 CORS preflight；Apps Script 仍能用 e.postData.contents 解析
+  const sheetRequest = fetch(CONFIG.bookingEndpoint, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(sheetPayload),
+    redirect: "follow"
+  });
 
-    if (!response.ok) {
-      throw new Error(`Endpoint returned ${response.status}`);
-    }
+  const discordRequest = fetch(CONFIG.discordWebhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(discordPayload)
+  });
 
-    let result = null;
-    try {
-      result = await response.json();
-    } catch (_) {
-      result = null;
-    }
+  const [sheetResult, discordResult] = await Promise.allSettled([sheetRequest, discordRequest]);
+  const sheetOk = sheetResult.status === "fulfilled" && sheetResult.value.ok;
+  const discordOk = discordResult.status === "fulfilled" && discordResult.value.ok;
 
-    if (!result || result.ok !== true) {
-      const backendError = result && typeof result.error === "string" && result.error.trim()
-        ? result.error.trim()
-        : null;
-      setBookingMessage(backendError || failMessage, "error");
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "送出預約";
-      }
-      return;
-    }
+  if (!sheetOk) console.error("Sheet 寫入失敗:", sheetResult);
+  if (!discordOk) console.error("Discord 通知失敗:", discordResult);
 
+  // 任一成功即視為成功（兩邊資料互備）
+  if (sheetOk || discordOk) {
     sessionStorage.setItem(BOOKING_LAST_KEY, String(Date.now()));
     setBookingMessage("預約成功！我們會透過 Discord 與您聯繫。", "success");
     if (submitBtn) submitBtn.textContent = "已送出";
-
     setTimeout(() => closeBookingModal(), 2500);
-  } catch (err) {
-    console.error("Booking submission failed:", err);
+  } else {
     setBookingMessage(failMessage, "error");
     if (submitBtn) {
       submitBtn.disabled = false;

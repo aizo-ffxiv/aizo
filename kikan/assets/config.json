@@ -1,3 +1,4 @@
 {
-  "bookingEndpoint": "https://script.google.com/macros/s/AKfycbzhTgbBsTl1Z8aTFBTdX8YW3ni5Z1zm-sBJ8rOW-4nhkAtkQp4x7ZvBTzCPMChXeelG/exec"
+  "bookingEndpoint": "https://script.google.com/macros/s/AKfycbzhTgbBsTl1Z8aTFBTdX8YW3ni5Z1zm-sBJ8rOW-4nhkAtkQp4x7ZvBTzCPMChXeelG/exec",
+  "discordWebhookUrl": "https://discord.com/api/webhooks/1502145971214356585/V78uWPHkzQvRmjBD1256TOyb1LQ1HoVK-60pIhr7v4B8a0KvhkoeSzEKE33BytaEWrnG"
 }
